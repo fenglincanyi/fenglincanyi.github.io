@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>滑动冲突之EditText-ScrollView | fenglincanyi|blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="###问题一    EditText的内容过多时，EditText的内容并不能滚动，而是ScrollView的滚动
+###解决        重写EditText的onTouch事件，将触摸事件交给EditText来处理
+123456789101112131415et.setOnTouchListener(new View.OnTouchListener() &amp;#123;            @">
+<meta property="og:type" content="article">
+<meta property="og:title" content="滑动冲突之EditText-ScrollView">
+<meta property="og:url" content="http://yoursite.com/2016/08/16/滑动冲突之EditText-ScrollView/index.html">
+<meta property="og:site_name" content="fenglincanyi|blog">
+<meta property="og:description" content="###问题一    EditText的内容过多时，EditText的内容并不能滚动，而是ScrollView的滚动
+###解决        重写EditText的onTouch事件，将触摸事件交给EditText来处理
+123456789101112131415et.setOnTouchListener(new View.OnTouchListener() &amp;#123;            @">
+<meta property="og:updated_time" content="2016-12-08T15:39:38.431Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="滑动冲突之EditText-ScrollView">
+<meta name="twitter:description" content="###问题一    EditText的内容过多时，EditText的内容并不能滚动，而是ScrollView的滚动
+###解决        重写EditText的onTouch事件，将触摸事件交给EditText来处理
+123456789101112131415et.setOnTouchListener(new View.OnTouchListener() &amp;#123;            @">
+  
+    <link rel="alternate" href="/atom.xml" title="fenglincanyi|blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">fenglincanyi|blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-滑动冲突之EditText-ScrollView" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/16/滑动冲突之EditText-ScrollView/" class="article-date">
+  <time datetime="2016-08-16T09:14:00.000Z" itemprop="datePublished">8月 16 2016</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      滑动冲突之EditText-ScrollView
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>###<strong>问题一</strong><br>    EditText的内容过多时，EditText的内容并不能滚动，而是ScrollView的滚动</p>
+<p>###<strong>解决</strong><br>        重写EditText的onTouch事件，将触摸事件交给EditText来处理</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">et.setOnTouchListener(new View.OnTouchListener() &#123;</div><div class="line">            @Override</div><div class="line">            public boolean onTouch(View v, MotionEvent event) &#123;</div><div class="line">            	// 设置ScrollView不拦截事件</div><div class="line">                scrollView.requestDisallowInterceptTouchEvent(true);</div><div class="line">            	switch (event.getAction() &amp; MotionEvent.ACTION_MASK)&#123;</div><div class="line">                	case MotionEvent.ACTION_UP:</div><div class="line">                	// 手指离开时：重置ScrollView事件拦截的状态</div><div class="line">                    slContainer.requestDisallowInterceptTouchEvent(false);</div><div class="line">                    	break;</div><div class="line">            	&#125;</div><div class="line">            	return false;</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>###<strong>问题二</strong><br>        若有ScrollView内容比较多，比较长时，编辑EditText里的内容时会出现ScrollView滑到底部的现象，使得当前编辑的EditText看不到了</p>
+<p>###<strong>解决</strong><br>        修改AndroidManifest.xml中Activity的windowSoftInputMode属性<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;activity</div><div class="line">	android:name=&quot;.me.MineResumeProjectExperienceActivity&quot;</div><div class="line">	android:screenOrientation=&quot;portrait</div><div class="line">	android:windowSoftInputMode=&quot;stateHidden|adjustPan&quot;/&gt;</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/08/16/滑动冲突之EditText-ScrollView/" data-id="ciwgj3dml000kp4v7mp65ehlk" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/09/09/Gradle相关配置/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Gradle相关配置
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/06/04/简单的页面置换算法分析/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">简单的页面置换算法分析</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/RxJava/">RxJava</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法/">算法</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络/">网络</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/11/17/Android 类加载初探/">Android 类加载初探</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/01/Android apk安装及编译过程/">Android apk安装及编译过程</a>
+          </li>
+        
+          <li>
+            <a href="/2016/10/25/RadioGroup、RadioButton动态创建并定制icon显示/">RadioGroup、RadioButton动态创建并定制icon显示</a>
+          </li>
+        
+          <li>
+            <a href="/2016/10/06/RxJava 初探（一）/">RxJava 初探（一）</a>
+          </li>
+        
+          <li>
+            <a href="/2016/09/09/Gradle相关配置/">Gradle相关配置</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 Gengjia rong<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

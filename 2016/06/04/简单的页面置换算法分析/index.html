@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>简单的页面置换算法分析 | fenglincanyi|blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="本文主要分析操作系统中涉及到的一些常见的置换算法，并不对涉及的操作系统内容过多介绍。这些算法在其他的计算机应用中也有体现，基本原理都是一致的，可参考理解。
+
+###一、前提说明本文主要针对一个例子进行说明，以下的算法实现过程均是按照本例进行分析。页面的走向为：
+4 3 2 1 4 3 5 4 3 2 1 5 
+一段程序在内存中，分配3个页面，初始情况下为空。以下依次根据不同的算法进行页面置换过程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="简单的页面置换算法分析">
+<meta property="og:url" content="http://yoursite.com/2016/06/04/简单的页面置换算法分析/index.html">
+<meta property="og:site_name" content="fenglincanyi|blog">
+<meta property="og:description" content="本文主要分析操作系统中涉及到的一些常见的置换算法，并不对涉及的操作系统内容过多介绍。这些算法在其他的计算机应用中也有体现，基本原理都是一致的，可参考理解。
+
+###一、前提说明本文主要针对一个例子进行说明，以下的算法实现过程均是按照本例进行分析。页面的走向为：
+4 3 2 1 4 3 5 4 3 2 1 5 
+一段程序在内存中，分配3个页面，初始情况下为空。以下依次根据不同的算法进行页面置换过程">
+<meta property="og:image" content="http://7xr1vo.com1.z0.glb.clouddn.com/%E5%9B%BE1.png">
+<meta property="og:image" content="http://7xr1vo.com1.z0.glb.clouddn.com/%E5%9B%BE2.png">
+<meta property="og:image" content="http://7xr1vo.com1.z0.glb.clouddn.com/%E5%9B%BE3.png">
+<meta property="og:updated_time" content="2016-12-08T15:35:59.174Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="简单的页面置换算法分析">
+<meta name="twitter:description" content="本文主要分析操作系统中涉及到的一些常见的置换算法，并不对涉及的操作系统内容过多介绍。这些算法在其他的计算机应用中也有体现，基本原理都是一致的，可参考理解。
+
+###一、前提说明本文主要针对一个例子进行说明，以下的算法实现过程均是按照本例进行分析。页面的走向为：
+4 3 2 1 4 3 5 4 3 2 1 5 
+一段程序在内存中，分配3个页面，初始情况下为空。以下依次根据不同的算法进行页面置换过程">
+<meta name="twitter:image" content="http://7xr1vo.com1.z0.glb.clouddn.com/%E5%9B%BE1.png">
+  
+    <link rel="alternate" href="/atom.xml" title="fenglincanyi|blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">fenglincanyi|blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-简单的页面置换算法分析" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/06/04/简单的页面置换算法分析/" class="article-date">
+  <time datetime="2016-06-04T11:39:00.000Z" itemprop="datePublished">6月 4 2016</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/算法/">算法</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      简单的页面置换算法分析
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>本文主要分析操作系统中涉及到的一些常见的置换算法，并不对涉及的操作系统内容过多介绍。这些算法在其他的计算机应用中也有体现，基本原理都是一致的，可参考理解。</p>
+</blockquote>
+<p>###一、前提说明<br>本文主要针对一个例子进行说明，以下的算法实现过程均是按照本例进行分析。页面的走向为：</p>
+<pre><code>4 3 2 1 4 3 5 4 3 2 1 5 
+</code></pre><p>一段程序在内存中，分配3个页面，初始情况下为空。<br>以下依次根据不同的算法进行页面置换过程的分析。</p>
+<p>###二、算法分析过程</p>
+<h4 id="1-FIFO（先进先出）"><a href="#1-FIFO（先进先出）" class="headerlink" title="1. FIFO（先进先出）"></a>1. FIFO（先进先出）</h4><p>FIFO算是最简单、最容易理解的算法了，只要按照依次装入内存的页面的页号按照进入的先后次序排好队列，每次总是从队首出，队尾出。当发生缺页时，置换队首的页面即可。<br><br>对上面的页面走向序列，分析过程如下图：</p>
+<p><img src="http://7xr1vo.com1.z0.glb.clouddn.com/%E5%9B%BE1.png" alt=""></p>
+<h4 id="2-LRU-（最近最少使用-Least-Recently-Used）"><a href="#2-LRU-（最近最少使用-Least-Recently-Used）" class="headerlink" title="2. LRU （最近最少使用 Least Recently Used）"></a>2. LRU （最近最少使用 Least Recently Used）</h4><p>在缺页发生时，选择离现在最长时间内，没有被访问过的页面置换出来。<br><br>分析过程，如下图：</p>
+<p><img src="http://7xr1vo.com1.z0.glb.clouddn.com/%E5%9B%BE2.png" alt=""></p>
+<ul>
+<li>此算法应用的比较广泛，尤其是拿来做缓存算法。Android的API中，已经封装了相关的LRU的算法直接可以调用。</li>
+<li>一些图片的缓存算法都是使用LRU进行缓存优化的。ImageLoader框架更是将好几种缓存算法融合到里面，可以灵活选用。详细可以查看源码的实现。<h4 id="3-LFU-（最近最不常用-Least-Frequently-Used）"><a href="#3-LFU-（最近最不常用-Least-Frequently-Used）" class="headerlink" title="3. LFU （最近最不常用 Least Frequently Used）"></a>3. LFU （最近最不常用 Least Frequently Used）</h4>选择访问次数最少的页面置换出来。<br>此算法的实现要花费的开销很大，并且要确定一个合适的周期T也有一定的难度，就不在分析了。<h4 id="3-OPT-（理想）"><a href="#3-OPT-（理想）" class="headerlink" title="3. OPT （理想）"></a>3. OPT （理想）</h4>此算法置换以后不再需要或最长时间以后才会用到的页面。这一算法一般不可能实现，但它可以作为衡量其他页面置换算法的标准。<br><br>分析过程，如下图：</li>
+</ul>
+<p><img src="http://7xr1vo.com1.z0.glb.clouddn.com/%E5%9B%BE3.png" alt=""></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/06/04/简单的页面置换算法分析/" data-id="ciwgj0uld0007p4v7koxckf58" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/08/16/滑动冲突之EditText-ScrollView/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          滑动冲突之EditText-ScrollView
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/05/16/Android SingleTask 探究/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Android SingleTask 探究</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/RxJava/">RxJava</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法/">算法</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络/">网络</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/11/17/Android 类加载初探/">Android 类加载初探</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/01/Android apk安装及编译过程/">Android apk安装及编译过程</a>
+          </li>
+        
+          <li>
+            <a href="/2016/10/25/RadioGroup、RadioButton动态创建并定制icon显示/">RadioGroup、RadioButton动态创建并定制icon显示</a>
+          </li>
+        
+          <li>
+            <a href="/2016/10/06/RxJava 初探（一）/">RxJava 初探（一）</a>
+          </li>
+        
+          <li>
+            <a href="/2016/09/09/Gradle相关配置/">Gradle相关配置</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 Gengjia rong<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

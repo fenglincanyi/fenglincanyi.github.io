@@ -3,17 +3,48 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Category: 工具 | fenglincanyi|blog</title>
+  <title>Git学习笔记（二） | fenglincanyi|blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="个人博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="fenglincanyi|blog">
-<meta property="og:url" content="http://yoursite.com/categories/工具/index.html">
+  <meta name="description" content="##常用命令：
+
+1、初始
+
+git &amp;lt;verb&amp;gt; --help           查看命令用法(方法之一)
+git init                    初始化git仓库(在当前目录下会创建.git目录)
+
+2、 远程操作
+
+git clone URL                从远程clone git仓库
+git remote -v                查">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git学习笔记（二）">
+<meta property="og:url" content="http://yoursite.com/2016/02/19/Git学习笔记（二）/index.html">
 <meta property="og:site_name" content="fenglincanyi|blog">
-<meta property="og:description" content="个人博客">
+<meta property="og:description" content="##常用命令：
+
+1、初始
+
+git &amp;lt;verb&amp;gt; --help           查看命令用法(方法之一)
+git init                    初始化git仓库(在当前目录下会创建.git目录)
+
+2、 远程操作
+
+git clone URL                从远程clone git仓库
+git remote -v                查">
+<meta property="og:updated_time" content="2016-12-08T15:23:17.306Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="fenglincanyi|blog">
-<meta name="twitter:description" content="个人博客">
+<meta name="twitter:title" content="Git学习笔记（二）">
+<meta name="twitter:description" content="##常用命令：
+
+1、初始
+
+git &amp;lt;verb&amp;gt; --help           查看命令用法(方法之一)
+git init                    初始化git仓库(在当前目录下会创建.git目录)
+
+2、 远程操作
+
+git clone URL                从远程clone git仓库
+git remote -v                查">
   
     <link rel="alternate" href="/atom.xml" title="fenglincanyi|blog" type="application/atom+xml">
   
@@ -62,9 +93,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-Git学习笔记（二）" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-Git学习笔记（二）" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/02/19/Git学习笔记（二）/" class="article-date">
   <time datetime="2016-02-19T08:06:00.000Z" itemprop="datePublished">2月 19 2016</time>
@@ -81,8 +110,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/19/Git学习笔记（二）/">Git学习笔记（二）</a>
+    <h1 class="article-title" itemprop="name">
+      Git学习笔记（二）
     </h1>
   
 
@@ -182,92 +211,28 @@ git branch -v, -vv            查看所有分支的最后一次提交
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-Git学习笔记（一）" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/02/19/Git学习笔记（一）/" class="article-date">
-  <time datetime="2016-02-19T07:28:00.000Z" itemprop="datePublished">2月 19 2016</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/工具/">工具</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+    <a href="/2016/02/28/对称、非对称加密技术初探/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
         
+          对称、非对称加密技术初探
+        
+      </div>
+    </a>
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/19/Git学习笔记（一）/">Git学习笔记（一）</a>
-    </h1>
   
+    <a href="/2016/02/19/Git学习笔记（一）/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Git学习笔记（一）</div>
+    </a>
+  
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>##一、Git特点</p>
-<p>###1. 直接记录快照，而非差异比较</p>
-<ul>
-<li>在 Git 中保存项目状态时，它主要对当时的全部文件制作一个快照并保存这个快照的索引。</li>
-<li>为了高效，如果文件没有修改，Git 不再重新存储该文件，而是只保留一个链接指向之前存储的文件。</li>
-<li>Git 对待数据更像是一个 快照流。<br>###2. 近乎所有操作都是本地执行</li>
-<li>在 Git 中的绝大多数操作都只需要访问本地文件和资源，一般不需要来自网络上其它计算机的信息。<br>###3. Git 保证完整性</li>
-<li><p>Git 中所有数据在存储前都计算校验和，然后以校验和来引用。Git 用以计算校验和的机制叫做 SHA-1 散列（hash，哈希）。<br>这是一个由 40 个十六进制字符（0-9 和 a-f）组成字符串，基于 Git 中文件的内容或目录结构计算出来。<br>SHA-1 哈希看起来是这样：  </p>
-<pre><code>&gt;24b9da6552252987aa493b52f8696cd6d3b00373
-</code></pre></li>
-<li><p>实际上，Git 数据库中保存的信息都是以文件内容的哈希值来索引，而不是文件名<br>###4. Git 一般只添加数据</p>
-</li>
-<li>你执行的 Git 操作，几乎只往 Git 数据库中增加数据</li>
-</ul>
-<p>##二、Git 中的文件有3种状态：</p>
-<p>###1. 已提交：数据已经安全的保存在本地数据库中</p>
-<p>###2. 已修改：修改了文件，但未保存到数据库中</p>
-<p>###3. 已暂存：对一个已修改文件的当前版本做了标记，使之包含在下次提交的快照中<br><img src="http://7xr1vo.com1.z0.glb.clouddn.com/%E6%96%87%E4%BB%B6%E7%9A%84%E7%8A%B6%E6%80%81%E5%8F%98%E5%8C%96%E5%91%A8%E6%9C%9F.png" alt=""> </p>
-<p>##三、Git 中的3个工作区域</p>
-<p>###1. Git仓库：保存项目的元数据和对象数据库，Git中最重要的部分，供其他人clone 仓库</p>
-<p>###2. 工作目录：对项目的某个版本独立提取出来的，供工作中使用、修改</p>
-<ul>
-<li><p>工作目录下的文件状态：</p>
-<p>  已跟踪：纳入了版本控制的文件，后期可能处于 未修改，已修改或放入暂存区了</p>
-<p>  未跟踪：工作目录下除已跟踪文件外的其他所有文件<br>###3. 暂存区：是一个文件，保存下次将提交的文件列表信息，一般在Git仓库目录中，有时也被叫做索引<br><img src="http://7xr1vo.com1.z0.glb.clouddn.com/git3%E7%A7%8D%E5%B7%A5%E4%BD%9C%E5%8C%BA%E5%9F%9F.png" alt=""> </p>
-</li>
-</ul>
-<h2 id="四、Git-的基本工作流程"><a href="#四、Git-的基本工作流程" class="headerlink" title="四、Git 的基本工作流程"></a>四、Git 的基本工作流程</h2><p>###1. 在工作目录中修改文件</p>
-<p>###2. 暂存文件，将文件的快照放入暂存区</p>
-<p>###3. 提交更新，找到暂存区的文件，将快照永久性存储到Git仓库中</p>
-<h2 id="五、Git-个人信息初始配置"><a href="#五、Git-个人信息初始配置" class="headerlink" title="五、Git 个人信息初始配置"></a>五、Git 个人信息初始配置</h2><ul>
-<li><p>全局信息配置：(个人默认信息)</p>
-<blockquote>
-<p>git config –global user.name “xxx”</p>
-<p>git config –global user.email   xxx@qq.coom</p>
-</blockquote>
-<p>  此配置会写入 user目录下的 .gitconfig文件，实际上为个人信息默认值</p>
-</li>
-<li><p>临时配置：</p>
-<p>  去掉 –global 即可<br>  实际是在其配置列表中追加其信息，重复变量名，不同的value值<br>  (Git每次会读取不同文件，其中就可能含有同一个配置)<br>  Git 会使用每个变量的最后一次的配置的值</p>
-</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/02/19/Git学习笔记（一）/" data-id="ciwgj0ul60004p4v7yofsbsru" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
   
 </article>
-
-
-  
 
 </section>
         

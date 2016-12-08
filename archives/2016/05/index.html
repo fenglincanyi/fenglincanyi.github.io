@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Archives: 2016/5 | fenglincanyi|blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="个人博客">
+<meta property="og:type" content="website">
+<meta property="og:title" content="fenglincanyi|blog">
+<meta property="og:url" content="http://yoursite.com/archives/2016/05/index.html">
+<meta property="og:site_name" content="fenglincanyi|blog">
+<meta property="og:description" content="个人博客">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="fenglincanyi|blog">
+<meta name="twitter:description" content="个人博客">
+  
+    <link rel="alternate" href="/atom.xml" title="fenglincanyi|blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">fenglincanyi|blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-Android SingleTask 探究" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/05/16/Android SingleTask 探究/" class="article-date">
+  <time datetime="2016-05-16T03:12:00.000Z" itemprop="datePublished">5月 16 2016</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/16/Android SingleTask 探究/">Android SingleTask 探究</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>Android 4种启动模式来说，用法说明此处不再提及主要介绍SingleTop，SingleTask相关的问题</p>
+</blockquote>
+<ul>
+<li><p>先分析 官方文档 中的一段话：</p>
+<blockquote>
+<p>As shown in the table above, standard is the default mode and is appropriate for most types of activities. SingleTop is also a common and useful launch mode for many types of activities. The other modes — singleTask and singleInstance — <font color="red">are not appropriate for most applications</font>, since they result in an interaction model that is likely to be unfamiliar to users and is very different from most other applications.</p>
+</blockquote>
+</li>
+</ul>
+<p>&emsp;&emsp;对于大多数应用来说，SingleTask 和 SingleInstance 并不适用，standrd 和 SingleTop对于普通的大部分Activity启动是适用的。<br>之所以使用singleTask，是存在这样一类问题，想要从后面的Activity 直接跳转到前面某一个Activity时，可能会采用的，如一个应用的MainActivity，LoginActivity等。</p>
+<p>&emsp;&emsp;对于SingleTask模式，官方文档的这么一句话，坑了不少人（我还比较幸运，没被坑惨）,也带给我对之前知识的迷惑。</p>
+<blockquote>
+<p>The system creates a new task and instantiates the activity at the root of the new task</p>
+</blockquote>
+<p>&emsp;&emsp;<strong>其实事实根本不是这样的</strong>！！！</p>
+<ul>
+<li><p>下面用代码事实说话：建立3个Activity，分别为Main1Activity、Main2Activity、Main3Activity，前两个都设定单击事件，跳转逻辑为：main1 -&gt; main2 -&gt; main3，其中 Main2Activity 为 SingleTask（AndroidManifest.xml中设置）。打印相应的生命周期方法和所在的 <strong>taskId</strong></p>
+<p>  <img src="http://7xr1vo.com1.z0.glb.clouddn.com/SingleTask%20%E5%9B%BE1.png" alt=""></p>
+</li>
+</ul>
+<p>&emsp;&emsp;这些taskid都是一样的，所以它们都是同一个Task中的。事实胜于雄辩。然后搜了一下相关问题，老罗的博客还是给力，彻彻底底的分析了这个坑。致谢老罗的开源精神！链接：<a href="http://blog.csdn.net/luoshengyang/article/details/6714543" target="_blank" rel="external">http://blog.csdn.net/luoshengyang/article/details/6714543</a></p>
+<ul>
+<li><p>同时为了解释项目中类似的一个页面跳转问题，对于上面的demo做了修改：</p>
+<p>  将 Main1Activity 设置为 SingleTask，其余2个为standrd</p>
+<p>  操作步骤：</p>
+<ol>
+<li>点击图标启动此应用</li>
+<li>依次点击进入 Main2，Main3，再点击Home键</li>
+<li><p>点击应用图标重新进入</p>
+<p>操作结果：结果再次显示的是Main1Activity，而不是Main3Activity。</p>
+<p>先看看打印的日志：</p>
+<p><img src="http://7xr1vo.com1.z0.glb.clouddn.com/SingleTask%E5%9B%BE2.png" alt=""></p>
+<p>再次点击图标进入应用时，实际上是Main2Activity，Main3Activity 出栈了。<br>分析下这个过程：</p>
+<p>Main1，Main2，Main3 依次压入栈中，然后 Home 键，则整个Task处于stop状态，是一个background Task。当再次点击应用图标时，系统检测到此时已经存在一个该应用的Task的，此时就将此Background Task 移至前台，成为Foreground Task，而且由于Main1Activity是SingleTask，且位于task底部，所以，再次启动时，将前两个Activity移除，且按照启动顺序依次移除，所以打出的日志是：Main2 desotry，Main3 destory，Main1 onResume。</p>
+</li>
+</ol>
+<ul>
+<li><p><strong>看来，SingleTask这种特殊的模式引起的Task内Activity的变化是值得注意的</strong></p>
+<p>之前我在Stackoverflow上问相关的问题，和我猜想的原因比较类似，链接如下：</p>
+<p><a href="http://stackoverflow.com/questions/36933755/activity-is-singletask-and-is-root-in-task-restrart-activity-of-top-is-destorye" target="_blank" rel="external">http://stackoverflow.com/questions/36933755/activity-is-singletask-and-is-root-in-task-restrart-activity-of-top-is-destorye</a> （可供参考）</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>那么，如何才能在一个新的任务栈里创建新的Activity呢？</p>
+<ul>
+<li><p>只需要在AndroidManifest.xml中配置即可</p>
+<p>  在SingleTask的基础之上，再增加设置 <strong>taskAffinify</strong> 属性即可，默认情况下，taskAffinity属性值为 包名，所以可以自定义一个taskAffinity值，便可以实现一个新的Task,新的Activity处于这个新的Task的root。如，我的 Demo 代码如下：</p>
+<p>  <img src="http://7xr1vo.com1.z0.glb.clouddn.com/SingleTask%E5%9B%BE3.png" alt=""></p>
+</li>
+</ul>
+<p>##总结</p>
+<ul>
+<li>SingleTask的启动模式并不会启动一个新的任务栈来承载Activity，而是在原来的Task中</li>
+<li>SingleTask的启动模式，在官方文档的说明中，日常开发中并不建议使用，SingleInstance更是如此。</li>
+<li>Activity的启动模式会带来的Task的变化和Activity的生命周期变化都会在ActivityRecord中体现的，通过源码分析可以发现。</li>
+<li><p>通过以下命令，可以查看Task内的Activity的变化：</p>
+<pre><code>adb shell dumpsys activity  获取所有应用的activity堆栈信息
+adb shell dumpsys activity | grep com.xxx.xxx.xxx   获取某个应用的activity 堆栈信息
+adb shell dumpsys activity | grep mFocusedActivity  获取处于栈顶的Activity
+</code></pre></li>
+<li><p><a href="http://blog.piasy.com/2016/03/19/Android-Task-And-Back-Stack/" target="_blank" rel="external">http://blog.piasy.com/2016/03/19/Android-Task-And-Back-Stack/</a> (写完此文后，发现有高人已经写得很全面很详尽了)</p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/05/16/Android SingleTask 探究/" data-id="ciwgj0ukq0000p4v7d6duj7ow" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/RxJava/">RxJava</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法/">算法</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络/">网络</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/11/17/Android 类加载初探/">Android 类加载初探</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/01/Android apk安装及编译过程/">Android apk安装及编译过程</a>
+          </li>
+        
+          <li>
+            <a href="/2016/10/25/RadioGroup、RadioButton动态创建并定制icon显示/">RadioGroup、RadioButton动态创建并定制icon显示</a>
+          </li>
+        
+          <li>
+            <a href="/2016/10/06/RxJava 初探（一）/">RxJava 初探（一）</a>
+          </li>
+        
+          <li>
+            <a href="/2016/09/09/Gradle相关配置/">Gradle相关配置</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 Gengjia rong<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
