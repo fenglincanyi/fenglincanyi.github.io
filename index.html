@@ -177,10 +177,7 @@
 需要关注的类有：
                 
                     
-                    
-                
-                
-           ...
+                ...
     
 
         <a href="/2016/11/17/Android 类加载初探/" class="post-more waves-effect waves-button">
@@ -226,7 +223,7 @@
         
 注：本文不对apk安装之前，系统所做的复杂工作做分析，只针对普通的apk安装过程进行简单的过程理解
 
-一般情况下，在apk安装时，系统一般会显示一个安装界面，获取用户同意之后进行安装，并且有一些apk预处理相关的操作，紧接着，会启动app界面，进入app。在这一过程中，不同版本的Android系统在安装时，对包的处理是不太一样的，以下分Dalivk、ART两种虚拟机进行分析。这里主要采用原...
+一般情况下，在apk安装时，系统一般会显示一个安装界面，获取用户同意之后进行安装，并且有一些apk预处理相关的操作，紧接着，会启动app界面，进入app。在这一过程中，不同版本的Androi...
     
 
         <a href="/2016/11/01/Android apk安装及编译过程/" class="post-more waves-effect waves-button">
@@ -269,7 +266,7 @@
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        由于原生的Radiobutton不能满足业务需求，所以需要自己定制icon图片，和默认选中某一项。需要自己代码动态实现。废话不多说，上代码：12345678910111213141516171819202122232425262728293031323334353637383940414243444546private void setViewData() &#123;        rad...
+        由于原生的Radiobutton不能满足业务需求，所以需要自己定制icon图片，和默认选中某一项。需要自己代码动态实现。废话不多说，上代码：12345678910111213141516171819202122232425262728293031323334353637383940414243...
     
 
         <a href="/2016/10/25/RadioGroup、RadioButton动态创建并定制icon显示/" class="post-more waves-effect waves-button">
@@ -313,11 +310,7 @@
 
     
         一、几个基本概念
-由来  Rx(Reactive Extensions)，最初是LINQ的一个扩展，后由微软团队开发，在2012年11月开源。ReactiveX.io给的定义是，Rx是一个使用可观察数据流进行异步编程的编程接口，ReactiveX结合了观察者模式、迭代器模式和函数式编程的精华。
-Rx 模式
-创建：Rx可以方便的创建事件流和数据流
-组合：Rx使用查询式的操作符组合和变换数据流
-...
+由来  Rx(Reactive Extensions)，最初是LINQ的一个扩展，后由微软团队开发，在2012年11月开源。ReactiveX.io给的定义是，Rx是一个使用可观察数据流进行异步编程的编程接口，ReactiveX结合了观察者模式、迭代器模式和函数式编程的精华。...
     
 
         <a href="/2016/10/06/RxJava 初探（一）/" class="post-more waves-effect waves-button">
@@ -360,7 +353,7 @@ Rx 模式
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091android &#123;    compil...
+        123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778...
     
 
         <a href="/2016/09/09/Gradle相关配置/" class="post-more waves-effect waves-button">
@@ -405,7 +398,7 @@ Rx 模式
     
         ###问题一    EditText的内容过多时，EditText的内容并不能滚动，而是ScrollView的滚动
 ###解决        重写EditText的onTouch事件，将触摸事件交给EditText来处理
-123456789101112131415et.setOnTouchListener(new View.OnTouchListener() &#123;          ...
+123456789101112131415et.setOnTouchLi...
     
 
         <a href="/2016/08/16/滑动冲突之EditText-ScrollView/" class="post-more waves-effect waves-button">
@@ -452,8 +445,7 @@ Rx 模式
 本文主要分析操作系统中涉及到的一些常见的置换算法，并不对涉及的操作系统内容过多介绍。这些算法在其他的计算机应用中也有体现，基本原理都是一致的，可参考理解。
 
 ###一、前提说明本文主要针对一个例子进行说明，以下的算法实现过程均是按照本例进行分析。页面的走向为：
-4 3 2 1 4 3 5 4 3 2 1 5 
-一段程序在内存中，分配3个页面，初始情况下为空。以下依次根据不同的算法进行页面置...
+4 3 2 1 4 3 5 4...
     
 
         <a href="/2016/06/04/简单的页面置换算法分析/" class="post-more waves-effect waves-button">
@@ -502,7 +494,7 @@ Android 4种启动模式来说，用法说明此处不再提及主要介绍Singl
 
 先分析 官方文档 中的一段话：
 
-As shown in the table above, standard is the default mode and is appropriate for most types of activities. SingleTop is ...
+As shown in the table above, standard is the default mode and is appro...
     
 
         <a href="/2016/05/16/Android SingleTask 探究/" class="post-more waves-effect waves-button">
@@ -553,10 +545,7 @@ As shown in the table above, standard is the default mode and is appropriate for
 代换：是将明文字母替换成其他字母、数字或符号的方法
   对于明文中的每一个字母，用字母表中k个字母来代替（允许循环，即a可以在z的后面）
 
-例如：如果 k = 3，那么明文中的 a 在密文中就变 d ，b 就变成 e。这里 k 值充当密钥
-
-
-置换：可以说对代换的一种改...
+例如：如果 k = 3，那么明...
     
 
         <a href="/2016/02/28/对称、非对称加密技术初探/" class="post-more waves-effect waves-button">
@@ -608,8 +597,7 @@ git init                    初始化git仓库(在当前目录下会创建.git�
 
 2、 远程操作
 
-git clone URL                从远程clone git仓库
-git remote -v              ...
+git clone URL        ...
     
 
         <a href="/2016/02/19/Git学习笔记（二）/" class="post-more waves-effect waves-button">
@@ -654,7 +642,7 @@ git remote -v              ...
     <div class="bottom">
         <p>
             <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
-            <span>fenglincanyi|Blog &copy; 2015 - 2016</span>
+            <span>fenglincanyi|Blog &copy; 2016</span>
         </p>
     </div>
 </footer>
