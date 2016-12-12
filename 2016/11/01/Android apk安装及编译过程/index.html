@@ -1,17 +1,32 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  
-  <title>Android apk安装及编译过程 | fenglincanyi|blog</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="注：本文不对apk安装之前，系统所做的复杂工作做分析，只针对普通的apk安装过程进行简单的过程理解
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>Android apk安装及编译过程 | fenglincanyi|Blog | null</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#2DBE60">
+    
+    
+    <meta name="keywords" content="">
+    <meta name="description" content="注：本文不对apk安装之前，系统所做的复杂工作做分析，只针对普通的apk安装过程进行简单的过程理解
 
 一般情况下，在apk安装时，系统一般会显示一个安装界面，获取用户同意之后进行安装，并且有一些apk预处理相关的操作，紧接着，会启动app界面，进入app。在这一过程中，不同版本的Android系统在安装时，对包的处理是不太一样的，以下分Dalivk、ART两种虚拟机进行分析。这里主要采用原生模拟">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android apk安装及编译过程">
 <meta property="og:url" content="http://yoursite.com/2016/11/01/Android apk安装及编译过程/index.html">
-<meta property="og:site_name" content="fenglincanyi|blog">
+<meta property="og:site_name" content="fenglincanyi|Blog">
 <meta property="og:description" content="注：本文不对apk安装之前，系统所做的复杂工作做分析，只针对普通的apk安装过程进行简单的过程理解
 
 一般情况下，在apk安装时，系统一般会显示一个安装界面，获取用户同意之后进行安装，并且有一些apk预处理相关的操作，紧接着，会启动app界面，进入app。在这一过程中，不同版本的Android系统在安装时，对包的处理是不太一样的，以下分Dalivk、ART两种虚拟机进行分析。这里主要采用原生模拟">
@@ -32,81 +47,149 @@
 
 一般情况下，在apk安装时，系统一般会显示一个安装界面，获取用户同意之后进行安装，并且有一些apk预处理相关的操作，紧接着，会启动app界面，进入app。在这一过程中，不同版本的Android系统在安装时，对包的处理是不太一样的，以下分Dalivk、ART两种虚拟机进行分析。这里主要采用原生模拟">
 <meta name="twitter:image" content="http://7xr1vo.com1.z0.glb.clouddn.com/apk%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B.png">
-  
-    <link rel="alternate" href="/atom.xml" title="fenglincanyi|blog" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  <link rel="stylesheet" href="/css/style.css">
-  
-
+    
+        <link rel="alternative" href="/atom.xml" title="fenglincanyi|Blog" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.2">
+    <script>window.lazyScripts=[]</script>
 </head>
 
 <body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">fenglincanyi|blog</a>
-      </h1>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/me.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">fenglincanyi</h5>
+          <a href="mailto:1154294696@qq.com" title="1154294696@qq.com" class="mail">1154294696@qq.com</a>
+        </hgroup>
       </div>
     </div>
-  </div>
-</header>
-      <div class="outer">
-        <section id="main"><article id="post-Android apk安装及编译过程" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/11/01/Android apk安装及编译过程/" class="article-date">
-  <time datetime="2016-11-01T10:53:00.000Z" itemprop="datePublished">11月 1 2016</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Android/">Android</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
         
-  
-    <h1 class="article-title" itemprop="name">
-      Android apk安装及编译过程
-    </h1>
-  
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/fenglincanyi" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
 
-      </header>
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Android apk安装及编译过程</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Android apk安装及编译过程</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-11-01T10:53:00.000Z" itemprop="datePublished" class="page-time">
+  2016-11-01
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a></li></ul>
+
+            
+        </h5>
+    </div>
+
     
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
+
+</header>
+
+
+<div class="container body-wrap">
+    
+<article id="post-Android apk安装及编译过程"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Android apk安装及编译过程</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016-11-1 18:53" datetime="2016-11-01T10:53:00.000Z"  itemprop="datePublished">2016-11-01</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+            
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <blockquote>
 <p>注：本文不对apk安装之前，系统所做的复杂工作做分析，只针对普通的apk安装过程进行简单的过程理解</p>
 </blockquote>
 <p>一般情况下，在apk安装时，系统一般会显示一个安装界面，获取用户同意之后进行安装，并且有一些apk预处理相关的操作，紧接着，会启动app界面，进入app。<br>在这一过程中，不同版本的Android系统在安装时，对包的处理是不太一样的，以下分Dalivk、ART两种虚拟机进行分析。这里主要采用原生模拟器，进行分析。</p>
@@ -132,13 +215,25 @@
 </ul>
 </li>
 </ul>
-<p><img src="http://7xr1vo.com1.z0.glb.clouddn.com/apk%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B.png" alt=""></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xr1vo.com1.z0.glb.clouddn.com/apk%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
 <p>   拷贝后，目录如下：</p>
 <p><img src="http://7xr1vo.com1.z0.glb.clouddn.com/copy%20lib%E7%BB%93%E6%9E%9C.png" alt=""></p>
 <p> dex位置：</p>
 <p><img src="http://7xr1vo.com1.z0.glb.clouddn.com/dex%E4%BD%8D%E7%BD%AE.png" alt=""></p>
 <p>如果把此位置的 dex 删除后，且杀掉已经运行的进程后，再次点击app启动后奔溃，如图：</p>
-<p><img src="http://7xr1vo.com1.z0.glb.clouddn.com/%E5%88%A0%E6%8E%89dalvik-cache%E7%9B%AE%E5%BD%95%E4%B8%8B%E7%9A%84dex%E5%90%8E%EF%BC%8C%E4%B8%94%E6%9D%80%E6%8E%89%E5%B7%B2%E7%BB%8F%E8%BF%90%E8%A1%8C%E7%9A%84%E5%BA%94%E7%94%A8%E8%BF%9B%E7%A8%8B%EF%BC%8C%E5%86%8D%E6%AC%A1%E5%90%AF%E5%8A%A8.png" alt=""></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xr1vo.com1.z0.glb.clouddn.com/%E5%88%A0%E6%8E%89dalvik-cache%E7%9B%AE%E5%BD%95%E4%B8%8B%E7%9A%84dex%E5%90%8E%EF%BC%8C%E4%B8%94%E6%9D%80%E6%8E%89%E5%B7%B2%E7%BB%8F%E8%BF%90%E8%A1%8C%E7%9A%84%E5%BA%94%E7%94%A8%E8%BF%9B%E7%A8%8B%EF%BC%8C%E5%86%8D%E6%AC%A1%E5%90%AF%E5%8A%A8.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
 <p>由此可知，要启动app时，需要加载 /data/dalik-cache 目录下的dex文件</p>
 <p>相关参考文献：<br><a href="http://www.woaitqs.cc/android/2016/07/28/android-plugin-get-apk-info" target="_blank" rel="external">http://www.woaitqs.cc/android/2016/07/28/android-plugin-get-apk-info</a><br><a href="http://blog.csdn.net/luoshengyang/article/details/8852432" target="_blank" rel="external">http://blog.csdn.net/luoshengyang/article/details/8852432</a></p>
 <p>###<strong>二、ART（AOT：Ahead of time  预编译）</strong></p>
@@ -156,142 +251,312 @@
 </ul>
 </li>
 </ul>
-<p><img src="http://7xr1vo.com1.z0.glb.clouddn.com/art%E5%AE%89%E8%A3%85apk%E7%9A%84log.png" alt=""><br>     可以看到，有apk的拷贝，有dex2oat的dex优化过程。再追一下相关的目录：</p>
-<p> <img src="http://7xr1vo.com1.z0.glb.clouddn.com/local%E7%9B%AE%E5%BD%95%E4%B8%8B.png" alt=""></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xr1vo.com1.z0.glb.clouddn.com/art%E5%AE%89%E8%A3%85apk%E7%9A%84log.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<pre><code>可以看到，有apk的拷贝，有dex2oat的dex优化过程。再追一下相关的目录：
+</code></pre><p> <img src="http://7xr1vo.com1.z0.glb.clouddn.com/local%E7%9B%AE%E5%BD%95%E4%B8%8B.png" alt=""></p>
 <p>  <img src="http://7xr1vo.com1.z0.glb.clouddn.com/dalvik-cache%E7%9B%AE%E5%BD%95%E4%B8%8B.png" alt=""></p>
 <p>里面有一部分是系统框架层的相关文件。</p>
 <p>安装后的目录结构也有变化：</p>
-<p><img src="http://7xr1vo.com1.z0.glb.clouddn.com/data_app%E7%9B%AE%E5%BD%95%E4%B8%8B.png" alt=""></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xr1vo.com1.z0.glb.clouddn.com/data_app%E7%9B%AE%E5%BD%95%E4%B8%8B.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
 <p>生成相应的平台下的文件，此处我使用的是x86的模拟器</p>
 <p>Android 在编译时用到的 dexopt、dex2oat、aapt 都在 /system/bin目录下：</p>
-<p><img src="http://7xr1vo.com1.z0.glb.clouddn.com/4.4%E4%B8%8Bsystem_bin%E4%B8%8B%E7%9A%84aapt.png.png" alt=""></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xr1vo.com1.z0.glb.clouddn.com/4.4%E4%B8%8Bsystem_bin%E4%B8%8B%E7%9A%84aapt.png.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
 <p>当时对于 multidex 的包也进行了目录查找，如下，留下后续研究做参考。</p>
-<p><img src="http://7xr1vo.com1.z0.glb.clouddn.com/multidex.png" alt=""></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xr1vo.com1.z0.glb.clouddn.com/multidex.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
 <p>相关参考文献：<br><a href="https://mssun.me/blog/android-art-runtime-2-dex2oat.html" target="_blank" rel="external">https://mssun.me/blog/android-art-runtime-2-dex2oat.html</a><br><a href="http://blog.csdn.net/luoshengyang/article/details/39307813" target="_blank" rel="external">http://blog.csdn.net/luoshengyang/article/details/39307813</a></p>
 
-      
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2016-12-08T15:54:46.507Z" title="2016-12-8 23:54" itemprop="dateUpdated">2016年12月8日 23:54</time>
+</span><br>
+
+
+        这里写留言或版权声明：<a href="/2016/11/01/Android apk安装及编译过程/" target="_blank" rel="external">http://yoursite.com/2016/11/01/Android apk安装及编译过程/</a>
     </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/11/01/Android apk安装及编译过程/" data-id="ciwgjn1r50002z8v7hgfuu827" class="article-share-link">Share</a>
-      
-      
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/me.jpg" alt="fenglincanyi">
+            fenglincanyi
+        </a>
     </footer>
-  </div>
-  
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+
+            
+<div class="page-share-wrap">
     
-<nav id="article-nav">
-  
-    <a href="/2016/11/17/Android 类加载初探/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Android 类加载初探
-        
-      </div>
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2016/11/01/Android apk安装及编译过程/&title=《Android apk安装及编译过程》 — fenglincanyi|Blog&pic=http://yoursite.com/img/me.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2016/11/01/Android apk安装及编译过程/&title=《Android apk安装及编译过程》 — fenglincanyi|Blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2016/11/01/Android apk安装及编译过程/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Android apk安装及编译过程》 — fenglincanyi|Blog&url=http://yoursite.com/2016/11/01/Android apk安装及编译过程/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2016/11/01/Android apk安装及编译过程/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
     </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
   
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/11/17/Android 类加载初探/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Android 类加载初探</h4>
+      </a>
+    </div>
   
-    <a href="/2016/10/25/RadioGroup、RadioButton动态创建并定制icon显示/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">RadioGroup、RadioButton动态创建并定制icon显示</div>
-    </a>
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/10/25/RadioGroup、RadioButton动态创建并定制icon显示/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">RadioGroup、RadioButton动态创建并定制icon显示</h4>
+      </a>
+    </div>
   
 </nav>
 
-  
+
+
+    
+
+<div class="comments" id="comments">
+    <div class="ds-thread" data-thread-key="Android apk安装及编译过程" data-title="Android apk安装及编译过程" data-url="http://yoursite.com/2016/11/01/Android apk安装及编译过程/"></div>
+</div>
+<script>
+lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
+
+var duoshuoQuery = {short_name:'ysblog', theme: 'none'};
+lazyScripts.push('/js/embed.min.js?v=1.4.2');
+
+
+</script>
+
+
+
+
+
+
+
 </article>
 
-</section>
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢打赏
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
         
-          <aside id="sidebar">
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
-    <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/RxJava/">RxJava</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法/">算法</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络/">网络</a></li></ul>
+        <li>
+            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
     </div>
-  </div>
-
-
-  
-    
-
-  
-    
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a></li></ul>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>fenglincanyi|Blog &copy; 2015 - 2016</span>
+        </p>
     </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2016/11/17/Android 类加载初探/">Android 类加载初探</a>
-          </li>
-        
-          <li>
-            <a href="/2016/11/01/Android apk安装及编译过程/">Android apk安装及编译过程</a>
-          </li>
-        
-          <li>
-            <a href="/2016/10/25/RadioGroup、RadioButton动态创建并定制icon显示/">RadioGroup、RadioButton动态创建并定制icon显示</a>
-          </li>
-        
-          <li>
-            <a href="/2016/10/06/RxJava 初探（一）/">RxJava 初探（一）</a>
-          </li>
-        
-          <li>
-            <a href="/2016/09/09/Gradle相关配置/">Gradle相关配置</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2016 Gengjia rong<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
 </footer>
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
 
 
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2016/11/01/Android apk安装及编译过程/&title=《Android apk安装及编译过程》 — fenglincanyi|Blog&pic=http://yoursite.com/img/me.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2016/11/01/Android apk安装及编译过程/&title=《Android apk安装及编译过程》 — fenglincanyi|Blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2016/11/01/Android apk安装及编译过程/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Android apk安装及编译过程》 — fenglincanyi|Blog&url=http://yoursite.com/2016/11/01/Android apk安装及编译过程/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2016/11/01/Android apk安装及编译过程/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
 
 
-<script src="/js/script.js"></script>
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACpUlEQVR42u3aQU7EMAwFUO5/aTgA6vC/ncyweF2hUhq/IsWW46+v+Pp+uNrnn/7q929/P/l6xdWFh4eHdyj0p8VyWLLuUwzt/cd18fDw8K7x8uVzWPKZ2ufzmPHw8PD+G292J9nW88SAh4eH9/95s4SRF9DtG/Dw8PA+y2s36AT8OjG0H+t6rwUPDw+vO4Eabsqf+vnK+R4eHh7e+lR9Py6QF9B5uVzEiYeHh3eBN2s6JCXyrLBui/VoYAsPDw/vKC9vv7ab+6wgnjUmHu/j4eHhXeDNFm6L3bOYummLh4eHd5S3KVjzY7N8yCBpQxQJCQ8PD+8tvISUlMvJndeAhBTNRODh4eFd4D2F0qaE/J2nPugfCQkPDw/vGm/WkM2btm2Bnpfgf7wfDw8P7wIv32T34DbxnGpV4OHh4d3gzRoKeTNiM5K1GeHCw8PDu8FrW6v56MBmGOtUeY2Hh4d3g7dvQLRjW5uRrM0/AA8PD+8G71R7YjZclXy4zfvx8PDwTvHaP97c3ySDdvQKDw8P7z28pDUQjTqNyvHN0NWBzjQeHh5ezNu0FTaFeBJc/hGL9IOHh4d3lJcf8Odl96x1uxnwwsPDw7vNa4vUfQneHnFtBhTw8PDwPsWbhTsL6FRCwsPDw7vHa1NC3sydldH11o+Hh4f3dl7OmBXieYht6FGSwMPDw7vAy0ed8mTQwtpn8lEtPDw8vBu87/JKQs8PqNpCPC/T8fDw8O7x2s13f7g1Syqzd+Lh4eHd422as5tAZwkpSRt1nxgPDw9vxNtvxEkJ3pbseQvjEY+Hh4f3UV47FpA3XmeJpyip8fDw8D7Ea4/N9uV4OzRQnKrh4eHhrXn7ZkQyJpUkhjzOaEwBDw8P7wJvkzza17UfJYEdGCbAw8PDS3k/RAJpztw25qoAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
 
-  </div>
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.2" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
 </body>
 </html>

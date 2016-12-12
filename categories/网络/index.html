@@ -1,322 +1,323 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  
-  <title>Category: 网络 | fenglincanyi|blog</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="个人博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="fenglincanyi|blog">
-<meta property="og:url" content="http://yoursite.com/categories/网络/index.html">
-<meta property="og:site_name" content="fenglincanyi|blog">
-<meta property="og:description" content="个人博客">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="fenglincanyi|blog">
-<meta name="twitter:description" content="个人博客">
-  
-    <link rel="alternate" href="/atom.xml" title="fenglincanyi|blog" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  <link rel="stylesheet" href="/css/style.css">
-  
+    
 
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>Categories: 网络 | fenglincanyi|Blog | null</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#2DBE60">
+    
+    
+    <meta name="keywords" content="undefined">
+    <meta property="og:type" content="website">
+<meta property="og:title" content="fenglincanyi|Blog">
+<meta property="og:url" content="http://yoursite.com/categories/网络/index.html">
+<meta property="og:site_name" content="fenglincanyi|Blog">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="fenglincanyi|Blog">
+    
+        <link rel="alternative" href="/atom.xml" title="fenglincanyi|Blog" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.2">
+    <script>window.lazyScripts=[]</script>
 </head>
 
 <body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">fenglincanyi|blog</a>
-      </h1>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/me.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">fenglincanyi</h5>
+          <a href="mailto:1154294696@qq.com" title="1154294696@qq.com" class="mail">1154294696@qq.com</a>
+        </hgroup>
       </div>
     </div>
-  </div>
-</header>
-      <div class="outer">
-        <section id="main">
-  
-    <article id="post-对称、非对称加密技术初探" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/02/28/对称、非对称加密技术初探/" class="article-date">
-  <time datetime="2016-02-28T09:52:00.000Z" itemprop="datePublished">2月 28 2016</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/网络/">网络</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/28/对称、非对称加密技术初探/">对称、非对称加密技术初探</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>##一、对称加密</p>
-<ol>
-<li><p><strong>对称加密简介</strong></p>
-<p> 对称加密算法所用到的基本的方法是：代换 和 置换。简单来说：（以早期的加密方式举例）</p>
-<ul>
-<li><p>代换：是将明文字母替换成其他字母、数字或符号的方法</p>
-<p>  对于明文中的每一个字母，用字母表中k个字母来代替（允许循环，即a可以在z的后面）</p>
-<blockquote>
-<p>例如：如果 k = 3，那么明文中的 a 在密文中就变 d ，b 就变成 e。这里 k 值充当密钥</p>
-</blockquote>
-</li>
-<li><p>置换：可以说对代换的一种改进，通过并不是通过固定的规则来替换字母，任意字母都可以替换为别的其他字母，但是一一对应的。例如（单表置换加密）：</p>
-<blockquote>
-<p>明文：a b c d e f g</p>
-<p>密文：d c h n q i a</p>
-</blockquote>
-<p>以上是早期加密时用的简单的方法，其思想还是通过 替换 来进行加密的</p>
-</li>
-</ul>
-</li>
-<li><p><strong>对称加密过程</strong></p>
-<p> <img src="http://7xr1vo.com1.z0.glb.clouddn.com/%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E8%BF%87%E7%A8%8B.PNG" alt=""></p>
-</li>
-<li><p><strong>常见对称加密算法</strong></p>
-<ul>
-<li><p><strong>DES</strong>   </p>
-<p>  采用64位的分组长度，和56位的密钥长度，将64位的输入经过一系列的变换得到64位的输出。加密解密使用了相同的密钥。</p>
-<pre><code>* 注： 此算法可以被暴力破解，穷举即可解密，所以不再单纯使用 
-</code></pre></li>
-<li><p><strong>3DES</strong></p>
-<p>  对DES的改进，使用多个密钥对DES进行三次加密，有些基于Internet的应用已经采纳了这种算法，如：PGP，S/MIME</p>
-</li>
-<li><p><strong>AES</strong>(高级加密标准)</p>
-<p>  对DES的再次改进，性能不低于3DES， 它的密钥长度为128、192或256位，分组长度为128位</p>
-</li>
-<li><p><strong>Blowfish算法</strong></p>
-<p>  一种可变密钥长度的分组加密算法，分组长度64位。迄今为止，该算法的安全性还没有受到挑战</p>
-</li>
-<li><p><strong>RC5算法</strong></p>
-<p>  参数可变的分组加密算法，此算法使用了三种运算：异或、加、循环</p>
-</li>
-</ul>
-</li>
-</ol>
-<p>##二、非对称加密</p>
-<blockquote>
-<p>基于数学函数的算法，而不再是基于代换和置换技术，公钥加密算法是 非对称的</p>
-<p>根据加密算法 和 加密密钥 是推不出 解密密钥的</p>
-</blockquote>
-<ol>
-<li><p><strong>关于公钥、私钥</strong></p>
-<p> 正确理解：</p>
-<pre><code>公钥是用于 加密 和 认证 的
-私钥是用于 解密 和 签名 的
-
-* 这两个密钥，任意一个都可以用来加密，另一个用来解密
-* 公钥是公开的
-</code></pre></li>
-<li><p><strong>非对称加密过程</strong></p>
-<p> <img src="http://7xr1vo.com1.z0.glb.clouddn.com/%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E8%BF%87%E7%A8%8B.png" alt=""></p>
-</li>
-<li><p><strong>RSA简介</strong></p>
-<p> 第一个能用于数据加密也能用于数字签名的算法，RSA是一种分组密码</p>
-<ul>
-<li>易于理解和操作，但安全性一直没有得到理论上的证明</li>
-<li><p>RSA的加密和解密时间是DES的上百倍，效率较低</p>
-<blockquote>
-<p>选取密钥的过程：</p>
-</blockquote>
-<p>  (1). 选取两个 大质数 p, q. 质数值越大，破解 RSA 就越困难，进行加密和解密的时间就越长<br>  (2). 计算 n = p <em> q,  z = (p-1) </em> (q-1)<br>  (3). 选取 e &lt; n, 且与 z 互质（e 和 z没有公约数）<br>  (4). 找到数 d, 满足 ed - 1 被 z 整除（ ((e * d) - 1) % n) == 0 ）<br>  (5). 公钥：（n, e）;  私钥：（n, d）</p>
-<blockquote>
-<p>加密、解密过程：</p>
-</blockquote>
-<p>  (1). 甲方（发送方）：发送 m (发送数)，m &lt; n,<br>  (2). 发送时，用乙方（接收方）的公钥加密：密文 c = m^e % n<br>  (3). 乙方：解密用自己的私钥，得到明文 m = c^d % n</p>
-</li>
-</ul>
-</li>
-<li><p><strong>其他非对称加密算法</strong></p>
-<ul>
-<li>ElGamal算法：基于公钥密码体制和椭圆曲线加密体系，既能用于数据加密，又能用于数字签名</li>
-<li>背包加密算法：基于背包算法，但是大多数一次背包体制均被破译了，因此很少有人使用它</li>
-</ul>
-</li>
-</ol>
-<ol>
-<li><p><strong>散列(哈希)函数</strong></p>
-<p> 是公开的函数，可以将任意长的串映射成一个固定长度的串，Hash值 由下面的函数 H 生成：</p>
-<pre><code>h = H (M)
-
-M: 变长的消息，H(M)是定长的 Hash值
-</code></pre><p> 常见的散列函数有： <strong>MD5</strong>，<strong>SHA-1</strong> </p>
-<ul>
-<li><p>MD5：</p>
-<p>  有广泛的应用，如在 Java API 中就有体现，但也不安全，有人专门将大量的明文和密文收集起来存至数据库中，用于暴力破解MD5。所以实际使用时，需 “加盐”</p>
-</li>
-<li><p>SHA-1:</p>
-<p>  在Linux系统、Git中都有广泛的使用，它的原理类似于 MD4(MD5的前身)。</p>
-<blockquote>
-<p>说明： MD5 和 SHA-1被好多人称为 加密算法，其实这两个散列函数，是用于散列获得消息摘要的，严格来说，应该叫做 <strong>消息摘要算法</strong></p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li><p><strong>数字签名</strong></p>
-<p> 签名是用来验证 发送方的身份 和 数据的完整性(数据是否被第三方篡改)的</p>
-<p> 签名分为：</p>
-<ul>
-<li>普通数字签名（如：RSA，DES）</li>
-<li><p>特殊数字签名（如：有盲签名，代理签名）</p>
-<p><strong>数字签名过程</strong>：</p>
-<p>  (1). 发送方 生成一对公钥和私钥，将自己的 公钥 发送给 接收方<br>  (2). 发送方 将 要发送的消息 msg, 进行散列(MD5或者SHA-1)，得到 消息摘要<br>  (3). 发送方 将 消息摘要 用自己的私钥加密，加密后的信息就是 数字签名<br>  (4). 发送方 将 数字签名 附在 要发送的消息 msg’ (是通过接收方的公钥加密后的) 的后面，再一起发送至 接收方<br><strong>数字签名的验证过程</strong>：</p>
-<p>  (1). 接收方 收到消息后，对消息 msg’ 使用自己的私钥进行解密得到 msg<br>  (2). 接收方 对 数字签名 使用 发送方的公钥解密，得到 消息摘要(之前是由消息经过散列得到)<br>  (3). 接收方 使用相同的 散列函数(散列函数也是公开的)对 msg 进行散列，再计算得到一个 消息摘要<br>  (4). 接收方 对比着两个 消息摘要 即可判断出 消息的完整性</p>
-<blockquote>
-<p>身份的正确性：可通过 使用公钥能否解开数字签名 来判断</p>
-<p>数据的完整性：可通过 对比两个消息摘要是否相同 来判断</p>
-</blockquote>
-<p><img src="http://7xr1vo.com1.z0.glb.clouddn.com/%E6%95%B0%E5%AD%97%E7%AD%BE%E5%90%8D.png" alt=""></p>
-</li>
-</ul>
-</li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/02/28/对称、非对称加密技术初探/" data-id="ciwgj0ul90005p4v7hb7t3esq" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-
-</section>
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
         
-          <aside id="sidebar">
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
-    <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/RxJava/">RxJava</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法/">算法</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络/">网络</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-
-  
-    
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
         
-          <li>
-            <a href="/2016/11/17/Android 类加载初探/">Android 类加载初探</a>
-          </li>
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
         
-          <li>
-            <a href="/2016/11/01/Android apk安装及编译过程/">Android apk安装及编译过程</a>
-          </li>
+            <li class="waves-block waves-effect active">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
         
-          <li>
-            <a href="/2016/10/25/RadioGroup、RadioButton动态创建并定制icon显示/">RadioGroup、RadioButton动态创建并定制icon显示</a>
-          </li>
-        
-          <li>
-            <a href="/2016/10/06/RxJava 初探（一）/">RxJava 初探（一）</a>
-          </li>
-        
-          <li>
-            <a href="/2016/09/09/Gradle相关配置/">Gradle相关配置</a>
-          </li>
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/fenglincanyi" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
         
       </ul>
     </div>
   </div>
-
-  
 </aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Categories: 网络</div>
         
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2016 Gengjia rong<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
     </div>
-  </div>
-</footer>
+</header>
+<header class="content-header categories-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Categories: 网络</h1>
+        <h5 class="subtitle">
+            
+        </h5>
     </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
+
+     
+<div class="tabs-bar container">
+    <nav class="tags-list">
+        <a href="/categories" style="-webkit-order:-1;order:-1" class="tags-list-item waves-effect waves-button waves-light
+            ">全部</a>
+         
+
+            <a href="/categories/工具/" style="-webkit-order:3;order:3" class="tags-list-item waves-effect waves-button waves-light">工具</a>
+
+         
+
+            <a href="/categories/Android/" style="-webkit-order:4;order:4" class="tags-list-item waves-effect waves-button waves-light">Android</a>
+
+         
+
+            <a href="/categories/RxJava/" style="-webkit-order:0;order:0" class="tags-list-item waves-effect waves-button waves-light">RxJava</a>
+
+         
+
+            <a href="/categories/网络/" style="-webkit-order:1;order:1" class="tags-list-item waves-effect waves-button waves-light active">网络</a>
+
+         
+
+            <a href="/categories/算法/" style="-webkit-order:2;order:2" class="tags-list-item waves-effect waves-button waves-light">算法</a>
+
+        
+    </nav>
+    <!-- PC show more-->
+    <div class="tags-list-more">
+        <a href="javascript:;" onclick="BLOG.tabBar(this)" class="action tags-list-item waves-effect waves-circle waves-light"><i class="icon icon-ellipsis-h"></i></a>
+    </div>
+</div>
+
+
+</header>
+
+<div class="container body-wrap fade">
+    
+            <div class="waterfall">
+          
+
+            <div class="waterfall-item">
+  <article class="article-card archive-article">
+    <div class="post-meta">
+      <time class="post-time" title="2016-2-28 17:52" datetime="2016-02-28T09:52:00.000Z"  itemprop="datePublished">Feb 28, 2016</time>
+
+      
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/网络/">网络</a></li></ul>
+
+
+
+    </div>
     
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2016/02/28/对称、非对称加密技术初探/">对称、非对称加密技术初探</a>
+    </h3>
+  
 
 
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+    
+  </article>
+</div>
+
+        
+            </div>
+        
+    
+</div>
 
 
-<script src="/js/script.js"></script>
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
 
-  </div>
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>fenglincanyi|Blog &copy; 2015 - 2016</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/categories/网络/&title=fenglincanyi|Blog&pic=http://yoursite.com/img/me.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/categories/网络/&title=fenglincanyi|Blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/categories/网络/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=fenglincanyi|Blog&url=http://yoursite.com/categories/网络/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/categories/网络/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK4AAACuCAAAAACKZ2kyAAAByElEQVR42u3aS27DMAwFwNz/0u6mixSF3Efqk6QYrQLDjkdeECTFxyNe19P6feX5+uip3/eMnlqwcHFxp7nX7UruGd1/j87/HxcX91XcUcQY3TO6Ut12bsDFxf0U7j0o2QwuLu7/4FYLnt7nwMXFfQduNdBUKS+o1XBxcSe4eZdy3+8t/V1cXNwW9yqu+SDVe+/3s7i4uEe4eUCZb4P20hdcXNzz3F54uj9WyZuh+acp9GlwcXGnuUmDo1oO9dooheYILi7uEW7e6MxZSUjKwyUuLu55bjV8zASp6njWH3EXFxd3MzfqoBSDXfWfo+MWXFzczdwkZUnSjjwZqo5cDBumuLi4R7jzL0i2Wn3LDxsuLu4R7qqGac7qNURwcXHPc2eGLXJ69XMUDmhxcXE3cPMBi2qxlLdNm3NkuLi4R7h5Q2T+RLdaDuHi4p7nVgetegXPgiwMFxd3M/cqrl5oqzZHyjUZLi7uUm61PZEnQ3mKMzOogYuLu4+bB6/esWhS5ORJFS4u7knufKCpJkbNAIqLi/vG3N6AxfzhCi4u7mdx145ilE9+cHFxN3DzBCU/Fs0LqnsiLi7ueW7v4HNZYIq3jYuLe4T7BYoAAS8z0pFLAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.2" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
 </body>
 </html>

@@ -1,526 +1,350 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  
-  <title>Archives: 2016/2 | fenglincanyi|blog</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="个人博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="fenglincanyi|blog">
-<meta property="og:url" content="http://yoursite.com/archives/2016/02/index.html">
-<meta property="og:site_name" content="fenglincanyi|blog">
-<meta property="og:description" content="个人博客">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="fenglincanyi|blog">
-<meta name="twitter:description" content="个人博客">
-  
-    <link rel="alternate" href="/atom.xml" title="fenglincanyi|blog" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  <link rel="stylesheet" href="/css/style.css">
-  
+    
 
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>Archives: 2016/2 | fenglincanyi|Blog | null</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#2DBE60">
+    
+    
+    <meta name="keywords" content="undefined">
+    <meta property="og:type" content="website">
+<meta property="og:title" content="fenglincanyi|Blog">
+<meta property="og:url" content="http://yoursite.com/archives/2016/02/index.html">
+<meta property="og:site_name" content="fenglincanyi|Blog">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="fenglincanyi|Blog">
+    
+        <link rel="alternative" href="/atom.xml" title="fenglincanyi|Blog" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.2">
+    <script>window.lazyScripts=[]</script>
 </head>
 
 <body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">fenglincanyi|blog</a>
-      </h1>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/me.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">fenglincanyi</h5>
+          <a href="mailto:1154294696@qq.com" title="1154294696@qq.com" class="mail">1154294696@qq.com</a>
+        </hgroup>
       </div>
     </div>
-  </div>
-</header>
-      <div class="outer">
-        <section id="main">
-  
-    <article id="post-对称、非对称加密技术初探" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/02/28/对称、非对称加密技术初探/" class="article-date">
-  <time datetime="2016-02-28T09:52:00.000Z" itemprop="datePublished">2月 28 2016</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/网络/">网络</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/28/对称、非对称加密技术初探/">对称、非对称加密技术初探</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>##一、对称加密</p>
-<ol>
-<li><p><strong>对称加密简介</strong></p>
-<p> 对称加密算法所用到的基本的方法是：代换 和 置换。简单来说：（以早期的加密方式举例）</p>
-<ul>
-<li><p>代换：是将明文字母替换成其他字母、数字或符号的方法</p>
-<p>  对于明文中的每一个字母，用字母表中k个字母来代替（允许循环，即a可以在z的后面）</p>
-<blockquote>
-<p>例如：如果 k = 3，那么明文中的 a 在密文中就变 d ，b 就变成 e。这里 k 值充当密钥</p>
-</blockquote>
-</li>
-<li><p>置换：可以说对代换的一种改进，通过并不是通过固定的规则来替换字母，任意字母都可以替换为别的其他字母，但是一一对应的。例如（单表置换加密）：</p>
-<blockquote>
-<p>明文：a b c d e f g</p>
-<p>密文：d c h n q i a</p>
-</blockquote>
-<p>以上是早期加密时用的简单的方法，其思想还是通过 替换 来进行加密的</p>
-</li>
-</ul>
-</li>
-<li><p><strong>对称加密过程</strong></p>
-<p> <img src="http://7xr1vo.com1.z0.glb.clouddn.com/%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E8%BF%87%E7%A8%8B.PNG" alt=""></p>
-</li>
-<li><p><strong>常见对称加密算法</strong></p>
-<ul>
-<li><p><strong>DES</strong>   </p>
-<p>  采用64位的分组长度，和56位的密钥长度，将64位的输入经过一系列的变换得到64位的输出。加密解密使用了相同的密钥。</p>
-<pre><code>* 注： 此算法可以被暴力破解，穷举即可解密，所以不再单纯使用 
-</code></pre></li>
-<li><p><strong>3DES</strong></p>
-<p>  对DES的改进，使用多个密钥对DES进行三次加密，有些基于Internet的应用已经采纳了这种算法，如：PGP，S/MIME</p>
-</li>
-<li><p><strong>AES</strong>(高级加密标准)</p>
-<p>  对DES的再次改进，性能不低于3DES， 它的密钥长度为128、192或256位，分组长度为128位</p>
-</li>
-<li><p><strong>Blowfish算法</strong></p>
-<p>  一种可变密钥长度的分组加密算法，分组长度64位。迄今为止，该算法的安全性还没有受到挑战</p>
-</li>
-<li><p><strong>RC5算法</strong></p>
-<p>  参数可变的分组加密算法，此算法使用了三种运算：异或、加、循环</p>
-</li>
-</ul>
-</li>
-</ol>
-<p>##二、非对称加密</p>
-<blockquote>
-<p>基于数学函数的算法，而不再是基于代换和置换技术，公钥加密算法是 非对称的</p>
-<p>根据加密算法 和 加密密钥 是推不出 解密密钥的</p>
-</blockquote>
-<ol>
-<li><p><strong>关于公钥、私钥</strong></p>
-<p> 正确理解：</p>
-<pre><code>公钥是用于 加密 和 认证 的
-私钥是用于 解密 和 签名 的
-
-* 这两个密钥，任意一个都可以用来加密，另一个用来解密
-* 公钥是公开的
-</code></pre></li>
-<li><p><strong>非对称加密过程</strong></p>
-<p> <img src="http://7xr1vo.com1.z0.glb.clouddn.com/%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E8%BF%87%E7%A8%8B.png" alt=""></p>
-</li>
-<li><p><strong>RSA简介</strong></p>
-<p> 第一个能用于数据加密也能用于数字签名的算法，RSA是一种分组密码</p>
-<ul>
-<li>易于理解和操作，但安全性一直没有得到理论上的证明</li>
-<li><p>RSA的加密和解密时间是DES的上百倍，效率较低</p>
-<blockquote>
-<p>选取密钥的过程：</p>
-</blockquote>
-<p>  (1). 选取两个 大质数 p, q. 质数值越大，破解 RSA 就越困难，进行加密和解密的时间就越长<br>  (2). 计算 n = p <em> q,  z = (p-1) </em> (q-1)<br>  (3). 选取 e &lt; n, 且与 z 互质（e 和 z没有公约数）<br>  (4). 找到数 d, 满足 ed - 1 被 z 整除（ ((e * d) - 1) % n) == 0 ）<br>  (5). 公钥：（n, e）;  私钥：（n, d）</p>
-<blockquote>
-<p>加密、解密过程：</p>
-</blockquote>
-<p>  (1). 甲方（发送方）：发送 m (发送数)，m &lt; n,<br>  (2). 发送时，用乙方（接收方）的公钥加密：密文 c = m^e % n<br>  (3). 乙方：解密用自己的私钥，得到明文 m = c^d % n</p>
-</li>
-</ul>
-</li>
-<li><p><strong>其他非对称加密算法</strong></p>
-<ul>
-<li>ElGamal算法：基于公钥密码体制和椭圆曲线加密体系，既能用于数据加密，又能用于数字签名</li>
-<li>背包加密算法：基于背包算法，但是大多数一次背包体制均被破译了，因此很少有人使用它</li>
-</ul>
-</li>
-</ol>
-<ol>
-<li><p><strong>散列(哈希)函数</strong></p>
-<p> 是公开的函数，可以将任意长的串映射成一个固定长度的串，Hash值 由下面的函数 H 生成：</p>
-<pre><code>h = H (M)
-
-M: 变长的消息，H(M)是定长的 Hash值
-</code></pre><p> 常见的散列函数有： <strong>MD5</strong>，<strong>SHA-1</strong> </p>
-<ul>
-<li><p>MD5：</p>
-<p>  有广泛的应用，如在 Java API 中就有体现，但也不安全，有人专门将大量的明文和密文收集起来存至数据库中，用于暴力破解MD5。所以实际使用时，需 “加盐”</p>
-</li>
-<li><p>SHA-1:</p>
-<p>  在Linux系统、Git中都有广泛的使用，它的原理类似于 MD4(MD5的前身)。</p>
-<blockquote>
-<p>说明： MD5 和 SHA-1被好多人称为 加密算法，其实这两个散列函数，是用于散列获得消息摘要的，严格来说，应该叫做 <strong>消息摘要算法</strong></p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li><p><strong>数字签名</strong></p>
-<p> 签名是用来验证 发送方的身份 和 数据的完整性(数据是否被第三方篡改)的</p>
-<p> 签名分为：</p>
-<ul>
-<li>普通数字签名（如：RSA，DES）</li>
-<li><p>特殊数字签名（如：有盲签名，代理签名）</p>
-<p><strong>数字签名过程</strong>：</p>
-<p>  (1). 发送方 生成一对公钥和私钥，将自己的 公钥 发送给 接收方<br>  (2). 发送方 将 要发送的消息 msg, 进行散列(MD5或者SHA-1)，得到 消息摘要<br>  (3). 发送方 将 消息摘要 用自己的私钥加密，加密后的信息就是 数字签名<br>  (4). 发送方 将 数字签名 附在 要发送的消息 msg’ (是通过接收方的公钥加密后的) 的后面，再一起发送至 接收方<br><strong>数字签名的验证过程</strong>：</p>
-<p>  (1). 接收方 收到消息后，对消息 msg’ 使用自己的私钥进行解密得到 msg<br>  (2). 接收方 对 数字签名 使用 发送方的公钥解密，得到 消息摘要(之前是由消息经过散列得到)<br>  (3). 接收方 使用相同的 散列函数(散列函数也是公开的)对 msg 进行散列，再计算得到一个 消息摘要<br>  (4). 接收方 对比着两个 消息摘要 即可判断出 消息的完整性</p>
-<blockquote>
-<p>身份的正确性：可通过 使用公钥能否解开数字签名 来判断</p>
-<p>数据的完整性：可通过 对比两个消息摘要是否相同 来判断</p>
-</blockquote>
-<p><img src="http://7xr1vo.com1.z0.glb.clouddn.com/%E6%95%B0%E5%AD%97%E7%AD%BE%E5%90%8D.png" alt=""></p>
-</li>
-</ul>
-</li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/02/28/对称、非对称加密技术初探/" data-id="ciwgj0ul90005p4v7hb7t3esq" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Git学习笔记（二）" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/02/19/Git学习笔记（二）/" class="article-date">
-  <time datetime="2016-02-19T08:06:00.000Z" itemprop="datePublished">2月 19 2016</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/工具/">工具</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/19/Git学习笔记（二）/">Git学习笔记（二）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>##常用命令：</p>
-<blockquote>
-<p>1、初始</p>
-</blockquote>
-<pre><code>git &lt;verb&gt; --help           查看命令用法(方法之一)
-git init                    初始化git仓库(在当前目录下会创建.git目录)
-</code></pre><blockquote>
-<p>2、 远程操作</p>
-</blockquote>
-<pre><code>git clone URL                从远程clone git仓库
-git remote -v                查看远程仓库使用的 Git 保存的简写与其对应的 URL    
-git pull URL                将数据拉取到你的本地仓库,并合并远程分支到当前分支
-git fetch URL                将数据拉取到你的本地仓库,并不会自动合并或修改你当前的工作
-git push URL                将本地git仓库推送到远程仓库(一次就记住URL了,之后不需要写URL)
-</code></pre><blockquote>
-<p>3、添加文件</p>
-</blockquote>
-<pre><code>git add filename            添加某个文件(该文件处于已跟踪(A)：tracked)
-git add --all , -A            添加所有文件
-</code></pre><blockquote>
-<p>4、提交文件</p>
-</blockquote>
-<pre><code>git commit -m &quot;提交信息&quot;     提交当下工作区的文件
-git commit -a -m &quot;提交信息&quot;     前两个命令的合并，直接跳过暂存区提交
-git commit                     启动文本编辑器写提交信息
-</code></pre><blockquote>
-<p>5、查看文件状态</p>
-</blockquote>
-<pre><code>git status                    查看当前文件状态
-git status -s                查看当前文件详细状态列表    
-</code></pre><blockquote>
-<p>6、查看日志</p>
-</blockquote>
-<pre><code>git log                        查看提交的日志
-git log    --oneline            查看提交的日志简略信息
-git log    -p -2                查看最近两次提交的日志
-</code></pre><blockquote>
-<p>7、查看修改</p>
-</blockquote>
-<pre><code>git diff                    查看未暂存文件(未add)的修改内容
-git diff --staged, --cached    查看已暂存文件(已add)的修改内容
-</code></pre><blockquote>
-<p>8、删除文件</p>
-</blockquote>
-<pre><code>git rm filename                移除文件
-git rm --cached filename    移除文件,但该文件还留在工作区，但之后不会被跟踪(untracked)
-git rm \*.txt                移除以 .txt 结尾的文件
-</code></pre><blockquote>
-<p>9、更改文件名</p>
-</blockquote>
-<pre><code>git mv oldName newName        更改文件名
-</code></pre><blockquote>
-<p>10、标签操作</p>
-</blockquote>
-<pre><code>git tag -a v1.0 -m &quot;info&quot;    打标签 v1.0:版本号，info:版本信息
-git tag                        查看已有标签
-</code></pre><blockquote>
-<p>11、分支操作</p>
-</blockquote>
-<pre><code>git branch branchName        创建分支
-git branch -d branchName    删除分支
-git checkout branchName        切换分支
-git merge branchName        合并分支到当前分支
-git mergetool                启动图形化工具解决冲突
-git branch                    查看所有分支
-git branch -v, -vv            查看所有分支的最后一次提交
-</code></pre><p>##补充：</p>
-<ul>
-<li><strong>rebase</strong>: <strong>变基</strong>，另一种不同于merge的”整合”方式 (命令示例：git rebase master)</li>
-<li>变基是将一系列提交按照原有次序依次应用到另一分支上，而合并是把最终结果合在一起。</li>
-<li><p>请注意：</p>
-<blockquote>
-<p>无论是通过变基，还是通过三方合并，整合的最终结果所指向的快照始终是一样的，只不过提交历史不同罢了。</p>
-</blockquote>
-</li>
-<li><p>准则：</p>
-<ul>
-<li>不要对在你的仓库外有副本的分支执行变基</li>
-<li>只对尚未推送或分享给别人的本地修改执行变基操作清理历史，从不对已推送至别处的提交执行变基操作</li>
-</ul>
-</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/02/19/Git学习笔记（二）/" data-id="ciwgj0ul40003p4v7sspmxlla" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Git学习笔记（一）" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/02/19/Git学习笔记（一）/" class="article-date">
-  <time datetime="2016-02-19T07:28:00.000Z" itemprop="datePublished">2月 19 2016</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/工具/">工具</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+            <li class="waves-block waves-effect active">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/19/Git学习笔记（一）/">Git学习笔记（一）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>##一、Git特点</p>
-<p>###1. 直接记录快照，而非差异比较</p>
-<ul>
-<li>在 Git 中保存项目状态时，它主要对当时的全部文件制作一个快照并保存这个快照的索引。</li>
-<li>为了高效，如果文件没有修改，Git 不再重新存储该文件，而是只保留一个链接指向之前存储的文件。</li>
-<li>Git 对待数据更像是一个 快照流。<br>###2. 近乎所有操作都是本地执行</li>
-<li>在 Git 中的绝大多数操作都只需要访问本地文件和资源，一般不需要来自网络上其它计算机的信息。<br>###3. Git 保证完整性</li>
-<li><p>Git 中所有数据在存储前都计算校验和，然后以校验和来引用。Git 用以计算校验和的机制叫做 SHA-1 散列（hash，哈希）。<br>这是一个由 40 个十六进制字符（0-9 和 a-f）组成字符串，基于 Git 中文件的内容或目录结构计算出来。<br>SHA-1 哈希看起来是这样：  </p>
-<pre><code>&gt;24b9da6552252987aa493b52f8696cd6d3b00373
-</code></pre></li>
-<li><p>实际上，Git 数据库中保存的信息都是以文件内容的哈希值来索引，而不是文件名<br>###4. Git 一般只添加数据</p>
-</li>
-<li>你执行的 Git 操作，几乎只往 Git 数据库中增加数据</li>
-</ul>
-<p>##二、Git 中的文件有3种状态：</p>
-<p>###1. 已提交：数据已经安全的保存在本地数据库中</p>
-<p>###2. 已修改：修改了文件，但未保存到数据库中</p>
-<p>###3. 已暂存：对一个已修改文件的当前版本做了标记，使之包含在下次提交的快照中<br><img src="http://7xr1vo.com1.z0.glb.clouddn.com/%E6%96%87%E4%BB%B6%E7%9A%84%E7%8A%B6%E6%80%81%E5%8F%98%E5%8C%96%E5%91%A8%E6%9C%9F.png" alt=""> </p>
-<p>##三、Git 中的3个工作区域</p>
-<p>###1. Git仓库：保存项目的元数据和对象数据库，Git中最重要的部分，供其他人clone 仓库</p>
-<p>###2. 工作目录：对项目的某个版本独立提取出来的，供工作中使用、修改</p>
-<ul>
-<li><p>工作目录下的文件状态：</p>
-<p>  已跟踪：纳入了版本控制的文件，后期可能处于 未修改，已修改或放入暂存区了</p>
-<p>  未跟踪：工作目录下除已跟踪文件外的其他所有文件<br>###3. 暂存区：是一个文件，保存下次将提交的文件列表信息，一般在Git仓库目录中，有时也被叫做索引<br><img src="http://7xr1vo.com1.z0.glb.clouddn.com/git3%E7%A7%8D%E5%B7%A5%E4%BD%9C%E5%8C%BA%E5%9F%9F.png" alt=""> </p>
-</li>
-</ul>
-<h2 id="四、Git-的基本工作流程"><a href="#四、Git-的基本工作流程" class="headerlink" title="四、Git 的基本工作流程"></a>四、Git 的基本工作流程</h2><p>###1. 在工作目录中修改文件</p>
-<p>###2. 暂存文件，将文件的快照放入暂存区</p>
-<p>###3. 提交更新，找到暂存区的文件，将快照永久性存储到Git仓库中</p>
-<h2 id="五、Git-个人信息初始配置"><a href="#五、Git-个人信息初始配置" class="headerlink" title="五、Git 个人信息初始配置"></a>五、Git 个人信息初始配置</h2><ul>
-<li><p>全局信息配置：(个人默认信息)</p>
-<blockquote>
-<p>git config –global user.name “xxx”</p>
-<p>git config –global user.email   xxx@qq.coom</p>
-</blockquote>
-<p>  此配置会写入 user目录下的 .gitconfig文件，实际上为个人信息默认值</p>
-</li>
-<li><p>临时配置：</p>
-<p>  去掉 –global 即可<br>  实际是在其配置列表中追加其信息，重复变量名，不同的value值<br>  (Git每次会读取不同文件，其中就可能含有同一个配置)<br>  Git 会使用每个变量的最后一次的配置的值</p>
-</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/02/19/Git学习笔记（一）/" data-id="ciwgj0ul60004p4v7yofsbsru" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-
-</section>
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
         
-          <aside id="sidebar">
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
-    <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/RxJava/">RxJava</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法/">算法</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络/">网络</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-
-  
-    
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
         
-          <li>
-            <a href="/2016/11/17/Android 类加载初探/">Android 类加载初探</a>
-          </li>
-        
-          <li>
-            <a href="/2016/11/01/Android apk安装及编译过程/">Android apk安装及编译过程</a>
-          </li>
-        
-          <li>
-            <a href="/2016/10/25/RadioGroup、RadioButton动态创建并定制icon显示/">RadioGroup、RadioButton动态创建并定制icon显示</a>
-          </li>
-        
-          <li>
-            <a href="/2016/10/06/RxJava 初探（一）/">RxJava 初探（一）</a>
-          </li>
-        
-          <li>
-            <a href="/2016/09/09/Gradle相关配置/">Gradle相关配置</a>
-          </li>
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/fenglincanyi" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
         
       </ul>
     </div>
   </div>
-
-  
 </aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Archives</div>
         
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2016 Gengjia rong<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
     </div>
-  </div>
-</footer>
+</header>
+<header class="content-header archives-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Archives</h1>
+        <h5 class="subtitle">
+            
+        </h5>
     </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
+
     
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+</header>
+
+<div class="container body-wrap fade">
+    
+
+    
+            
+            <h3 class="archive-separator">February, 2016</h3>
+            <div class="waterfall">
+    
+
+        <div class="waterfall-item">
+  <article class="article-card archive-article">
+    <div class="post-meta">
+      <time class="post-time" title="2016-2-28 17:52" datetime="2016-02-28T09:52:00.000Z"  itemprop="datePublished">Feb 28</time>
+
+      
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/网络/">网络</a></li></ul>
 
 
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+    </div>
+    
 
 
-<script src="/js/script.js"></script>
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2016/02/28/对称、非对称加密技术初探/">对称、非对称加密技术初探</a>
+    </h3>
+  
 
-  </div>
+
+
+    
+  </article>
+</div>
+
+    
+
+        <div class="waterfall-item">
+  <article class="article-card archive-article">
+    <div class="post-meta">
+      <time class="post-time" title="2016-2-19 16:06" datetime="2016-02-19T08:06:00.000Z"  itemprop="datePublished">Feb 19</time>
+
+      
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/工具/">工具</a></li></ul>
+
+
+
+    </div>
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2016/02/19/Git学习笔记（二）/">Git学习笔记（二）</a>
+    </h3>
+  
+
+
+
+    
+  </article>
+</div>
+
+    
+
+        <div class="waterfall-item">
+  <article class="article-card archive-article">
+    <div class="post-meta">
+      <time class="post-time" title="2016-2-19 15:28" datetime="2016-02-19T07:28:00.000Z"  itemprop="datePublished">Feb 19</time>
+
+      
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/工具/">工具</a></li></ul>
+
+
+
+    </div>
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2016/02/19/Git学习笔记（一）/">Git学习笔记（一）</a>
+    </h3>
+  
+
+
+
+    
+  </article>
+</div>
+
+    
+    </div>
+
+    
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>fenglincanyi|Blog &copy; 2015 - 2016</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/archives/2016/02/&title=fenglincanyi|Blog&pic=http://yoursite.com/img/me.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/archives/2016/02/&title=fenglincanyi|Blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/archives/2016/02/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=fenglincanyi|Blog&url=http://yoursite.com/archives/2016/02/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/archives/2016/02/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK4AAACuCAAAAACKZ2kyAAABzUlEQVR42u3ay24CMQwFUP7/p+m2EpC5tkk6lU5WFYSZky6s+PF4xOv5sn5/vt75uufTb7+2cHFxx9zncq256xcnh8kNuLi457nrl1X35IevHhgXF/ee3Dw8fdrT+3fg4uLemZvsXNNxcXH/Cze5lKwD0yR4bcnVcHFxB9y8Srnv7y31XVxc3Bb3WVzV5kq1MHrxdlxc3CPcPKD0rkG95uvFRQoXF/cINy9t7ADlox64uLhnuNVm53rwIt/TDJe4uLgHub3yZT5O0Uuf3jwNFxf3ODe5DfVKHpMr1MdAhouLe4Q7KWImx05C28WVCBcX9yC3l5z0Rrt6F6lyroaLi7uB20t+qsNYyTHeJD+4uLhHuPn9oVr46LVqLgIZLi7uZm6vnDGfn+yNiuLi4v4VtzrMnadG1eJIFMhwcXGPcCeP6zVm8nQIFxf3PDe5XpQTlaCoWt6Ji4u7mTtpqfaarElx5NGb6MTFxf0St1qeqAapfQkVLi7ubu63Rq/ylsnoW1xc3IPcPNDkBY5JCnQRyHBxcW/PTZq11bGMURUHFxf3ODcPSZMiyKiVgouL+yVutbiZFEp6CRUuLu4duNXG5+hBxfLoqL6Li4vb4f4AwncBL4QlNmQAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.2" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
 </body>
 </html>

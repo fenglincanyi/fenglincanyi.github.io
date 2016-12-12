@@ -1,244 +1,323 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  
-  <title>Category: RxJava | fenglincanyi|blog</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="个人博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="fenglincanyi|blog">
-<meta property="og:url" content="http://yoursite.com/categories/RxJava/index.html">
-<meta property="og:site_name" content="fenglincanyi|blog">
-<meta property="og:description" content="个人博客">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="fenglincanyi|blog">
-<meta name="twitter:description" content="个人博客">
-  
-    <link rel="alternate" href="/atom.xml" title="fenglincanyi|blog" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  <link rel="stylesheet" href="/css/style.css">
-  
+    
 
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>Categories: RxJava | fenglincanyi|Blog | null</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#2DBE60">
+    
+    
+    <meta name="keywords" content="undefined">
+    <meta property="og:type" content="website">
+<meta property="og:title" content="fenglincanyi|Blog">
+<meta property="og:url" content="http://yoursite.com/categories/RxJava/index.html">
+<meta property="og:site_name" content="fenglincanyi|Blog">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="fenglincanyi|Blog">
+    
+        <link rel="alternative" href="/atom.xml" title="fenglincanyi|Blog" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.2">
+    <script>window.lazyScripts=[]</script>
 </head>
 
 <body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">fenglincanyi|blog</a>
-      </h1>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/me.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">fenglincanyi</h5>
+          <a href="mailto:1154294696@qq.com" title="1154294696@qq.com" class="mail">1154294696@qq.com</a>
+        </hgroup>
       </div>
     </div>
-  </div>
-</header>
-      <div class="outer">
-        <section id="main">
-  
-    <article id="post-RxJava 初探（一）" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/10/06/RxJava 初探（一）/" class="article-date">
-  <time datetime="2016-10-05T16:45:00.000Z" itemprop="datePublished">10月 6 2016</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/RxJava/">RxJava</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/10/06/RxJava 初探（一）/">RxJava 初探（一）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="一、几个基本概念"><a href="#一、几个基本概念" class="headerlink" title="一、几个基本概念"></a>一、几个基本概念</h3><ul>
-<li>由来<br>  Rx(Reactive Extensions)，最初是LINQ的一个扩展，后由微软团队开发，在2012年11月开源。ReactiveX.io给的定义是，Rx是一个使用可观察数据流进行异步编程的编程接口，ReactiveX结合了观察者模式、迭代器模式和函数式编程的精华。</li>
-<li>Rx 模式<ul>
-<li>创建：Rx可以方便的创建事件流和数据流</li>
-<li>组合：Rx使用查询式的操作符组合和变换数据流</li>
-<li>监听：Rx可以订阅任何可观察的数据流并执行操作</li>
-</ul>
-</li>
-<li>名词定义<ul>
-<li>Iterable： 可迭代对象，支持以迭代器的形式遍历</li>
-<li>Observable：可观察对象，在Rx中定义为更强大的Iterable，在观察者模式中是被观察的对象，一旦数据产生或发生变化，会通过某种方式通知观察者或订阅者</li>
-<li>Observer： 观察者对象，监听Observable发射的数据并做出响应，Subscriber是它的一个特殊实现</li>
-<li>emit：直译为发射，发布，发出，含义是Observable在数据产生或变化时发送通知给Observer，调用Observer对应的方法。文章统一翻译为发射</li>
-<li>items：直译为项目，条目，在Rx里是指Observable发射的数据项，文章统一译为数据，数据项</li>
-</ul>
-</li>
-</ul>
-<h3 id="二、响应式编程模式"><a href="#二、响应式编程模式" class="headerlink" title="二、响应式编程模式"></a>二、响应式编程模式</h3><ul>
-<li><p>下图采自官方文档，基本阐述了数据流和数据变换的过程：</p>
-<p>  <img src="http://7xr1vo.com1.z0.glb.clouddn.com/rxjava%E7%AE%80%E5%8D%95%E5%9B%BE%E8%A7%A3.png" alt="这里写图片描述"></p>
-</li>
-<li>冷热观察者<ul>
-<li>热 观察者：可能一创建完就开始发射数据，因此所有后续订阅它的观察者可能从序列中间的某个位置开始接受数据（有一些数据错过了）</li>
-<li>冷 观察者：一个”冷”的Observable会一直等待，直到有观察者订阅它才开始发射数据，因此这个观察者可以确保会收到整个数据序列</li>
-</ul>
-</li>
-</ul>
-<h3 id="三、操作分类"><a href="#三、操作分类" class="headerlink" title="三、操作分类"></a>三、操作分类</h3><ul>
-<li>创建操作： Create, Defer, Empty/Never/Throw, From, Interval, Just, Range, Repeat, Start, Timer</li>
-<li>变换操作：Buffer, FlatMap, GroupBy, Map, Scan和Window</li>
-<li>过滤操作：Debounce, Distinct, ElementAt, Filter, First, IgnoreElements, Last, Sample, Skip, SkipLast, Take, TakeLast</li>
-<li>组合操作：And/Then/When, CombineLatest, Join, Merge, StartWith, Switch, Zip</li>
-<li>错误处理：Catch和Retry</li>
-<li>辅助操作：Delay, Do, Materialize/Dematerialize, ObserveOn, Serialize, Subscribe, SubscribeOn, TimeInterval, Timeout, Timestamp, Using</li>
-<li>条件和布尔操作：All, Amb, Contains, DefaultIfEmpty, SequenceEqual, SkipUntil, SkipWhile, TakeUntil, TakeWhile</li>
-<li>算术和集合操作：Average, Concat, Count, Max, Min, Reduce, Sum</li>
-<li>转换操作：To</li>
-<li>连接操作：Connect, Publish, RefCount, Replay</li>
-<li>反压操作：用于增加特殊的流程控制策略的操作符</li>
-</ul>
-<blockquote>
-<p>官方文档翻译版：<a href="https://mcxiaoke.gitbooks.io/rxdocs/content/Intro.html" target="_blank" rel="external">https://mcxiaoke.gitbooks.io/rxdocs/content/Intro.html</a></p>
-</blockquote>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/10/06/RxJava 初探（一）/" data-id="ciwgje5ga0002osv729igs2y1" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-
-</section>
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
         
-          <aside id="sidebar">
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
-    <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/RxJava/">RxJava</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法/">算法</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络/">网络</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-
-  
-    
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
         
-          <li>
-            <a href="/2016/11/17/Android 类加载初探/">Android 类加载初探</a>
-          </li>
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
         
-          <li>
-            <a href="/2016/11/01/Android apk安装及编译过程/">Android apk安装及编译过程</a>
-          </li>
+            <li class="waves-block waves-effect active">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
         
-          <li>
-            <a href="/2016/10/25/RadioGroup、RadioButton动态创建并定制icon显示/">RadioGroup、RadioButton动态创建并定制icon显示</a>
-          </li>
-        
-          <li>
-            <a href="/2016/10/06/RxJava 初探（一）/">RxJava 初探（一）</a>
-          </li>
-        
-          <li>
-            <a href="/2016/09/09/Gradle相关配置/">Gradle相关配置</a>
-          </li>
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/fenglincanyi" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
         
       </ul>
     </div>
   </div>
-
-  
 </aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Categories: RxJava</div>
         
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2016 Gengjia rong<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
     </div>
-  </div>
-</footer>
+</header>
+<header class="content-header categories-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Categories: RxJava</h1>
+        <h5 class="subtitle">
+            
+        </h5>
     </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
+
+     
+<div class="tabs-bar container">
+    <nav class="tags-list">
+        <a href="/categories" style="-webkit-order:-1;order:-1" class="tags-list-item waves-effect waves-button waves-light
+            ">全部</a>
+         
+
+            <a href="/categories/工具/" style="-webkit-order:4;order:4" class="tags-list-item waves-effect waves-button waves-light">工具</a>
+
+         
+
+            <a href="/categories/Android/" style="-webkit-order:0;order:0" class="tags-list-item waves-effect waves-button waves-light">Android</a>
+
+         
+
+            <a href="/categories/RxJava/" style="-webkit-order:1;order:1" class="tags-list-item waves-effect waves-button waves-light active">RxJava</a>
+
+         
+
+            <a href="/categories/网络/" style="-webkit-order:2;order:2" class="tags-list-item waves-effect waves-button waves-light">网络</a>
+
+         
+
+            <a href="/categories/算法/" style="-webkit-order:3;order:3" class="tags-list-item waves-effect waves-button waves-light">算法</a>
+
+        
+    </nav>
+    <!-- PC show more-->
+    <div class="tags-list-more">
+        <a href="javascript:;" onclick="BLOG.tabBar(this)" class="action tags-list-item waves-effect waves-circle waves-light"><i class="icon icon-ellipsis-h"></i></a>
+    </div>
+</div>
+
+
+</header>
+
+<div class="container body-wrap fade">
+    
+            <div class="waterfall">
+          
+
+            <div class="waterfall-item">
+  <article class="article-card archive-article">
+    <div class="post-meta">
+      <time class="post-time" title="2016-10-6 0:45" datetime="2016-10-05T16:45:00.000Z"  itemprop="datePublished">Oct 6, 2016</time>
+
+      
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/RxJava/">RxJava</a></li></ul>
+
+
+
+    </div>
     
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2016/10/06/RxJava 初探（一）/">RxJava 初探（一）</a>
+    </h3>
+  
 
 
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+    
+  </article>
+</div>
+
+        
+            </div>
+        
+    
+</div>
 
 
-<script src="/js/script.js"></script>
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
 
-  </div>
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>fenglincanyi|Blog &copy; 2015 - 2016</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/categories/RxJava/&title=fenglincanyi|Blog&pic=http://yoursite.com/img/me.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/categories/RxJava/&title=fenglincanyi|Blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/categories/RxJava/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=fenglincanyi|Blog&url=http://yoursite.com/categories/RxJava/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/categories/RxJava/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK4AAACuCAAAAACKZ2kyAAABw0lEQVR42u3ay24CMQwFUP7/p6nUXUUJ1/YkgHSyQu0Un+nC8iO3W3zuv+fxJ+vz+OT6Oy87uLi4Y24eMg+/fmb9Ss+ewcXFPc9dJ688PVVxuQEXF/czuflr5JUJLi7ut3OTAEn7hIuL+y3c3mgjKYCq/47LejVcXNwBt5eGrv28cb6Li4tb5N6Lp5q8qkOTF9FxcXGPcNcL1Gop0xuklpsrXFzcI9xq4F6Cm1QyuLi4J7lJsMlyJR+XrF/vT0WGi4t7nDtZgeQXtpppFBcX9yC3WtxUE1byt1ENg4uLe4SbpLPqCDVPcPm1rei2CC4u7jZu79LDtd9wNBguLm4cJh9e5AVKb1n7dCyCi4u7mZsH7hUlly1ccXFxD3IniSxfx+apMFql4OLibuPOr0klSWrSJr1YqODi4m7gVtuSSXEzv66Bi4t7kntVu5K/anWQiouLe56bn3xF2tuGFOy4uLjbuJM1av45b4Ty3+Li4u7mzkelvWIoaXheTHFwcXE3c6vXrXprmFHzg4uL+5HcXqqaDEn/iYuLi/vB3B5lVNzg4uIe51YLlPyKVdJQFVosXFzcI9zewLS6MqkOYXFxcd/E/QEPlWzDq4nwHwAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.2" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
 </body>
 </html>

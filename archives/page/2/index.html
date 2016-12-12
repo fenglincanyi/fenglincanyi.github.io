@@ -1,383 +1,332 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  
-  <title>Archives | fenglincanyi|blog</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="个人博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="fenglincanyi|blog">
-<meta property="og:url" content="http://yoursite.com/archives/page/2/index.html">
-<meta property="og:site_name" content="fenglincanyi|blog">
-<meta property="og:description" content="个人博客">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="fenglincanyi|blog">
-<meta name="twitter:description" content="个人博客">
-  
-    <link rel="alternate" href="/atom.xml" title="fenglincanyi|blog" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  <link rel="stylesheet" href="/css/style.css">
-  
+    
 
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>Archives | fenglincanyi|Blog | null</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#2DBE60">
+    
+    
+    <meta name="keywords" content="undefined">
+    <meta property="og:type" content="website">
+<meta property="og:title" content="fenglincanyi|Blog">
+<meta property="og:url" content="http://yoursite.com/archives/page/2/index.html">
+<meta property="og:site_name" content="fenglincanyi|Blog">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="fenglincanyi|Blog">
+    
+        <link rel="alternative" href="/atom.xml" title="fenglincanyi|Blog" type="application/atom+xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.4.2">
+    <script>window.lazyScripts=[]</script>
 </head>
 
 <body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">fenglincanyi|blog</a>
-      </h1>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu"  >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/me.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">fenglincanyi</h5>
+          <a href="mailto:1154294696@qq.com" title="1154294696@qq.com" class="mail">1154294696@qq.com</a>
+        </hgroup>
       </div>
     </div>
-  </div>
-</header>
-      <div class="outer">
-        <section id="main">
-  
-    <article id="post-Git学习笔记（一）" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/02/19/Git学习笔记（一）/" class="article-date">
-  <time datetime="2016-02-19T07:28:00.000Z" itemprop="datePublished">2月 19 2016</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/工具/">工具</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/19/Git学习笔记（一）/">Git学习笔记（一）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>##一、Git特点</p>
-<p>###1. 直接记录快照，而非差异比较</p>
-<ul>
-<li>在 Git 中保存项目状态时，它主要对当时的全部文件制作一个快照并保存这个快照的索引。</li>
-<li>为了高效，如果文件没有修改，Git 不再重新存储该文件，而是只保留一个链接指向之前存储的文件。</li>
-<li>Git 对待数据更像是一个 快照流。<br>###2. 近乎所有操作都是本地执行</li>
-<li>在 Git 中的绝大多数操作都只需要访问本地文件和资源，一般不需要来自网络上其它计算机的信息。<br>###3. Git 保证完整性</li>
-<li><p>Git 中所有数据在存储前都计算校验和，然后以校验和来引用。Git 用以计算校验和的机制叫做 SHA-1 散列（hash，哈希）。<br>这是一个由 40 个十六进制字符（0-9 和 a-f）组成字符串，基于 Git 中文件的内容或目录结构计算出来。<br>SHA-1 哈希看起来是这样：  </p>
-<pre><code>&gt;24b9da6552252987aa493b52f8696cd6d3b00373
-</code></pre></li>
-<li><p>实际上，Git 数据库中保存的信息都是以文件内容的哈希值来索引，而不是文件名<br>###4. Git 一般只添加数据</p>
-</li>
-<li>你执行的 Git 操作，几乎只往 Git 数据库中增加数据</li>
-</ul>
-<p>##二、Git 中的文件有3种状态：</p>
-<p>###1. 已提交：数据已经安全的保存在本地数据库中</p>
-<p>###2. 已修改：修改了文件，但未保存到数据库中</p>
-<p>###3. 已暂存：对一个已修改文件的当前版本做了标记，使之包含在下次提交的快照中<br><img src="http://7xr1vo.com1.z0.glb.clouddn.com/%E6%96%87%E4%BB%B6%E7%9A%84%E7%8A%B6%E6%80%81%E5%8F%98%E5%8C%96%E5%91%A8%E6%9C%9F.png" alt=""> </p>
-<p>##三、Git 中的3个工作区域</p>
-<p>###1. Git仓库：保存项目的元数据和对象数据库，Git中最重要的部分，供其他人clone 仓库</p>
-<p>###2. 工作目录：对项目的某个版本独立提取出来的，供工作中使用、修改</p>
-<ul>
-<li><p>工作目录下的文件状态：</p>
-<p>  已跟踪：纳入了版本控制的文件，后期可能处于 未修改，已修改或放入暂存区了</p>
-<p>  未跟踪：工作目录下除已跟踪文件外的其他所有文件<br>###3. 暂存区：是一个文件，保存下次将提交的文件列表信息，一般在Git仓库目录中，有时也被叫做索引<br><img src="http://7xr1vo.com1.z0.glb.clouddn.com/git3%E7%A7%8D%E5%B7%A5%E4%BD%9C%E5%8C%BA%E5%9F%9F.png" alt=""> </p>
-</li>
-</ul>
-<h2 id="四、Git-的基本工作流程"><a href="#四、Git-的基本工作流程" class="headerlink" title="四、Git 的基本工作流程"></a>四、Git 的基本工作流程</h2><p>###1. 在工作目录中修改文件</p>
-<p>###2. 暂存文件，将文件的快照放入暂存区</p>
-<p>###3. 提交更新，找到暂存区的文件，将快照永久性存储到Git仓库中</p>
-<h2 id="五、Git-个人信息初始配置"><a href="#五、Git-个人信息初始配置" class="headerlink" title="五、Git 个人信息初始配置"></a>五、Git 个人信息初始配置</h2><ul>
-<li><p>全局信息配置：(个人默认信息)</p>
-<blockquote>
-<p>git config –global user.name “xxx”</p>
-<p>git config –global user.email   xxx@qq.coom</p>
-</blockquote>
-<p>  此配置会写入 user目录下的 .gitconfig文件，实际上为个人信息默认值</p>
-</li>
-<li><p>临时配置：</p>
-<p>  去掉 –global 即可<br>  实际是在其配置列表中追加其信息，重复变量名，不同的value值<br>  (Git每次会读取不同文件，其中就可能含有同一个配置)<br>  Git 会使用每个变量的最后一次的配置的值</p>
-</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/02/19/Git学习笔记（一）/" data-id="ciwgj0ul60004p4v7yofsbsru" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Android Studio NDK开发环境搭建及Demo示例" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/01/16/Android Studio NDK开发环境搭建及Demo示例/" class="article-date">
-  <time datetime="2016-01-16T11:34:00.000Z" itemprop="datePublished">1月 16 2016</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Android/">Android</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Home
+              </a>
+            </li>
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/01/16/Android Studio NDK开发环境搭建及Demo示例/">Android Studio NDK开发环境搭建及Demo示例</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>说明：Android Studio 1.4后支持C/C++开发，1.3之前的版本坑点较多，所以使用1.4后的版本较为容易</p>
-<h2 id="1-所用工具版本"><a href="#1-所用工具版本" class="headerlink" title="1.所用工具版本"></a>1.所用工具版本</h2><ul>
-<li>Android Studio 1.5</li>
-<li>android-ndk-r10e-windows-x86_64.exe<h2 id="2-配置NDK环境"><a href="#2-配置NDK环境" class="headerlink" title="2.配置NDK环境"></a>2.配置NDK环境</h2></li>
-<li>自行下载 <strong>ndk</strong> 工具，在你的要安装 ndk 的目录下，直接双击 此安装包，就会自动安装至此目录下，过程中会打开cmd窗口，命令行不断执行命令，需等待一会即可</li>
-</ul>
-</blockquote>
-<ul>
-<li><p>cmd窗口自动关闭后，会出现 <strong>ndk</strong> 的文件夹，如图：</p>
-<blockquote>
-<p><img src="http://7xr1vo.com1.z0.glb.clouddn.com/1.jpg" alt=""> </p>
-<p><img src="http://7xr1vo.com1.z0.glb.clouddn.com/2.png" alt=""></p>
-</blockquote>
-</li>
-<li><p>配置<strong>ndk</strong>环境变量，path 中添加即可，如我的路径如下：</p>
-<blockquote>
-<p><strong>PATH： D:\android-ndk-r10e</strong></p>
-</blockquote>
-</li>
-<li><p>保存后，打开cmd,输入命令:</p>
-<blockquote>
-<p><strong>ndk-build</strong> </p>
-</blockquote>
-<p>  出现如下显示，则安装成功：</p>
-<p>  <img src="http://7xr1vo.com1.z0.glb.clouddn.com/3.png" alt=""></p>
-</li>
-</ul>
-<h2 id="3-第一个NDKDemo"><a href="#3-第一个NDKDemo" class="headerlink" title="3.第一个NDKDemo"></a>3.第一个NDKDemo</h2><ul>
-<li>studio中，新建一个project，    name： NDKDemo</li>
-<li><p>在本项目中，配置 <strong>ndk</strong> 路径，如图：</p>
-<p>  <img src="http://7xr1vo.com1.z0.glb.clouddn.com/4.png" alt=""><br>  <img src="http://7xr1vo.com1.z0.glb.clouddn.com/5.png" alt=""></p>
-<p>  点击<strong>OK</strong>， 此时，等待gradle构建，构建完成后，观察 <strong>local.properties</strong> 文件，多出来了 <strong>ndk</strong> 的路径，如图所示：<br>  <img src="http://7xr1vo.com1.z0.glb.clouddn.com/6.png" alt=""></p>
-</li>
-<li>打开 <strong>grade.properties</strong> 文件，在末尾添加：<blockquote>
-<p><strong>android.useDeprecatedNdk=”true”</strong></p>
-</blockquote>
-</li>
-</ul>
-<pre><code>![](http://7xr1vo.com1.z0.glb.clouddn.com/7.png)
-
-    * 此步骤，为了防止下一步修改 app/build.gradle 文件后报错
-</code></pre><ul>
-<li><p>打开 <strong>app/build.gradle</strong> 文件，在 <strong>defaultConfig</strong> 下加入<strong>ndk</strong>相关配置参数：</p>
-<pre><code>ndk {
-    moduleName &quot;HelloNDK&quot;
-}
-</code></pre><p><img src="http://7xr1vo.com1.z0.glb.clouddn.com/8.png" alt=""></p>
-<pre><code>* 此处的 modleName 是 加载库文件的标识，必须和后面代码中的 System.loadLibrary(&quot;HelloNDK&quot;) 保持一致，否则会报错
-</code></pre></li>
-<li><p>书写 <strong>native</strong> 方法 和 加载类库，代码如下：</p>
-<pre><code>static {
-    // 加载类库
-    System.loadLibrary(&quot;HelloNDK&quot;);
-}
-
-// native方法 调用 C代码
-public native String javaCallC();
-</code></pre><p>如图，我这是后续的图片，过程中的未截：</p>
-<p>  <img src="http://7xr1vo.com1.z0.glb.clouddn.com/10.png" alt=""></p>
-</li>
-<li><p>打开左下角的 <strong>Terminal</strong>，<strong>cd</strong> 至 <strong>java</strong> 路径下，并执行命令：</p>
-<pre><code>javah -d jni [native方法所在类的全路径]
-</code></pre><p>  如图：</p>
-<p>  <img src="http://7xr1vo.com1.z0.glb.clouddn.com/11.png" alt=""></p>
-<pre><code>* 在studio中：类的全路径可 通过 右击该类 -&gt; Copy Reference获得
-</code></pre><p>  执行成功后，刷新下目录，可看到目录中多了一个 <strong>咖啡色的jni目录</strong>，和一个 <strong>.h文件</strong>，如图：</p>
-<p>  <img src="http://7xr1vo.com1.z0.glb.clouddn.com/12.png" alt=""></p>
-</li>
-<li><p>右击 <strong>Main目录的图标 -&gt; New -&gt; Floder -&gt; JNI Floder</strong>，之后会出现一个 <strong>蓝色的JNI</strong> 文件夹，如图：</p>
-<p>   <img src="http://7xr1vo.com1.z0.glb.clouddn.com/13.png" alt=""></p>
-<p>  此时，继续解决上面 <strong>native</strong> 方法名报错（红色）的问题，<strong>Alt + Enter</strong> 选择创建 <strong>.c</strong> 中的方法，这时，会在蓝色的JNI文件夹下自动生成一个 <strong>.c</strong> 文件，并且 含有 <strong>c代码</strong>，里面有复杂的方法头</p>
-<p>  <img src="http://7xr1vo.com1.z0.glb.clouddn.com/9.png" alt=""></p>
-<p>  <img src="http://7xr1vo.com1.z0.glb.clouddn.com/14.png" alt=""></p>
-<pre><code>* 可能 native 方法名仍然是红色的，这可能是 Studio 的一个bug，但其实是可以运行的。可能过一段时间红色会消失变为正常，我的就是这种情况
-</code></pre></li>
-<li><p>下面就可以书写真正的 <strong>C代码</strong>了，此处 只简单写下，关于更牛逼的用法，将更新在后面blog中，继续总结。</p>
-<p>  此处代码改为：</p>
-<pre><code>return (*env)-&gt;NewStringUTF(env, &quot;你好，NDK&quot;);
-</code></pre></li>
-<li><p>OK，第一个NDK Demo可以运行了，上图：</p>
-<p> <img src="http://7xr1vo.com1.z0.glb.clouddn.com/16.png" alt=""></p>
-</li>
-</ul>
-<h2 id="4-总结"><a href="#4-总结" class="headerlink" title="4.总结"></a>4.总结</h2><ul>
-<li>相比以前在 <strong>eclipse</strong> 中进行 <strong>NDK</strong> 开发，<strong>studio</strong>中显得方便多了，并不用安装 <strong>CDT</strong> 和 <strong>cygwin</strong>，而且 <strong>.c</strong> 文件及其内容可以自动生成</li>
-<li>利用命令 <strong>javah -d jni [native方法所在类的全路径]</strong>  生成的  <strong>.h头文件</strong> 可以在 有了 <strong>.c</strong> 文件后删除，此 <strong>.h</strong> 文件主要是用来用于生成 <strong>.c</strong> 文件中相应比较长的方法头。如果之前没有 <strong>.h</strong> 文件，<strong>Alt + Enter</strong> 是无法自动生成 <strong>.c</strong>文件的</li>
-<li>必须在 有 <strong>/src/main/jni</strong> 的文件夹（蓝色的jni文件夹）下，才能自动生成<strong>.c</strong> 文件</li>
-<li><strong>.c</strong> 文件中要出现了中文，必须是 <strong>UTF-8</strong> 下，否则，运行时会崩溃报错</li>
-<li><p>注意观察 <strong>/app/build/intermediates/ndk</strong> 目录下，有相关的 所有平台的 .so 文件（默认情况下，生成所有平台的；若只想生成某几种平台的，可在 <strong>app/build.gradle（abi-Filters “armeabi”,”armeabi-v7a”,”x86”）</strong> 中  或者 <strong>Android.mk</strong>中 进行配置）</p>
-<p>   <img src="http://7xr1vo.com1.z0.glb.clouddn.com/17.png" alt=""><br>##补充：</p>
-</li>
-<li>so文件和native类与混淆无关，无需keep语句</li>
-<li>实现类一定要方法名正确否则会报java.lang.UnsatisfiedLinkError: dlopen failed异常</li>
-<li>studio工具的提示并不是很智能，所以有时要rebuild project</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/01/16/Android Studio NDK开发环境搭建及Demo示例/" data-id="ciwgj0ukw0001p4v7ty3nn6ma" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-
-
-  <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/archives/">&laquo; __('prev')</a><a class="page-number" href="/archives/">1</a><span class="page-number current">2</span>
-  </nav>
-</section>
+            <li class="waves-block waves-effect active">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
         
-          <aside id="sidebar">
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
-    <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/RxJava/">RxJava</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/工具/">工具</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法/">算法</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络/">网络</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-
-  
-    
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
         
-          <li>
-            <a href="/2016/11/17/Android 类加载初探/">Android 类加载初探</a>
-          </li>
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
         
-          <li>
-            <a href="/2016/11/01/Android apk安装及编译过程/">Android apk安装及编译过程</a>
-          </li>
-        
-          <li>
-            <a href="/2016/10/25/RadioGroup、RadioButton动态创建并定制icon显示/">RadioGroup、RadioButton动态创建并定制icon显示</a>
-          </li>
-        
-          <li>
-            <a href="/2016/10/06/RxJava 初探（一）/">RxJava 初探（一）</a>
-          </li>
-        
-          <li>
-            <a href="/2016/09/09/Gradle相关配置/">Gradle相关配置</a>
-          </li>
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/fenglincanyi" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
         
       </ul>
     </div>
   </div>
-
-  
 </aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Archives</div>
         
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2016 Gengjia rong<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
     </div>
-  </div>
-</footer>
+</header>
+<header class="content-header archives-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Archives</h1>
+        <h5 class="subtitle">
+            
+        </h5>
     </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
+
     
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+</header>
+
+<div class="container body-wrap fade">
+    
+
+    
+            
+            <h3 class="archive-separator">February, 2016</h3>
+            <div class="waterfall">
+    
+
+        <div class="waterfall-item">
+  <article class="article-card archive-article">
+    <div class="post-meta">
+      <time class="post-time" title="2016-2-19 15:28" datetime="2016-02-19T07:28:00.000Z"  itemprop="datePublished">Feb 19</time>
+
+      
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/工具/">工具</a></li></ul>
 
 
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+    </div>
+    
 
 
-<script src="/js/script.js"></script>
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2016/02/19/Git学习笔记（一）/">Git学习笔记（一）</a>
+    </h3>
+  
 
-  </div>
+
+
+    
+  </article>
+</div>
+
+    
+            </div> 
+            <h3 class="archive-separator">January, 2016</h3>
+            <div class="waterfall">
+    
+
+        <div class="waterfall-item">
+  <article class="article-card archive-article">
+    <div class="post-meta">
+      <time class="post-time" title="2016-1-16 19:34" datetime="2016-01-16T11:34:00.000Z"  itemprop="datePublished">Jan 16</time>
+
+      
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a></li></ul>
+
+
+
+    </div>
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2016/01/16/Android Studio NDK开发环境搭建及Demo示例/">Android Studio NDK开发环境搭建及Demo示例</a>
+    </h3>
+  
+
+
+
+    
+  </article>
+</div>
+
+    
+    </div>
+
+    
+<nav id="page-nav">
+    <div class="inner">
+    <a class="extend prev" rel="prev" href="/archives/">上一页</a><a class="page-number" href="/archives/">1</a><span class="page-number current">2</span>
+    </div>
+</nav>
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            <span>博客内容遵循 <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享 署名 - 非商业性 - 相同方式共享 4.0协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p>
+            <span>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></span>
+            <span>fenglincanyi|Blog &copy; 2015 - 2016</span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/archives/page/2/&title=fenglincanyi|Blog&pic=http://yoursite.com/img/me.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/archives/page/2/&title=fenglincanyi|Blog&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/archives/page/2/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=fenglincanyi|Blog&url=http://yoursite.com/archives/page/2/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/archives/page/2/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK4AAACuCAAAAACKZ2kyAAABvUlEQVR42u3aQW7DMAwEwPz/0y7QU4vA7lI0FRcYnQo7dUY5ENTSr1e8ju/1fuXnev/k+93rZ962cHFx29zjcq1xz64kGzv7PC4u7n7udaHJt9Sn/2HDxcV9GDfZRpWOi4v737lJ09Npg3BxcZ/GXWtfrlOL63Bk/KyGi4vb4FYD04m/B/NdXFzcIvcorvy/8iap8O24uLhbuPkxphOtrrVBp2UOFxd3mJsfUfLryd1qJ4OLi/tZbvXAs7bt6ljlV0eGi4s7zO0PPPbHrLi4uHu4nbajGoJUX89aROPi4t7EzR+dD0TzX6U8XsXFxR3j3nvgyQPTPIrFxcXdz23Fl8XwNG9iClMgXFzcAe5te2qUM1xc3GdyO2PU/vgkfw4uLu4ebr/oJCUv50bfiIuLO8zNBx7VEUinGTo14OLibuQmkWh1Qps0RtVQBhcXdye3P0DNi1Fr6IKLi7uFu9aUVIey+Ybzu7i4uNPcpHitNUNrL2pEr2fh4uJu4a4NTatj2tbhBxcX95Hc6vA1D15HChkuLu5HuUmMUh274uLiPoHbKi5BCas2QDfEIri4uA3uWmDaT2c7hyhcXNwx7hctUN1EKwvapwAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.4.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.4.2" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
 </body>
 </html>
