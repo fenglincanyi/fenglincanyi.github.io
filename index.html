@@ -396,9 +396,9 @@
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        ###问题一    EditText的内容过多时，EditText的内容并不能滚动，而是ScrollView的滚动
-###解决        重写EditText的onTouch事件，将触摸事件交给EditText来处理
-123456789101112131415et.setOnTouchLi...
+        问题一EditText的内容过多时，EditText的内容并不能滚动，而是ScrollView的滚动
+解决重写EditText的onTouch事件，将触摸事件交给EditText来处理
+123456789101112131415et.setOnTouchListener(new View.On...
     
 
         <a href="/2016/08/16/滑动冲突之EditText-ScrollView/" class="post-more waves-effect waves-button">
@@ -444,8 +444,8 @@
         
 本文主要分析操作系统中涉及到的一些常见的置换算法，并不对涉及的操作系统内容过多介绍。这些算法在其他的计算机应用中也有体现，基本原理都是一致的，可参考理解。
 
-###一、前提说明本文主要针对一个例子进行说明，以下的算法实现过程均是按照本例进行分析。页面的走向为：
-4 3 2 1 4 3 5 4...
+一、前提说明本文主要针对一个例子进行说明，以下的算法实现过程均是按照本例进行分析。页面的走向为：
+4 3 2 1 4 3 5 4 3 ...
     
 
         <a href="/2016/06/04/简单的页面置换算法分析/" class="post-more waves-effect waves-button">
@@ -491,10 +491,10 @@
         
 Android 4种启动模式来说，用法说明此处不再提及主要介绍SingleTop，SingleTask相关的问题
 
-
+说明
 先分析 官方文档 中的一段话：
 
-As shown in the table above, standard is the default mode and is appro...
+As shown in the table above, standard is the default mode and is app...
     
 
         <a href="/2016/05/16/Android SingleTask 探究/" class="post-more waves-effect waves-button">
@@ -537,15 +537,14 @@ As shown in the table above, standard is the default mode and is appro...
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        ##一、对称加密
-
+        一、对称加密
 对称加密简介
  对称加密算法所用到的基本的方法是：代换 和 置换。简单来说：（以早期的加密方式举例）
 
 代换：是将明文字母替换成其他字母、数字或符号的方法
   对于明文中的每一个字母，用字母表中k个字母来代替（允许循环，即a可以在z的后面）
 
-例如：如果 k = 3，那么明...
+例如：如果 k = 3，那么明文中的...
     
 
         <a href="/2016/02/28/对称、非对称加密技术初探/" class="post-more waves-effect waves-button">
@@ -588,8 +587,7 @@ As shown in the table above, standard is the default mode and is appro...
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        ##常用命令：
-
+        常用命令：
 1、初始
 
 git &lt;verb&gt; --help           查看命令用法(方法之一)
@@ -597,7 +595,7 @@ git init                    初始化git仓库(在当前目录下会创建.git�
 
 2、 远程操作
 
-git clone URL        ...
+git clone URL           ...
     
 
         <a href="/2016/02/19/Git学习笔记（二）/" class="post-more waves-effect waves-button">

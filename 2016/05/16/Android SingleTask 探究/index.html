@@ -22,32 +22,32 @@
     <meta name="keywords" content="">
     <meta name="description" content="Android 4种启动模式来说，用法说明此处不再提及主要介绍SingleTop，SingleTask相关的问题
 
-
+说明
 先分析 官方文档 中的一段话：
 
-As shown in the table above, standard is the default mode and is appropriate for most types of activities. SingleTop is als">
+As shown in the table above, standard is the default mode and is appropriate for most types of activities. SingleTop is a">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android SingleTask 探究">
 <meta property="og:url" content="http://yoursite.com/2016/05/16/Android SingleTask 探究/index.html">
 <meta property="og:site_name" content="fenglincanyi|Blog">
 <meta property="og:description" content="Android 4种启动模式来说，用法说明此处不再提及主要介绍SingleTop，SingleTask相关的问题
 
-
+说明
 先分析 官方文档 中的一段话：
 
-As shown in the table above, standard is the default mode and is appropriate for most types of activities. SingleTop is als">
+As shown in the table above, standard is the default mode and is appropriate for most types of activities. SingleTop is a">
 <meta property="og:image" content="http://7xr1vo.com1.z0.glb.clouddn.com/SingleTask%20%E5%9B%BE1.png">
 <meta property="og:image" content="http://7xr1vo.com1.z0.glb.clouddn.com/SingleTask%E5%9B%BE2.png">
 <meta property="og:image" content="http://7xr1vo.com1.z0.glb.clouddn.com/SingleTask%E5%9B%BE3.png">
-<meta property="og:updated_time" content="2016-12-08T15:31:23.112Z">
+<meta property="og:updated_time" content="2016-12-13T03:43:43.809Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android SingleTask 探究">
 <meta name="twitter:description" content="Android 4种启动模式来说，用法说明此处不再提及主要介绍SingleTop，SingleTask相关的问题
 
-
+说明
 先分析 官方文档 中的一段话：
 
-As shown in the table above, standard is the default mode and is appropriate for most types of activities. SingleTop is als">
+As shown in the table above, standard is the default mode and is appropriate for most types of activities. SingleTop is a">
 <meta name="twitter:image" content="http://7xr1vo.com1.z0.glb.clouddn.com/SingleTask%20%E5%9B%BE1.png">
     
         <link rel="alternative" href="/atom.xml" title="fenglincanyi|Blog" type="application/atom+xml">
@@ -168,6 +168,13 @@ As shown in the table above, standard is the default mode and is appropriate for
 
 <div class="container body-wrap">
     
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#说明"><span class="post-toc-number">1.</span> <span class="post-toc-text">说明</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#场景复现"><span class="post-toc-number">2.</span> <span class="post-toc-text">场景复现</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#总结"><span class="post-toc-number">3.</span> <span class="post-toc-text">总结</span></a></li></ol>
+        </nav>
+    </aside>
+    
 <article id="post-Android SingleTask 探究"
   class="post-article article-type-post fade" itemprop="blogPost">
 
@@ -194,7 +201,7 @@ As shown in the table above, standard is the default mode and is appropriate for
             <blockquote>
 <p>Android 4种启动模式来说，用法说明此处不再提及主要介绍SingleTop，SingleTask相关的问题</p>
 </blockquote>
-<ul>
+<h3 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h3><ul>
 <li><p>先分析 官方文档 中的一段话：</p>
 <blockquote>
 <p>As shown in the table above, standard is the default mode and is appropriate for most types of activities. SingleTop is also a common and useful launch mode for many types of activities. The other modes — singleTask and singleInstance — <font color="red">are not appropriate for most applications</font>, since they result in an interaction model that is likely to be unfamiliar to users and is very different from most other applications.</p>
@@ -207,12 +214,12 @@ As shown in the table above, standard is the default mode and is appropriate for
 <p>The system creates a new task and instantiates the activity at the root of the new task</p>
 </blockquote>
 <p>&emsp;&emsp;<strong>其实事实根本不是这样的</strong>！！！</p>
-<ul>
+<h3 id="场景复现"><a href="#场景复现" class="headerlink" title="场景复现"></a>场景复现</h3><ul>
 <li><p>下面用代码事实说话：建立3个Activity，分别为Main1Activity、Main2Activity、Main3Activity，前两个都设定单击事件，跳转逻辑为：main1 -&gt; main2 -&gt; main3，其中 Main2Activity 为 SingleTask（AndroidManifest.xml中设置）。打印相应的生命周期方法和所在的 <strong>taskId</strong></p>
 <p>  <img src="http://7xr1vo.com1.z0.glb.clouddn.com/SingleTask%20%E5%9B%BE1.png" alt=""></p>
 </li>
 </ul>
-<p>&emsp;&emsp;这些taskid都是一样的，所以它们都是同一个Task中的。事实胜于雄辩。然后搜了一下相关问题，老罗的博客还是给力，彻彻底底的分析了这个坑。致谢老罗的开源精神！链接：<a href="http://blog.csdn.net/luoshengyang/article/details/6714543" target="_blank" rel="external">http://blog.csdn.net/luoshengyang/article/details/6714543</a></p>
+<p>&emsp;&emsp;这些taskid都是一样的，所以它们都是同一个Task中的。事实胜于雄辩。然后搜了一下相关问题，老罗的博客还是给力，彻彻底底的分析了这个坑。致谢老罗的开源精神！<br>&emsp;&emsp;链接：<a href="http://blog.csdn.net/luoshengyang/article/details/6714543" target="_blank" rel="external">http://blog.csdn.net/luoshengyang/article/details/6714543</a></p>
 <ul>
 <li><p>同时为了解释项目中类似的一个页面跳转问题，对于上面的demo做了修改：</p>
 <p>  将 Main1Activity 设置为 SingleTask，其余2个为standrd</p>
@@ -243,8 +250,7 @@ As shown in the table above, standard is the default mode and is appropriate for
 <p>  <img src="http://7xr1vo.com1.z0.glb.clouddn.com/SingleTask%E5%9B%BE3.png" alt=""></p>
 </li>
 </ul>
-<p>##总结</p>
-<ul>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
 <li>SingleTask的启动模式并不会启动一个新的任务栈来承载Activity，而是在原来的Task中</li>
 <li>SingleTask的启动模式，在官方文档的说明中，日常开发中并不建议使用，SingleInstance更是如此。</li>
 <li>Activity的启动模式会带来的Task的变化和Activity的生命周期变化都会在ActivityRecord中体现的，通过源码分析可以发现。</li>
@@ -263,7 +269,7 @@ adb shell dumpsys activity | grep mFocusedActivity  获取处于栈顶的Activit
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2016-12-08T15:31:23.112Z" title="2016-12-8 23:31" itemprop="dateUpdated">2016年12月8日 23:31</time>
+    最后更新时间：<time datetime="2016-12-13T03:43:43.809Z" title="2016-12-13 11:43" itemprop="dateUpdated">2016年12月13日 11:43</time>
 </span><br>
 
 

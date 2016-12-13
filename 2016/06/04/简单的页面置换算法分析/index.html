@@ -22,29 +22,29 @@
     <meta name="keywords" content="">
     <meta name="description" content="本文主要分析操作系统中涉及到的一些常见的置换算法，并不对涉及的操作系统内容过多介绍。这些算法在其他的计算机应用中也有体现，基本原理都是一致的，可参考理解。
 
-###一、前提说明本文主要针对一个例子进行说明，以下的算法实现过程均是按照本例进行分析。页面的走向为：
+一、前提说明本文主要针对一个例子进行说明，以下的算法实现过程均是按照本例进行分析。页面的走向为：
 4 3 2 1 4 3 5 4 3 2 1 5 
-一段程序在内存中，分配3个页面，初始情况下为空。以下依次根据不同的算法进行页面置换过程">
+一段程序在内存中，分配3个页面，初始情况下为空。以下依次根据不同的算法进行页面置换过程的分析">
 <meta property="og:type" content="article">
 <meta property="og:title" content="简单的页面置换算法分析">
 <meta property="og:url" content="http://yoursite.com/2016/06/04/简单的页面置换算法分析/index.html">
 <meta property="og:site_name" content="fenglincanyi|Blog">
 <meta property="og:description" content="本文主要分析操作系统中涉及到的一些常见的置换算法，并不对涉及的操作系统内容过多介绍。这些算法在其他的计算机应用中也有体现，基本原理都是一致的，可参考理解。
 
-###一、前提说明本文主要针对一个例子进行说明，以下的算法实现过程均是按照本例进行分析。页面的走向为：
+一、前提说明本文主要针对一个例子进行说明，以下的算法实现过程均是按照本例进行分析。页面的走向为：
 4 3 2 1 4 3 5 4 3 2 1 5 
-一段程序在内存中，分配3个页面，初始情况下为空。以下依次根据不同的算法进行页面置换过程">
+一段程序在内存中，分配3个页面，初始情况下为空。以下依次根据不同的算法进行页面置换过程的分析">
 <meta property="og:image" content="http://7xr1vo.com1.z0.glb.clouddn.com/%E5%9B%BE1.png">
 <meta property="og:image" content="http://7xr1vo.com1.z0.glb.clouddn.com/%E5%9B%BE2.png">
 <meta property="og:image" content="http://7xr1vo.com1.z0.glb.clouddn.com/%E5%9B%BE3.png">
-<meta property="og:updated_time" content="2016-12-08T15:35:59.174Z">
+<meta property="og:updated_time" content="2016-12-13T04:26:21.192Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="简单的页面置换算法分析">
 <meta name="twitter:description" content="本文主要分析操作系统中涉及到的一些常见的置换算法，并不对涉及的操作系统内容过多介绍。这些算法在其他的计算机应用中也有体现，基本原理都是一致的，可参考理解。
 
-###一、前提说明本文主要针对一个例子进行说明，以下的算法实现过程均是按照本例进行分析。页面的走向为：
+一、前提说明本文主要针对一个例子进行说明，以下的算法实现过程均是按照本例进行分析。页面的走向为：
 4 3 2 1 4 3 5 4 3 2 1 5 
-一段程序在内存中，分配3个页面，初始情况下为空。以下依次根据不同的算法进行页面置换过程">
+一段程序在内存中，分配3个页面，初始情况下为空。以下依次根据不同的算法进行页面置换过程的分析">
 <meta name="twitter:image" content="http://7xr1vo.com1.z0.glb.clouddn.com/%E5%9B%BE1.png">
     
         <link rel="alternative" href="/atom.xml" title="fenglincanyi|Blog" type="application/atom+xml">
@@ -168,7 +168,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-FIFO（先进先出）"><span class="post-toc-number">1.</span> <span class="post-toc-text">1. FIFO（先进先出）</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-LRU-（最近最少使用-Least-Recently-Used）"><span class="post-toc-number">2.</span> <span class="post-toc-text">2. LRU （最近最少使用 Least Recently Used）</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-LFU-（最近最不常用-Least-Frequently-Used）"><span class="post-toc-number">3.</span> <span class="post-toc-text">3. LFU （最近最不常用 Least Frequently Used）</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-OPT-（理想）"><span class="post-toc-number">4.</span> <span class="post-toc-text">3. OPT （理想）</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#一、前提说明"><span class="post-toc-number">1.</span> <span class="post-toc-text">一、前提说明</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#二、算法分析过程"><span class="post-toc-number">2.</span> <span class="post-toc-text">二、算法分析过程</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-FIFO（先进先出）"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">1. FIFO（先进先出）</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-LRU-（最近最少使用-Least-Recently-Used）"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">2. LRU （最近最少使用 Least Recently Used）</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-LFU-（最近最不常用-Least-Frequently-Used）"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">3. LFU （最近最不常用 Least Frequently Used）</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-OPT-（理想）"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">3. OPT （理想）</span></a></li></ol></li></ol>
         </nav>
     </aside>
     
@@ -198,11 +198,10 @@
             <blockquote>
 <p>本文主要分析操作系统中涉及到的一些常见的置换算法，并不对涉及的操作系统内容过多介绍。这些算法在其他的计算机应用中也有体现，基本原理都是一致的，可参考理解。</p>
 </blockquote>
-<p>###一、前提说明<br>本文主要针对一个例子进行说明，以下的算法实现过程均是按照本例进行分析。页面的走向为：</p>
+<h3 id="一、前提说明"><a href="#一、前提说明" class="headerlink" title="一、前提说明"></a>一、前提说明</h3><p>本文主要针对一个例子进行说明，以下的算法实现过程均是按照本例进行分析。页面的走向为：</p>
 <pre><code>4 3 2 1 4 3 5 4 3 2 1 5 
 </code></pre><p>一段程序在内存中，分配3个页面，初始情况下为空。<br>以下依次根据不同的算法进行页面置换过程的分析。</p>
-<p>###二、算法分析过程</p>
-<h4 id="1-FIFO（先进先出）"><a href="#1-FIFO（先进先出）" class="headerlink" title="1. FIFO（先进先出）"></a>1. FIFO（先进先出）</h4><p>FIFO算是最简单、最容易理解的算法了，只要按照依次装入内存的页面的页号按照进入的先后次序排好队列，每次总是从队首出，队尾出。当发生缺页时，置换队首的页面即可。<br><br>对上面的页面走向序列，分析过程如下图：</p>
+<h3 id="二、算法分析过程"><a href="#二、算法分析过程" class="headerlink" title="二、算法分析过程"></a>二、算法分析过程</h3><h4 id="1-FIFO（先进先出）"><a href="#1-FIFO（先进先出）" class="headerlink" title="1. FIFO（先进先出）"></a>1. FIFO（先进先出）</h4><p>FIFO算是最简单、最容易理解的算法了，只要按照依次装入内存的页面的页号按照进入的先后次序排好队列，每次总是从队首出，队尾出。当发生缺页时，置换队首的页面即可。<br><br>对上面的页面走向序列，分析过程如下图：</p>
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
@@ -236,7 +235,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2016-12-08T15:35:59.174Z" title="2016-12-8 23:35" itemprop="dateUpdated">2016年12月8日 23:35</time>
+    最后更新时间：<time datetime="2016-12-13T04:26:21.192Z" title="2016-12-13 12:26" itemprop="dateUpdated">2016年12月13日 12:26</time>
 </span><br>
 
 
