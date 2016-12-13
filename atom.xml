@@ -4,9 +4,9 @@
   
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://yoursite.com/"/>
+  <link href="https://fenglincanyi.github.io/"/>
   <updated>2016-12-13T04:20:05.368Z</updated>
-  <id>http://yoursite.com/</id>
+  <id>https://fenglincanyi.github.io/</id>
   
   <author>
     <name>fenglincanyi</name>
@@ -17,8 +17,8 @@
   
   <entry>
     <title>Android 类加载初探</title>
-    <link href="http://yoursite.com/2016/11/17/Android%20%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%88%9D%E6%8E%A2/"/>
-    <id>http://yoursite.com/2016/11/17/Android 类加载初探/</id>
+    <link href="https://fenglincanyi.github.io/2016/11/17/Android%20%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%88%9D%E6%8E%A2/"/>
+    <id>https://fenglincanyi.github.io/2016/11/17/Android 类加载初探/</id>
     <published>2016-11-17T13:08:00.000Z</published>
     <updated>2016-12-13T04:20:05.368Z</updated>
     
@@ -131,15 +131,15 @@
     
     </summary>
     
-      <category term="Android" scheme="http://yoursite.com/categories/Android/"/>
+      <category term="Android" scheme="https://fenglincanyi.github.io/categories/Android/"/>
     
     
   </entry>
   
   <entry>
     <title>Android apk安装及编译过程</title>
-    <link href="http://yoursite.com/2016/11/01/Android%20apk%E5%AE%89%E8%A3%85%E5%8F%8A%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B/"/>
-    <id>http://yoursite.com/2016/11/01/Android apk安装及编译过程/</id>
+    <link href="https://fenglincanyi.github.io/2016/11/01/Android%20apk%E5%AE%89%E8%A3%85%E5%8F%8A%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B/"/>
+    <id>https://fenglincanyi.github.io/2016/11/01/Android apk安装及编译过程/</id>
     <published>2016-11-01T10:53:00.000Z</published>
     <updated>2016-12-13T03:34:25.140Z</updated>
     
@@ -251,17 +251,17 @@
     
     </summary>
     
-      <category term="Android" scheme="http://yoursite.com/categories/Android/"/>
+      <category term="Android" scheme="https://fenglincanyi.github.io/categories/Android/"/>
     
     
   </entry>
   
   <entry>
     <title>RadioGroup、RadioButton动态创建并定制icon显示</title>
-    <link href="http://yoursite.com/2016/10/25/RadioGroup%E3%80%81RadioButton%E5%8A%A8%E6%80%81%E5%88%9B%E5%BB%BA%E5%B9%B6%E5%AE%9A%E5%88%B6icon%E6%98%BE%E7%A4%BA/"/>
-    <id>http://yoursite.com/2016/10/25/RadioGroup、RadioButton动态创建并定制icon显示/</id>
+    <link href="https://fenglincanyi.github.io/2016/10/25/RadioGroup%E3%80%81RadioButton%E5%8A%A8%E6%80%81%E5%88%9B%E5%BB%BA%E5%B9%B6%E5%AE%9A%E5%88%B6icon%E6%98%BE%E7%A4%BA/"/>
+    <id>https://fenglincanyi.github.io/2016/10/25/RadioGroup、RadioButton动态创建并定制icon显示/</id>
     <published>2016-10-25T02:24:00.000Z</published>
-    <updated>2016-12-13T00:23:57.924Z</updated>
+    <updated>2016-12-13T04:29:15.203Z</updated>
     
     <content type="html"><![CDATA[<p>由于原生的Radiobutton不能满足业务需求，所以需要自己定制icon图片，和默认选中某一项。需要自己代码动态实现。废话不多说，上代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line">private void setViewData() &#123;</div><div class="line">        radioGroup.removeAllViews();</div><div class="line"></div><div class="line">        int margin = ScreenUtil.dip2px(this, 14.0f);</div><div class="line">        int marginLeft = ScreenUtil.dip2px(this, 20.0f);</div><div class="line">        int paddingLeft = ScreenUtil.dip2px(this, 3.0f);</div><div class="line"></div><div class="line">        RadioGroup.LayoutParams layoutParams = </div><div class="line">            new RadioGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);</div><div class="line">        RadioGroup.LayoutParams layoutParams1 = </div><div class="line">            new RadioGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 1);</div><div class="line">        layoutParams.setMargins(marginLeft, margin, margin, margin);</div><div class="line">        layoutParams1.setMargins(margin, 0, margin, 0);</div><div class="line"></div><div class="line">        int defaultId = -1;</div><div class="line">        for (int i = 0; i &lt; messageList.size(); i++) &#123;</div><div class="line">            RadioButton rb = new RadioButton(this);</div><div class="line">            rb.setMaxLines(2);</div><div class="line">            rb.setPadding(paddingLeft, 0, 0, 0);</div><div class="line">            rb.setText(messageList.get(i).relayMessage);</div><div class="line">            rb.setButtonDrawable(android.R.color.transparent);</div><div class="line">            rb.setTextColor(Color.parseColor(&quot;#555555&quot;));</div><div class="line">            rb.setButtonDrawable(null);// 去掉左边默认图标</div><div class="line">            rb.setCompoundDrawablePadding(margin);</div><div class="line">            rb.setEllipsize(TextUtils.TruncateAt.END);// 结尾处打点显示</div><div class="line">            Drawable drawable = getResources().getDrawable(R.drawable.relay_message_radio_selector);</div><div class="line">            drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());</div><div class="line">            rb.setCompoundDrawables(drawable, null, null, null);</div><div class="line">            // 手动生成id</div><div class="line">            int generateId = generateViewId();</div><div class="line">            messages.put(generateId, messageList.get(i).relayMessage);</div><div class="line">            rb.setId(generateId);</div><div class="line">            if (i == 0) &#123;</div><div class="line">                defaultId = generateId;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            TextView view = new TextView(this);</div><div class="line">            view.setBackgroundColor(Color.parseColor(&quot;#dddddd&quot;));</div><div class="line"></div><div class="line">            radioGroup.addView(rb, layoutParams);</div><div class="line">            radioGroup.addView(view, layoutParams1);</div><div class="line">        &#125;</div><div class="line">        // 此处：默认选中第一个</div><div class="line">        radioGroup.check(defaultId);</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
 <p>R.drawable.relay_message_radio_selector 代码如下：</p>
@@ -270,9 +270,9 @@
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="http://7xr1vo.com1.z0.glb.clouddn.com/%E9%80%89%E6%8B%A9.png" alt="这里写图片描述" title="">
+                    <img src="http://7xr1vo.com1.z0.glb.clouddn.com/%E9%80%89%E6%8B%A9.png" alt="" title="">
                 </div>
-                <div class="image-caption">这里写图片描述</div>
+                <div class="image-caption"></div>
             </figure>]]></content>
     
     <summary type="html">
@@ -281,15 +281,15 @@
     
     </summary>
     
-      <category term="Android" scheme="http://yoursite.com/categories/Android/"/>
+      <category term="Android" scheme="https://fenglincanyi.github.io/categories/Android/"/>
     
     
   </entry>
   
   <entry>
     <title>RxJava 初探（一）</title>
-    <link href="http://yoursite.com/2016/10/06/RxJava%20%E5%88%9D%E6%8E%A2%EF%BC%88%E4%B8%80%EF%BC%89/"/>
-    <id>http://yoursite.com/2016/10/06/RxJava 初探（一）/</id>
+    <link href="https://fenglincanyi.github.io/2016/10/06/RxJava%20%E5%88%9D%E6%8E%A2%EF%BC%88%E4%B8%80%EF%BC%89/"/>
+    <id>https://fenglincanyi.github.io/2016/10/06/RxJava 初探（一）/</id>
     <published>2016-10-05T16:45:00.000Z</published>
     <updated>2016-12-08T15:48:08.904Z</updated>
     
@@ -345,15 +345,15 @@
     
     </summary>
     
-      <category term="RxJava" scheme="http://yoursite.com/categories/RxJava/"/>
+      <category term="RxJava" scheme="https://fenglincanyi.github.io/categories/RxJava/"/>
     
     
   </entry>
   
   <entry>
     <title>Gradle相关配置</title>
-    <link href="http://yoursite.com/2016/09/09/Gradle%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE/"/>
-    <id>http://yoursite.com/2016/09/09/Gradle相关配置/</id>
+    <link href="https://fenglincanyi.github.io/2016/09/09/Gradle%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE/"/>
+    <id>https://fenglincanyi.github.io/2016/09/09/Gradle相关配置/</id>
     <published>2016-09-09T02:36:00.000Z</published>
     <updated>2016-12-08T15:44:40.909Z</updated>
     
@@ -365,15 +365,15 @@
     
     </summary>
     
-      <category term="Android" scheme="http://yoursite.com/categories/Android/"/>
+      <category term="Android" scheme="https://fenglincanyi.github.io/categories/Android/"/>
     
     
   </entry>
   
   <entry>
     <title>滑动冲突之EditText-ScrollView</title>
-    <link href="http://yoursite.com/2016/08/16/%E6%BB%91%E5%8A%A8%E5%86%B2%E7%AA%81%E4%B9%8BEditText-ScrollView/"/>
-    <id>http://yoursite.com/2016/08/16/滑动冲突之EditText-ScrollView/</id>
+    <link href="https://fenglincanyi.github.io/2016/08/16/%E6%BB%91%E5%8A%A8%E5%86%B2%E7%AA%81%E4%B9%8BEditText-ScrollView/"/>
+    <id>https://fenglincanyi.github.io/2016/08/16/滑动冲突之EditText-ScrollView/</id>
     <published>2016-08-16T09:14:00.000Z</published>
     <updated>2016-12-13T04:25:45.933Z</updated>
     
@@ -391,15 +391,15 @@
     
     </summary>
     
-      <category term="Android" scheme="http://yoursite.com/categories/Android/"/>
+      <category term="Android" scheme="https://fenglincanyi.github.io/categories/Android/"/>
     
     
   </entry>
   
   <entry>
     <title>简单的页面置换算法分析</title>
-    <link href="http://yoursite.com/2016/06/04/%E7%AE%80%E5%8D%95%E7%9A%84%E9%A1%B5%E9%9D%A2%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90/"/>
-    <id>http://yoursite.com/2016/06/04/简单的页面置换算法分析/</id>
+    <link href="https://fenglincanyi.github.io/2016/06/04/%E7%AE%80%E5%8D%95%E7%9A%84%E9%A1%B5%E9%9D%A2%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90/"/>
+    <id>https://fenglincanyi.github.io/2016/06/04/简单的页面置换算法分析/</id>
     <published>2016-06-04T11:39:00.000Z</published>
     <updated>2016-12-13T04:26:21.192Z</updated>
     
@@ -447,15 +447,15 @@
     
     </summary>
     
-      <category term="算法" scheme="http://yoursite.com/categories/%E7%AE%97%E6%B3%95/"/>
+      <category term="算法" scheme="https://fenglincanyi.github.io/categories/%E7%AE%97%E6%B3%95/"/>
     
     
   </entry>
   
   <entry>
     <title>Android SingleTask 探究</title>
-    <link href="http://yoursite.com/2016/05/16/Android%20SingleTask%20%E6%8E%A2%E7%A9%B6/"/>
-    <id>http://yoursite.com/2016/05/16/Android SingleTask 探究/</id>
+    <link href="https://fenglincanyi.github.io/2016/05/16/Android%20SingleTask%20%E6%8E%A2%E7%A9%B6/"/>
+    <id>https://fenglincanyi.github.io/2016/05/16/Android SingleTask 探究/</id>
     <published>2016-05-16T03:12:00.000Z</published>
     <updated>2016-12-13T03:43:43.809Z</updated>
     
@@ -534,15 +534,15 @@ adb shell dumpsys activity | grep mFocusedActivity  获取处于栈顶的Activit
     
     </summary>
     
-      <category term="Android" scheme="http://yoursite.com/categories/Android/"/>
+      <category term="Android" scheme="https://fenglincanyi.github.io/categories/Android/"/>
     
     
   </entry>
   
   <entry>
     <title>对称、非对称加密技术初探</title>
-    <link href="http://yoursite.com/2016/02/28/%E5%AF%B9%E7%A7%B0%E3%80%81%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E5%88%9D%E6%8E%A2/"/>
-    <id>http://yoursite.com/2016/02/28/对称、非对称加密技术初探/</id>
+    <link href="https://fenglincanyi.github.io/2016/02/28/%E5%AF%B9%E7%A7%B0%E3%80%81%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E5%88%9D%E6%8E%A2/"/>
+    <id>https://fenglincanyi.github.io/2016/02/28/对称、非对称加密技术初探/</id>
     <published>2016-02-28T09:52:00.000Z</published>
     <updated>2016-12-13T04:25:57.079Z</updated>
     
@@ -675,22 +675,22 @@ M: 变长的消息，H(M)是定长的 Hash值
     
     </summary>
     
-      <category term="网络" scheme="http://yoursite.com/categories/%E7%BD%91%E7%BB%9C/"/>
+      <category term="网络" scheme="https://fenglincanyi.github.io/categories/%E7%BD%91%E7%BB%9C/"/>
     
     
   </entry>
   
   <entry>
     <title>Git学习笔记（二）</title>
-    <link href="http://yoursite.com/2016/02/19/Git%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/"/>
-    <id>http://yoursite.com/2016/02/19/Git学习笔记（二）/</id>
+    <link href="https://fenglincanyi.github.io/2016/02/19/Git%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/"/>
+    <id>https://fenglincanyi.github.io/2016/02/19/Git学习笔记（二）/</id>
     <published>2016-02-19T08:06:00.000Z</published>
-    <updated>2016-12-13T04:22:56.536Z</updated>
+    <updated>2016-12-13T05:11:57.321Z</updated>
     
     <content type="html"><![CDATA[<h3 id="常用命令："><a href="#常用命令：" class="headerlink" title="常用命令："></a>常用命令：</h3><blockquote>
 <p>1、初始</p>
 </blockquote>
-<pre><code>git &lt;verb&gt; --help           查看命令用法(方法之一)
+<pre><code>git &lt;verb&gt; --help            查看命令用法(方法之一)
 git init                    初始化git仓库(在当前目录下会创建.git目录)
 </code></pre><blockquote>
 <p>2、 远程操作</p>
@@ -708,9 +708,9 @@ git add --all , -A            添加所有文件
 </code></pre><blockquote>
 <p>4、提交文件</p>
 </blockquote>
-<pre><code>git commit -m &quot;提交信息&quot;     提交当下工作区的文件
-git commit -a -m &quot;提交信息&quot;     前两个命令的合并，直接跳过暂存区提交
-git commit                     启动文本编辑器写提交信息
+<pre><code>git commit -m &quot;提交信息&quot;         提交当下工作区的文件
+git commit -a -m &quot;提交信息&quot;         前两个命令的合并，直接跳过暂存区提交
+git commit                        启动文本编辑器写提交信息
 </code></pre><blockquote>
 <p>5、查看文件状态</p>
 </blockquote>
@@ -778,15 +778,15 @@ git branch -v, -vv            查看所有分支的最后一次提交
     
     </summary>
     
-      <category term="工具" scheme="http://yoursite.com/categories/%E5%B7%A5%E5%85%B7/"/>
+      <category term="工具" scheme="https://fenglincanyi.github.io/categories/%E5%B7%A5%E5%85%B7/"/>
     
     
   </entry>
   
   <entry>
     <title>Git学习笔记（一）</title>
-    <link href="http://yoursite.com/2016/02/19/Git%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/"/>
-    <id>http://yoursite.com/2016/02/19/Git学习笔记（一）/</id>
+    <link href="https://fenglincanyi.github.io/2016/02/19/Git%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/"/>
+    <id>https://fenglincanyi.github.io/2016/02/19/Git学习笔记（一）/</id>
     <published>2016-02-19T07:28:00.000Z</published>
     <updated>2016-12-13T04:23:55.294Z</updated>
     
@@ -842,15 +842,15 @@ git branch -v, -vv            查看所有分支的最后一次提交
     
     </summary>
     
-      <category term="工具" scheme="http://yoursite.com/categories/%E5%B7%A5%E5%85%B7/"/>
+      <category term="工具" scheme="https://fenglincanyi.github.io/categories/%E5%B7%A5%E5%85%B7/"/>
     
     
   </entry>
   
   <entry>
     <title>Android Studio NDK开发环境搭建及Demo示例</title>
-    <link href="http://yoursite.com/2016/01/16/Android%20Studio%20NDK%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E5%8F%8ADemo%E7%A4%BA%E4%BE%8B/"/>
-    <id>http://yoursite.com/2016/01/16/Android Studio NDK开发环境搭建及Demo示例/</id>
+    <link href="https://fenglincanyi.github.io/2016/01/16/Android%20Studio%20NDK%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E5%8F%8ADemo%E7%A4%BA%E4%BE%8B/"/>
+    <id>https://fenglincanyi.github.io/2016/01/16/Android Studio NDK开发环境搭建及Demo示例/</id>
     <published>2016-01-16T11:34:00.000Z</published>
     <updated>2016-12-13T04:01:49.524Z</updated>
     
@@ -985,7 +985,7 @@ public native String javaCallC();
     
     </summary>
     
-      <category term="Android" scheme="http://yoursite.com/categories/Android/"/>
+      <category term="Android" scheme="https://fenglincanyi.github.io/categories/Android/"/>
     
     
   </entry>
