@@ -32,7 +32,7 @@
 一">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android 类加载初探">
-<meta property="og:url" content="https://fenglincanyi.github.io/2016/11/17/Android 类加载初探/index.html">
+<meta property="og:url" content="https://fenglincanyi.github.io/2016/11/17/Android apk安装过程实例分析/index.html">
 <meta property="og:site_name" content="fenglincanyi">
 <meta property="og:description" content="源码路径(此版本：Android 5.0)：android-5.0.0_r7\libcore\dalvik\src\main\java\dalvik\system
 
@@ -55,7 +55,7 @@
 <meta property="og:image" content="http://7xr1vo.com1.z0.glb.clouddn.com/AndroidClassloader9.png">
 <meta property="og:image" content="http://7xr1vo.com1.z0.glb.clouddn.com/AndroidClassloader10.png">
 <meta property="og:image" content="http://7xr1vo.com1.z0.glb.clouddn.com/AndroidClassloader11.png">
-<meta property="og:updated_time" content="2016-12-15T10:59:35.409Z">
+<meta property="og:updated_time" content="2016-12-15T10:56:46.896Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android 类加载初探">
 <meta name="twitter:description" content="源码路径(此版本：Android 5.0)：android-5.0.0_r7\libcore\dalvik\src\main\java\dalvik\system
@@ -195,7 +195,7 @@
         </nav>
     </aside>
     
-<article id="post-Android 类加载初探"
+<article id="post-Android apk安装过程实例分析"
   class="post-article article-type-post fade" itemprop="blogPost">
 
     <div class="post-card">
@@ -323,11 +323,11 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2016-12-15T10:59:35.409Z" title="2016-12-15 18:59" itemprop="dateUpdated">2016年12月15日 18:59</time>
+    最后更新时间：<time datetime="2016-12-15T10:56:46.896Z" title="2016-12-15 18:56" itemprop="dateUpdated">2016年12月15日 18:56</time>
 </span><br>
 
 
-        <b>版权声明：本文为博主原创文章，转载请标识出处：</b><br/><a href="/2016/11/17/Android 类加载初探/" target="_blank" rel="external">https://fenglincanyi.github.io/2016/11/17/Android 类加载初探/</a>
+        <b>版权声明：本文为博主原创文章，转载请标识出处：</b><br/><a href="/2016/11/17/Android apk安装过程实例分析/" target="_blank" rel="external">https://fenglincanyi.github.io/2016/11/17/Android apk安装过程实例分析/</a>
     </div>
     <footer>
         <a href="https://fenglincanyi.github.io">
@@ -354,7 +354,7 @@
 <div class="page-share" id="pageShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://fenglincanyi.github.io/2016/11/17/Android 类加载初探/&title=《Android 类加载初探》 — fenglincanyi&pic=https://fenglincanyi.github.io/img/me.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://fenglincanyi.github.io/2016/11/17/Android apk安装过程实例分析/&title=《Android 类加载初探》 — fenglincanyi&pic=https://fenglincanyi.github.io/img/me.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -364,22 +364,22 @@
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://fenglincanyi.github.io/2016/11/17/Android 类加载初探/&title=《Android 类加载初探》 — fenglincanyi&source=" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://fenglincanyi.github.io/2016/11/17/Android apk安装过程实例分析/&title=《Android 类加载初探》 — fenglincanyi&source=" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://fenglincanyi.github.io/2016/11/17/Android 类加载初探/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://fenglincanyi.github.io/2016/11/17/Android apk安装过程实例分析/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Android 类加载初探》 — fenglincanyi&url=https://fenglincanyi.github.io/2016/11/17/Android 类加载初探/&via=https://fenglincanyi.github.io" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Android 类加载初探》 — fenglincanyi&url=https://fenglincanyi.github.io/2016/11/17/Android apk安装过程实例分析/&via=https://fenglincanyi.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://fenglincanyi.github.io/2016/11/17/Android 类加载初探/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://fenglincanyi.github.io/2016/11/17/Android apk安装过程实例分析/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -402,18 +402,18 @@
 <nav class="post-nav flex-row flex-justify-between">
   
     <div class="waves-block waves-effect prev">
-      <a href="/2016/11/17/Android apk安装过程实例分析/" id="post-prev" class="post-nav-link">
+      <a href="/2016/12/15/Android 与 js 交互中url传参中也有url的问题/" id="post-prev" class="post-nav-link">
         <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">Android 类加载初探</h4>
+        <h4 class="title">Android 与 js 交互中url传参中也有url的问题</h4>
       </a>
     </div>
   
 
   
     <div class="waves-block waves-effect next">
-      <a href="/2016/10/25/RadioGroup、RadioButton动态创建并定制icon显示/" id="post-next" class="post-nav-link">
+      <a href="/2016/11/17/Android 类加载初探/" id="post-next" class="post-nav-link">
         <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">RadioGroup、RadioButton动态创建并定制icon显示</h4>
+        <h4 class="title">Android 类加载初探</h4>
       </a>
     </div>
   
@@ -424,7 +424,7 @@
     
 
 <div class="comments" id="comments">
-    <div class="ds-thread" data-thread-key="Android 类加载初探" data-title="Android 类加载初探" data-url="https://fenglincanyi.github.io/2016/11/17/Android 类加载初探/"></div>
+    <div class="ds-thread" data-thread-key="Android apk安装过程实例分析" data-title="Android 类加载初探" data-url="https://fenglincanyi.github.io/2016/11/17/Android apk安装过程实例分析/"></div>
 </div>
 <script>
 lazyScripts.push('//cdn.bootcss.com/marked/0.3.6/marked.min.js');
@@ -506,7 +506,7 @@ lazyScripts.push('/js/embed.min.js?v=1.4.2');
 <div class="global-share" id="globalShare">
     <ul class="reset share-icons">
       <li>
-        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://fenglincanyi.github.io/2016/11/17/Android 类加载初探/&title=《Android 类加载初探》 — fenglincanyi&pic=https://fenglincanyi.github.io/img/me.jpg" data-title="微博">
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=https://fenglincanyi.github.io/2016/11/17/Android apk安装过程实例分析/&title=《Android 类加载初探》 — fenglincanyi&pic=https://fenglincanyi.github.io/img/me.jpg" data-title="微博">
           <i class="icon icon-weibo"></i>
         </a>
       </li>
@@ -516,22 +516,22 @@ lazyScripts.push('/js/embed.min.js?v=1.4.2');
         </a>
       </li>
       <li>
-        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://fenglincanyi.github.io/2016/11/17/Android 类加载初探/&title=《Android 类加载初探》 — fenglincanyi&source=" data-title=" QQ">
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=https://fenglincanyi.github.io/2016/11/17/Android apk安装过程实例分析/&title=《Android 类加载初探》 — fenglincanyi&source=" data-title=" QQ">
           <i class="icon icon-qq"></i>
         </a>
       </li>
       <li>
-        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://fenglincanyi.github.io/2016/11/17/Android 类加载初探/" data-title=" Facebook">
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://fenglincanyi.github.io/2016/11/17/Android apk安装过程实例分析/" data-title=" Facebook">
           <i class="icon icon-facebook"></i>
         </a>
       </li>
       <li>
-        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Android 类加载初探》 — fenglincanyi&url=https://fenglincanyi.github.io/2016/11/17/Android 类加载初探/&via=https://fenglincanyi.github.io" data-title=" Twitter">
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Android 类加载初探》 — fenglincanyi&url=https://fenglincanyi.github.io/2016/11/17/Android apk安装过程实例分析/&via=https://fenglincanyi.github.io" data-title=" Twitter">
           <i class="icon icon-twitter"></i>
         </a>
       </li>
       <li>
-        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://fenglincanyi.github.io/2016/11/17/Android 类加载初探/" data-title=" Google+">
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=https://fenglincanyi.github.io/2016/11/17/Android apk安装过程实例分析/" data-title=" Google+">
           <i class="icon icon-google-plus"></i>
         </a>
       </li>
@@ -542,7 +542,7 @@ lazyScripts.push('/js/embed.min.js?v=1.4.2');
 <div class="page-modal wx-share" id="wxShare">
     <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACuElEQVR42u3a0W7jMAwEQP//T+deD7iztSQlNwVGT0EapxoVkNilrisen5vx70//fuf52edx9+x1YuDh4eFtmnoCuPuVz9S7T97NqrpkeHh4eO/w8ikm+3D1UJks2cKCh4eH92W8uwk9v58vWbIoeHh4eL+Rl0y39215aY6Hh4f3Pq9a+FZDgV4EnEQh27IWPDw8vJhXjRi+4fWR/h4eHh7euKuebLjV5tY8vCjMFg8PD+8Arxen5mVu3gDb1YTDw8PDe5+Xt6yqsF6A27v+hYeHh3eaV20+VaeeL+IknF18Bg8PD+8Yr9q4qh4M5YJ4UKzj4eHhneNVi9TeYZD8dBLvbshR8PDw8Fq8yXafPLs38C00wPDw8PC28ibbfTUmqC7l5JjBw8PDO8GrFqx5K6u3oU9K88WdMjw8PLwDvOrUq1cKehenkqL59s+Dh4eH9wpv8nVJQdxbyuSQ+M934uHh4R3gVVtiVzx6hXXvMsFVHXh4eHhj3qTB37uSlR8z+VEUtb7w8PDwNvGqG331QkDvekH1etboPMTDw8OLefl0qwVuNertHUKLxcLDw8M7xquGEb2yNT9Otl3JwsPDwzvAy0veyYFRXYK80TWKdPHw8PBavHy7PxfLJsdAr1jHw8PDO8Gbl8LVLbs6ld6FsAISDw8Pr8XLW1DVX9ar8avBxGKZ8PDw8F7h5dPtXcnK448edXEw4OHh4W3i5Vv26PZW8dlJEIyHh4d3gjcvlKsXAp6fzePgqEzHw8PDO8DrbeXVWDb5/K7XzYGHh4dX5OWNpaTYrV7J2hVtLO5H4OHh4R3g5Rt6L369jo3F0uPh4eF9Aa/ayJ+HHXm8u0ip8fDw8H6IlxfQvdL8MxhXbyXw8PDwWrxJy6oaIuSLNQ8p8PDw8E7w5v/w5wXxPCbe1tPDw8PD6/D+ADRKc6gfiPzSAAAAAElFTkSuQmCC" alt="微信分享二维码">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACu0lEQVR42u3a0W7jMAwEwPz/T+deDzjY2RXNNgeMnoq0ljUKILEkX694vP8ayV/++9TVuH+qffvhwMPDwxss/f71k8Xdb0GyofnG4eHh4f0MLznik6vifhH5RXI/QzIbHh4e3rfxkqslD77bgB4PDw/v/+LlYXebXGgDdzw8PLzf5Z1NnWPyEDkJ31dyLXh4eHgxLw9qv+fnlfoeHh4e3riqflYMa8PuZJ7D1eLh4eEt8PID96yQf3bBJNtUNIfh4eHhLfDa5qezhG/bktU2eH3YLDw8PLyHeHkZKQ+a2y1oE8rFnHh4eHhrvDz1kB/N+aXSzlOnIfDw8PAWeHn6tT2+k7Rs3obVXjN4eHh4G7yzw3d+JeSNAvknH0JwPDw8vId47bFel53GQXO+nugbw8PDwxvz2kao7QM9abfK14+Hh4e3wWv/+T9bYvtUe2ld/hYPDw9vjTdJkrYNBHl7QX7lXP6Mh4eHt8abFJyebTjIExDRhuLh4eEt8JLH2lLWZIZka+rKHh4eHt4aLz/KJ8WznJ1fVNGFgYeHh/cQL3ksD17b4lkbUtdNYHh4eHgLvLakNGmNai+eNllc5F3w8PDwHuLlx/c88M2TDpPUMx4eHt4Gb5IaOGsvOEtznDUQ4OHh4W3wzl5wVqaahObvYFx+SXh4eHhrvPzoz192FuO36do6y4KHh4f3EC9f7n0g214DeYh8eM3g4eHh/TjvLN2QNxm0Sdt8fjw8PLwN3rscbVo2D4uTklubHMHDw8Pb4LVHbRtqtwH3JHB/TQYeHh5eyTsLqdvCWJ7ePWsC+9AfgYeHh7fAaw/lSYFqFP6WVxEeHh7ed/LyRoE2NM8D98vP8fDw8L6A91Rf01k7V/0WPDw8vDXeWcnqfol5unbSUvBhfjw8PLwFXvsP/wTTpomfbcbCw8PDG/P+AONW72QrmsxTAAAAAElFTkSuQmCC" alt="微信分享二维码">
 </div>
 
 
