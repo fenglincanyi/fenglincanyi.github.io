@@ -47,10 +47,10 @@
   
   <entry>
     <title>Android 类加载初探</title>
-    <link href="https://fenglincanyi.github.io/2016/11/17/Android%20apk%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B%E5%AE%9E%E4%BE%8B%E5%88%86%E6%9E%90/"/>
-    <id>https://fenglincanyi.github.io/2016/11/17/Android apk安装过程实例分析/</id>
+    <link href="https://fenglincanyi.github.io/2016/11/17/Android%20%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%88%9D%E6%8E%A2/"/>
+    <id>https://fenglincanyi.github.io/2016/11/17/Android 类加载初探/</id>
     <published>2016-11-17T13:08:00.000Z</published>
-    <updated>2016-12-15T10:56:46.896Z</updated>
+    <updated>2016-12-13T04:20:05.368Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
 <p>源码路径(此版本：Android 5.0)：<br>android-5.0.0_r7\libcore\dalvik\src\main\java\dalvik\system</p>
@@ -148,7 +148,7 @@
                 </div>
                 <div class="image-caption"></div>
             </figure>
-<p>由上可知，PathClassLoader 的构造函数，与DexClassLoader相比较，optimizedDirectory 优化目录为null。<br>由于optimizedDirectory是用来缓存我们需要加载的dex文件的，并创建一个DexFile对象，如果它为null，那么会直接使用dex文件原有的路径来创建DexFile对象。<br>optimizedDirectory必须是一个内部存储路径，无论哪种动态加载，加载的可执行文件一定要存放在内部存储。DexClassLoader可以指定自己的optimizedDirectory，所以它可以加载外部的dex，因为这个dex会被复制到内部路径的optimizedDirectory<br>所以DexClassLoader可以通过其他路径（内部存储路径）加载dex，而PathClassLoader没有optimizedDirectory，所以它只能加载内部的dex，这些大都是存在系统中已经安装过的apk里面的。</p>
+<p>由上可知，PathClassLoader 的构造函数，与DexClassLoader相比较，optimizedDirectory 优化目录为null，所以PathClassLoader加载的dex文件并不是 已经被dexopt优化后的了，而是原生的dex文件（通常是zip/jar）。也就是说未被加载过的dex。而DexClassLoader是加载优化后的路径：/data/dalvik-cache 下的dex 文件</p>
 <p>若想查看相关目录下的dex文件，可参考上一篇文章。</p>
 ]]></content>
     
@@ -167,118 +167,117 @@
   </entry>
   
   <entry>
-    <title>Android 类加载初探</title>
-    <link href="https://fenglincanyi.github.io/2016/11/17/Android%20%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%88%9D%E6%8E%A2/"/>
-    <id>https://fenglincanyi.github.io/2016/11/17/Android 类加载初探/</id>
-    <published>2016-11-17T13:08:00.000Z</published>
-    <updated>2016-12-15T10:59:35.409Z</updated>
+    <title>Android apk安装过程实例分析</title>
+    <link href="https://fenglincanyi.github.io/2016/11/01/Android%20apk%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B%E5%AE%9E%E4%BE%8B%E5%88%86%E6%9E%90/"/>
+    <id>https://fenglincanyi.github.io/2016/11/01/Android apk安装过程实例分析/</id>
+    <published>2016-11-01T10:53:00.000Z</published>
+    <updated>2016-12-15T06:20:48.906Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
-<p>源码路径(此版本：Android 5.0)：<br>android-5.0.0_r7\libcore\dalvik\src\main\java\dalvik\system</p>
+<p>注：本文不对apk安装之前，系统所做的复杂工作做分析，只针对普通的apk安装过程进行简单的过程理解</p>
 </blockquote>
-<p>需要关注的类有：<br><figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://7xr1vo.com1.z0.glb.clouddn.com/AndroidClassloader1.png" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure></p>
-<h3 id="一、查找类的过程"><a href="#一、查找类的过程" class="headerlink" title="一、查找类的过程"></a>一、查找类的过程</h3><p>对于一个Class，在Android中，是如何被ClassLoader查找的呢？我们先查看一下，在Android中最原始的ClassLoader: BaseDexClassLoader 中有直接的方法。直接看源码：<br><figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://7xr1vo.com1.z0.glb.clouddn.com/AndroidClassLoader2.png" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure></p>
-<p>再继续追， pathList 的 findClass() 方法：<br><figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://7xr1vo.com1.z0.glb.clouddn.com/AndroidClassLoader3.png" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure></p>
-<p>此时遍历每个dex，通过二进制名来查找类Class；若类未定义或类未找到，则将异常add至suppressed异常集合中，随后抛出。<br><figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://7xr1vo.com1.z0.glb.clouddn.com/AndroidClassLoader4.png" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure></p>
-<h3 id="二、3个类加载器的关系"><a href="#二、3个类加载器的关系" class="headerlink" title="二、3个类加载器的关系"></a>二、3个类加载器的关系</h3><p>我们先来看看这3个ClassLoader的定义</p>
+<p>一般情况下，在apk安装时，系统一般会显示一个安装界面，获取用户同意之后进行安装，并且有一些apk预处理相关的操作，紧接着，会启动app界面，进入app。<br>在这一过程中，不同版本的Android系统在安装时，对包的处理是不太一样的，以下分Dalivk、ART两种虚拟机进行分析。这里主要采用原生模拟器，进行分析。</p>
+<h3 id="一、-Dalvik（JIT：just-in-time-即时编译）"><a href="#一、-Dalvik（JIT：just-in-time-即时编译）" class="headerlink" title="一、 Dalvik（JIT：just in time  即时编译）"></a>一、 Dalvik（JIT：just in time  即时编译）</h3><ul>
+<li>过程分析：<ul>
+<li>点击apk包后或apk下载后，安装之前，系统会启动安装界面PackageInstallerActivity，让用户进行授权选择，用户同意后，会调用ApplicationPackageManager 进行相关操作。</li>
+<li>调用ApplicationPackageManager，通过IPC来调用 PackageManagerService 中的 installPackage 方法，在这个方法中，又去调用 installPackageAsUser 方法，此时，要进行权限相关校验，完毕之后，会通过 handler 发送消息（类型：INIT_COPY，MCS_BOUND）</li>
+<li>然后 startCopy —&gt; handleStartCopy 依次调用，这里，对安装位置、存储空间进行处理，之后会 拷贝apk 相关文件放在相应的目录下。这些文件主要包括：<ul>
+<li>apk文件</li>
+<li>jar、so文件</li>
+<li>db文件（若有的话）</li>
+</ul>
+</li>
+<li>拷贝完成之后，进行预处理，对于Dalvik来说，dexopt要进行dex文件的优化，生成odex文件，在app运行时，能加快其启动速度。</li>
+<li>另外，对于资源处理，是 AssetMananger 来进行资源的解析、加载。</li>
+</ul>
+</li>
+</ul>
 <ul>
-<li>BaseDexClassLoader</li>
+<li>实例考察：<ul>
+<li>安装时logcat日志：拷贝工作，然后进行dex优化，dexopt执行操作</li>
+</ul>
+</li>
 </ul>
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="http://7xr1vo.com1.z0.glb.clouddn.com/AndroidClassloader5.png" alt="" title="">
+                    <img src="http://7xr1vo.com1.z0.glb.clouddn.com/apk%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B.png" alt="" title="">
                 </div>
                 <div class="image-caption"></div>
             </figure>
+<p>   拷贝后，目录如下：</p>
+<p><img src="http://7xr1vo.com1.z0.glb.clouddn.com/copy%20lib%E7%BB%93%E6%9E%9C.png" alt=""></p>
+<p> dex位置：</p>
+<p><img src="http://7xr1vo.com1.z0.glb.clouddn.com/dex%E4%BD%8D%E7%BD%AE.png" alt=""></p>
+<p>如果把此位置的 dex 删除后，且杀掉已经运行的进程后，再次点击app启动后奔溃，如图：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xr1vo.com1.z0.glb.clouddn.com/%E5%88%A0%E6%8E%89dalvik-cache%E7%9B%AE%E5%BD%95%E4%B8%8B%E7%9A%84dex%E5%90%8E%EF%BC%8C%E4%B8%94%E6%9D%80%E6%8E%89%E5%B7%B2%E7%BB%8F%E8%BF%90%E8%A1%8C%E7%9A%84%E5%BA%94%E7%94%A8%E8%BF%9B%E7%A8%8B%EF%BC%8C%E5%86%8D%E6%AC%A1%E5%90%AF%E5%8A%A8.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>由此可知，要启动app时，需要加载 /data/dalik-cache 目录下的dex文件</p>
+<p>相关参考文献：<br><a href="http://www.woaitqs.cc/android/2016/07/28/android-plugin-get-apk-info" target="_blank" rel="external">http://www.woaitqs.cc/android/2016/07/28/android-plugin-get-apk-info</a><br><a href="http://blog.csdn.net/luoshengyang/article/details/8852432" target="_blank" rel="external">http://blog.csdn.net/luoshengyang/article/details/8852432</a></p>
+<h3 id="二、ART（AOT：Ahead-of-time-预编译）"><a href="#二、ART（AOT：Ahead-of-time-预编译）" class="headerlink" title="二、ART（AOT：Ahead of time  预编译）"></a>二、ART（AOT：Ahead of time  预编译）</h3><p>Android 4.4之后，对于Android虚拟机又继续做了优化，art 代替了 Dalvik，对于dex文件，优化工作做了改变。</p>
 <ul>
-<li>DexClassLoader</li>
+<li><p>大致的处理过程：</p>
+</li>
+<li><p>编译时，通过调用 dex2oat 对dex 进行预编译，这个编译器参考了LLVM框架，默认情况下，是采用了quick模式，但在6.0之后，LLVM被彻底去除了。关于LLVM细节，自行Google。</p>
+</li>
+<li>编译后生成的文件 .oat 文件，实际上是Android 私有的ELF文件。在Linux系统中，ELF文件主要分为3类：目标文件（ .o）、共享文件（ .so）、可执行文件。此处Android的 .oat文件属于可执行文件。<br>  oat 文件含有ELF文件正常的结构形态，里面既包含有dex 文件，也包含编译好的本地指令代码。被包含的dex文件也可以是多个。</li>
+</ul>
+<ul>
+<li>实例考察<ul>
+<li>ART 安装apk时，日志记录：</li>
+</ul>
+</li>
 </ul>
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="http://7xr1vo.com1.z0.glb.clouddn.com/AndroidClassloader6.png" alt="" title="">
+                    <img src="http://7xr1vo.com1.z0.glb.clouddn.com/art%E5%AE%89%E8%A3%85apk%E7%9A%84log.png" alt="" title="">
                 </div>
                 <div class="image-caption"></div>
             </figure>
-<ul>
-<li>PathClassLoader</li>
-</ul>
+<pre><code>可以看到，有apk的拷贝，有dex2oat的dex优化过程。再追一下相关的目录：
+</code></pre><p> <img src="http://7xr1vo.com1.z0.glb.clouddn.com/local%E7%9B%AE%E5%BD%95%E4%B8%8B.png" alt=""></p>
+<p>  <img src="http://7xr1vo.com1.z0.glb.clouddn.com/dalvik-cache%E7%9B%AE%E5%BD%95%E4%B8%8B.png" alt=""></p>
+<p>里面有一部分是系统框架层的相关文件。</p>
+<p>安装后的目录结构也有变化：</p>
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="http://7xr1vo.com1.z0.glb.clouddn.com/AndroidClassloader7.png" alt="" title="">
+                    <img src="http://7xr1vo.com1.z0.glb.clouddn.com/data_app%E7%9B%AE%E5%BD%95%E4%B8%8B.png" alt="" title="">
                 </div>
                 <div class="image-caption"></div>
             </figure>
-<p>由上面可看出：BaseDexClassLoader 继承自最原始的 ClassLoader，DexClassLoader 和 PathClassLoader都继承自BaseClassLoader。依据传入的参数不同，来实现各自不同的 dex 加载功能</p>
-<p><strong>ClassLoader 相关说明：</strong></p>
-<p>从存储中加载类和资源。 在运行时安装一个或多个类加载器。 每当运行时系统需要在内存中尚不可用的特定类时，都会查询这些类。 通常，类加载器是一个树型结构，其中子类加载器将所有请求委托给父类加载器。 只有父类加载器无法满足请求，子类加载器才会尝试处理它（委托机制）</p>
-<p>下面我们再继续分析，传入不同的 optimizedDirectory 参数，两者会有什么样的区别？</p>
-<p>DexPathList 构造函数：<br><figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://7xr1vo.com1.z0.glb.clouddn.com/AndroidClassloader8.png" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure></p>
-<p>makeDexElements过程：<br><figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://7xr1vo.com1.z0.glb.clouddn.com/AndroidClassloader9.png" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure></p>
-<p>加载DexFile，若optimizedDirectory 目录为空，则初始化一个DexFile，否则，直接加载dex文件：</p>
+<p>生成相应的平台下的文件，此处我使用的是x86的模拟器</p>
+<p>Android 在编译时用到的 dexopt、dex2oat、aapt 都在 /system/bin目录下：</p>
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="http://7xr1vo.com1.z0.glb.clouddn.com/AndroidClassloader10.png" alt="" title="">
+                    <img src="http://7xr1vo.com1.z0.glb.clouddn.com/4.4%E4%B8%8Bsystem_bin%E4%B8%8B%E7%9A%84aapt.png.png" alt="" title="">
                 </div>
                 <div class="image-caption"></div>
             </figure>
-<p>初始化DexFile文件，通常是从一个文件对象中打开一个Dex file ，通常是一个 内容是 classes.dex 的 zip/jar文件，<br>虚拟机将在 /data/dalvik-cache 目录下生成相应名称的文件，且打开它，在系统权限允许的情况下尽可能的先创建或更新该文件<br>不能传递 优化后的 文件名（/data/dalvik-cache），而是在 dexopt 之前的原始状态的文件名。</p>
+<p>当时对于 multidex 的包也进行了目录查找，如下，留下后续研究做参考。</p>
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="http://7xr1vo.com1.z0.glb.clouddn.com/AndroidClassloader11.png" alt="" title="">
+                    <img src="http://7xr1vo.com1.z0.glb.clouddn.com/multidex.png" alt="" title="">
                 </div>
                 <div class="image-caption"></div>
             </figure>
-<p>由上可知，PathClassLoader 的构造函数，与DexClassLoader相比较，optimizedDirectory 优化目录为null。<br>由于optimizedDirectory是用来缓存我们需要加载的dex文件的，并创建一个DexFile对象，如果它为null，那么会直接使用dex文件原有的路径来创建DexFile对象。<br>optimizedDirectory必须是一个内部存储路径，无论哪种动态加载，加载的可执行文件一定要存放在内部存储。DexClassLoader可以指定自己的optimizedDirectory，所以它可以加载外部的dex，因为这个dex会被复制到内部路径的optimizedDirectory<br>所以DexClassLoader可以通过其他路径（内部存储路径）加载dex，而PathClassLoader没有optimizedDirectory，所以它只能加载内部的dex，这些大都是存在系统中已经安装过的apk里面的。</p>
-<p>若想查看相关目录下的dex文件，可参考上一篇文章。</p>
+<p>相关参考文献：<br><a href="https://mssun.me/blog/android-art-runtime-2-dex2oat.html" target="_blank" rel="external">https://mssun.me/blog/android-art-runtime-2-dex2oat.html</a><br><a href="http://blog.csdn.net/luoshengyang/article/details/39307813" target="_blank" rel="external">http://blog.csdn.net/luoshengyang/article/details/39307813</a></p>
 ]]></content>
     
     <summary type="html">
     
       &lt;blockquote&gt;
-&lt;p&gt;源码路径(此版本：Android 5.0)：&lt;br&gt;android-5.0.0_r7\libcore\dalvik\src\main\java\dalvik\system&lt;/p&gt;
+&lt;p&gt;注：本文不对apk安装之前，系统所做的复杂工作做分析，只针对普通的apk安装过程进行简单的过程理解&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;需要关注的类有：&lt;br&gt;&lt;figu
+&lt;p&gt;一般情况下，在apk安装时，系统一般会显示一个安装界面，获取用户同意之后进行安装，并且有一些apk预处理相
     
     </summary>
     

@@ -55,7 +55,7 @@
 <meta property="og:image" content="http://7xr1vo.com1.z0.glb.clouddn.com/AndroidClassloader9.png">
 <meta property="og:image" content="http://7xr1vo.com1.z0.glb.clouddn.com/AndroidClassloader10.png">
 <meta property="og:image" content="http://7xr1vo.com1.z0.glb.clouddn.com/AndroidClassloader11.png">
-<meta property="og:updated_time" content="2016-12-15T10:59:35.409Z">
+<meta property="og:updated_time" content="2016-12-13T04:20:05.368Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android 类加载初探">
 <meta name="twitter:description" content="源码路径(此版本：Android 5.0)：android-5.0.0_r7\libcore\dalvik\src\main\java\dalvik\system
@@ -314,7 +314,7 @@
                 </div>
                 <div class="image-caption"></div>
             </figure>
-<p>由上可知，PathClassLoader 的构造函数，与DexClassLoader相比较，optimizedDirectory 优化目录为null。<br>由于optimizedDirectory是用来缓存我们需要加载的dex文件的，并创建一个DexFile对象，如果它为null，那么会直接使用dex文件原有的路径来创建DexFile对象。<br>optimizedDirectory必须是一个内部存储路径，无论哪种动态加载，加载的可执行文件一定要存放在内部存储。DexClassLoader可以指定自己的optimizedDirectory，所以它可以加载外部的dex，因为这个dex会被复制到内部路径的optimizedDirectory<br>所以DexClassLoader可以通过其他路径（内部存储路径）加载dex，而PathClassLoader没有optimizedDirectory，所以它只能加载内部的dex，这些大都是存在系统中已经安装过的apk里面的。</p>
+<p>由上可知，PathClassLoader 的构造函数，与DexClassLoader相比较，optimizedDirectory 优化目录为null，所以PathClassLoader加载的dex文件并不是 已经被dexopt优化后的了，而是原生的dex文件（通常是zip/jar）。也就是说未被加载过的dex。而DexClassLoader是加载优化后的路径：/data/dalvik-cache 下的dex 文件</p>
 <p>若想查看相关目录下的dex文件，可参考上一篇文章。</p>
 
         </div>
@@ -323,7 +323,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2016-12-15T10:59:35.409Z" title="2016-12-15 18:59" itemprop="dateUpdated">2016年12月15日 18:59</time>
+    最后更新时间：<time datetime="2016-12-13T04:20:05.368Z" title="2016-12-13 12:20" itemprop="dateUpdated">2016年12月13日 12:20</time>
 </span><br>
 
 
@@ -402,18 +402,18 @@
 <nav class="post-nav flex-row flex-justify-between">
   
     <div class="waves-block waves-effect prev">
-      <a href="/2016/11/17/Android apk安装过程实例分析/" id="post-prev" class="post-nav-link">
+      <a href="/2016/12/15/Android 与 js 交互中url传参中也有url的问题/" id="post-prev" class="post-nav-link">
         <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">Android 类加载初探</h4>
+        <h4 class="title">Android 与 js 交互中url传参中也有url的问题</h4>
       </a>
     </div>
   
 
   
     <div class="waves-block waves-effect next">
-      <a href="/2016/10/25/RadioGroup、RadioButton动态创建并定制icon显示/" id="post-next" class="post-nav-link">
+      <a href="/2016/11/01/Android apk安装过程实例分析/" id="post-next" class="post-nav-link">
         <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">RadioGroup、RadioButton动态创建并定制icon显示</h4>
+        <h4 class="title">Android apk安装过程实例分析</h4>
       </a>
     </div>
   
