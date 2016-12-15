@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://fenglincanyi.github.io/"/>
-  <updated>2016-12-13T04:20:05.368Z</updated>
+  <updated>2016-12-15T05:34:30.915Z</updated>
   <id>https://fenglincanyi.github.io/</id>
   
   <author>
@@ -14,6 +14,36 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Android 与 js 交互中url传参中也有url的问题</title>
+    <link href="https://fenglincanyi.github.io/2016/12/15/Android%20%E4%B8%8E%20js%20%E4%BA%A4%E4%BA%92%E4%B8%ADurl%E4%BC%A0%E5%8F%82%E4%B8%AD%E4%B9%9F%E6%9C%89url%E7%9A%84%E9%97%AE%E9%A2%98/"/>
+    <id>https://fenglincanyi.github.io/2016/12/15/Android 与 js 交互中url传参中也有url的问题/</id>
+    <published>2016-12-15T05:29:00.000Z</published>
+    <updated>2016-12-15T05:34:30.915Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="问题场景"><a href="#问题场景" class="headerlink" title="问题场景"></a>问题场景</h3><p>get请求链接中： 传参中含有url</p>
+<p>“chinahr://customer/h5page?” + LEOGAO_PAGE+”=”+finishpage+”&amp;”+LEOGAO_ACTION+”=”+finishaction + “&amp;”+INTENT_URL+”=” + <b><font color="red">url</font></b></p>
+<p>其中：<br><b><font color="red">url：</font></b>  file:///android_asset/hybird/cp/index.html?uid=” + cuid +”&amp;gender=”+gender +”&amp;photo=”+photoPath;</p>
+<p>合并之后：<br>“chinahr://customer/h5page?” + LEOGAO_PAGE+”=”+finishpage+”&amp;”+LEOGAO_ACTION+”=”+finishaction + “&amp;”+INTENT_URL+”=”+“file:///android_asset/hybird/cp/index.html?uid=” + cuid +”&amp;gender=”+gender +”&amp;photo=”+photoPath；</p>
+<p>所以这个 url 中的 第二个及以后的参数第一次就会被router解析，并不会将 url 整体作为一个参数传到下一个页面中去再次解析识别。</p>
+<h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><h4 id="Android端"><a href="#Android端" class="headerlink" title="Android端"></a>Android端</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">JSONObject jsonObject = new JSONObject();</div><div class="line">try &#123;</div><div class="line">    jsonObject.put(&quot;uid&quot;, cUid);</div><div class="line">    jsonObject.put(&quot;gender&quot;, gender);</div><div class="line">    jsonObject.put(&quot;photo&quot;, potoPath);</div><div class="line">    paramsResult =  URLEncoder.encode(Base64.encodeToString(jsonObject.toString().getBytes(), Base64.DEFAULT));</div><div class="line">&#125; catch (JSONException e) &#123;</div><div class="line">    e.printStackTrace();</div><div class="line">&#125;</div><div class="line">// 此处为加载本地，也可以为网络url</div><div class="line">BaseH5Activity.startWebViewActivity(this, &quot;file:///android_asset/hybird/cp/index.html?params=&quot; + paramsResult, &quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;);</div></pre></td></tr></table></figure>
+<h4 id="前端js"><a href="#前端js" class="headerlink" title="前端js"></a>前端js</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">var me = this;</div><div class="line">var href = window.location.url || window.location.href;</div><div class="line">var params = me.getParams(href, &apos;params&apos;);</div><div class="line">params = Base64.decode(decodeURIComponent(params));</div><div class="line">info = JSON.parse(params);</div><div class="line">var uid = info.uid;</div><div class="line">var photo = info.photo;</div><div class="line">var gender = info.gender;</div></pre></td></tr></table></figure>
+<h3 id="踩坑"><a href="#踩坑" class="headerlink" title="踩坑"></a>踩坑</h3><p>第一次使用UrlEncoder编码，k可能会造成浏览器与js解析数据会存在不一致的问题<br>解决：先使用base64进行编码，解决数据不一致的问题，再进行UrlEncoder编码（为了防止base64编码后的数据解析时：”+” 会当做空格的问题 ） </p>
+<h3 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h3><p>在线加解密、编码解析工具：<br><a href="http://tool.oschina.net/encrypt?type=3" target="_blank" rel="external">http://tool.oschina.net/encrypt?type=3</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;问题场景&quot;&gt;&lt;a href=&quot;#问题场景&quot; class=&quot;headerlink&quot; title=&quot;问题场景&quot;&gt;&lt;/a&gt;问题场景&lt;/h3&gt;&lt;p&gt;get请求链接中： 传参中含有url&lt;/p&gt;
+&lt;p&gt;“chinahr://customer/h5page?” + LEOGA
+    
+    </summary>
+    
+      <category term="Hybird" scheme="https://fenglincanyi.github.io/categories/Hybird/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>Android 类加载初探</title>
