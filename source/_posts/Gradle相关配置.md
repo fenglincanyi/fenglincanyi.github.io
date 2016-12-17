@@ -1,7 +1,8 @@
 ---
 title: Gradle相关配置
 date: 2016-09-09 10:36
-categories: Android
+categories: Android 
+tags: Gradle
 ---
 ```
 android {

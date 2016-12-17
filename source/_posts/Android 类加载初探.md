@@ -2,6 +2,7 @@
 title: Android 类加载初探
 date: 2016-11-17 21:08
 categories: Android
+tags: ClassLoader
 ---
 > 源码路径(此版本：Android 5.0)：
 android-5.0.0_r7\libcore\dalvik\src\main\java\dalvik\system

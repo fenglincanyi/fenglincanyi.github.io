@@ -2,6 +2,7 @@
 title: 滑动冲突之EditText-ScrollView
 date: 2016-08-16 17:14
 categories: Android
+tags: 滑动冲突
 ---
 ### 问题一
 	EditText的内容过多时，EditText的内容并不能滚动，而是ScrollView的滚动

@@ -3,6 +3,7 @@ title: Android Studio NDK开发环境搭建及Demo示例
 date: 2016-01-16 19:34
 comments: true
 categories: Android
+tags: [JNI, NDK]
 ---
 >  说明：Android Studio 1.4后支持C/C++开发，1.3之前的版本坑点较多，所以使用1.4后的版本较为容易
 

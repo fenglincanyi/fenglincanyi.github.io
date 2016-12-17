@@ -2,6 +2,7 @@
 title: Git学习笔记（一）
 date: 2016-02-19 15:28
 categories: 工具
+tags: Git
 ---
 ### 一、Git特点
 #### 1. 直接记录快照，而非差异比较

@@ -2,6 +2,7 @@
 title: RadioGroup、RadioButton动态创建并定制icon显示
 date: 2016-10-25 10:24
 categories: Android
+tags: Radiobutton
 ---
 由于原生的Radiobutton不能满足业务需求，所以需要自己定制icon图片，和默认选中某一项。需要自己代码动态实现。废话不多说，上代码：
 ```

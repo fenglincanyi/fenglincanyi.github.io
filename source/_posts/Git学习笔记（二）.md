@@ -2,6 +2,7 @@
 title: Git学习笔记（二）
 date: 2016-02-19 16:06
 categories: 工具
+tags: Git
 ---
 ### 常用命令：
 > 1、初始

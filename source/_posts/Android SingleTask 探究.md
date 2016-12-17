@@ -1,7 +1,8 @@
 ---
 title: Android SingleTask 探究
 date: 2016-05-16 11:12
-categories: Android
+categories: Android 
+tags: SingleTask
 ---
 > Android 4种启动模式来说，用法说明此处不再提及主要介绍SingleTop，SingleTask相关的问题
 

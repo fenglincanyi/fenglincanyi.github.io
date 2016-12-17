@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://fenglincanyi.github.io/"/>
-  <updated>2016-12-15T05:34:30.915Z</updated>
+  <updated>2016-12-17T14:27:19.680Z</updated>
   <id>https://fenglincanyi.github.io/</id>
   
   <author>
@@ -16,11 +16,181 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>instant run 相关分析</title>
+    <link href="https://fenglincanyi.github.io/2016/12/17/instant%20run%20%E7%9B%B8%E5%85%B3%E5%88%86%E6%9E%90/"/>
+    <id>https://fenglincanyi.github.io/2016/12/17/instant run 相关分析/</id>
+    <published>2016-12-17T05:00:00.000Z</published>
+    <updated>2016-12-17T14:27:19.680Z</updated>
+    
+    <content type="html"><![CDATA[<p>Android Studio 2.0 引入了即时编译功能：instant run，一定程度上进行了增量编译、增量更新代码，节省了开发耗时（喝咖啡的时间）。<br>下面具体分析下instant run相关工作流程和相关的源码</p>
+<h3 id="instant-run-使用"><a href="#instant-run-使用" class="headerlink" title="instant run 使用"></a>instant run 使用</h3><h4 id="版本要求"><a href="#版本要求" class="headerlink" title="版本要求"></a>版本要求</h4><p>Gradle 2.0 以上<br>build.gradle：minSdkVersion 15 以上（设置21以上可获得最佳性能）<br>Android 5.0以上的手机或模拟器</p>
+<h4 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h4><p>首先确认开启instant run，在settings中搜索instant run，可看到相关设置，默认instant run功能是开启的<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xr1vo.com1.z0.glb.clouddn.com/Image.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<p>当第一次点击 run 按钮 <figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xr1vo.com1.z0.glb.clouddn.com/Image1.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>，进行第一次编译打包。<br>apk成功安装之后，再观察工具栏，run按钮发生了变化：<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xr1vo.com1.z0.glb.clouddn.com/Image2.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<p>然后我们随意修改一部分代码，点击运行，可看到手机屏幕上弹出toast，提示代码已经改变了，可看到最新的运行效果。使用起来也比较方便、快捷。</p>
+<h4 id="更新方式"><a href="#更新方式" class="headerlink" title="更新方式"></a>更新方式</h4><ul>
+<li>热交换 hot swap<br>更改现有方法的实现代码；不会重新初始化正在运行的app，不要做重启app，activity的操作，即可看到最新代码运行结果</li>
+<li>温交换 warm swap<br>更改或移除当前的资源；activity会自动重启（小闪烁），即可看到最新运行结果</li>
+<li>冷交换 cold swap<br>对代码有结构性的更改（字段更改、类继承关系、清单文件更改）；此时会重启app</li>
+</ul>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xr1vo.com1.z0.glb.clouddn.com/1-Y-gIucAGyqQscMdXuHaSiA.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>参考：<br><a href="https://developer.android.com/studio/run/index.html?hl=zh-cn" target="_blank" rel="external">https://developer.android.com/studio/run/index.html?hl=zh-cn</a><br><a href="https://medium.com/google-developers/instant-run-how-does-it-work-294a1633367f#.go1u6yq2o" target="_blank" rel="external">https://medium.com/google-developers/instant-run-how-does-it-work-294a1633367f#.go1u6yq2o</a></p>
+<h3 id="过程分析"><a href="#过程分析" class="headerlink" title="过程分析"></a>过程分析</h3><h4 id="第一次打包"><a href="#第一次打包" class="headerlink" title="第一次打包"></a>第一次打包</h4><p>instant run 第一次编译打包流程，会执行下面的工作<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xr1vo.com1.z0.glb.clouddn.com/1-U2tXGUWaeDU7L3u9Z_U0fw.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<p>先来看看生成的apk：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xr1vo.com1.z0.glb.clouddn.com/instant%20run%20apk.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<p> 多出了 instant-run.zip文件，那它里面是什么内容呢？<br> <figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xr1vo.com1.z0.glb.clouddn.com/instant%20run%20zip%20class.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure><br> instant-run.zip里的dex文件，是我们真正的业务代码</p>
+<p> 那instant run 相关的类呢，反而跑到了外层的classes.dex和classes2.dex中。</p>
+<p><img src="http://7xr1vo.com1.z0.glb.clouddn.com/%E6%97%A0%E6%A0%87%E9%A2%98.png" alt=""><br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xr1vo.com1.z0.glb.clouddn.com/instant%20run%20%E7%9B%B8%E5%85%B3jar.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<p>实际上这2个dex中的内容是instant-run.jar和instant-run-bootstrap.jar 的内容（自己可反编译出来看看）：</p>
+<p><strong>就是说，第一次运行打包时候，是将 instant-run.jar 和 instant-run-bootstrap.jar 2个jar 变成 2个dex文件，真正的业务代码编译后整合到别的dex中，然后放在了instant-run.zip中</strong></p>
+<blockquote>
+<p>classes.dex  -&gt;   instant-run.jar &nbsp;&nbsp;&nbsp;&nbsp; instant run 相关api类<br>classes2.dex  -&gt;  instant-run-bootstrap.jar   &nbsp;&nbsp;  AppInfo.class</p>
+</blockquote>
+<p>再来看看清单文件，application 被替换成 BootstrapApplication：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xr1vo.com1.z0.glb.clouddn.com/instant%20run%20application.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<h4 id="instant-run-代码分析"><a href="#instant-run-代码分析" class="headerlink" title="instant run 代码分析"></a>instant run 代码分析</h4><h5 id="attachBaseContext-中执行的三个步骤"><a href="#attachBaseContext-中执行的三个步骤" class="headerlink" title="attachBaseContext() 中执行的三个步骤"></a>attachBaseContext() 中执行的三个步骤</h5><p>首先来观察下该类下的 attachBaseContext()方法，其中做了3个比较重要的事情：<br>createResources() 、setupClassLoaders()、createRealApplication()</p>
+<ul>
+<li>createResources()<br>主要是判断资源resource.ap<em>是否改变，然后保存resource.ap</em>的路径到externalResourcePath中</li>
+<li>setupClassLoaders()<br>设置instant run 相关的classLoader，及其继承关系（PathClassLoader -&gt; BootClassLoader   变为  PathClassLoader -&gt; IncrementalClassLoader -&gt; BootClassLoader）</li>
+<li>createRealApplication()<br>进行application 的相关替换，当前app的application变为realApplication；<br>反射的方式拿到 真实的 Application，通过AppInfo相关字段进行获取</li>
+</ul>
+<p>下面我们分析一下setClassLoader详细过程：<br>主要经历了以下的方法：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xr1vo.com1.z0.glb.clouddn.com/instant%20run%20%E8%AE%BE%E7%BD%AE%E7%88%B6classloader%E8%BF%87%E7%A8%8B.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure><br>这几个ClassLoader类定义的逻辑关系如下：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xr1vo.com1.z0.glb.clouddn.com/instant-run%E7%9B%B8%E5%85%B3classLoader%E5%AE%9A%E4%B9%89.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure><br>findClass过程依次委托给 父ClassLoader，最后是让PathClassLoader去加载类</p>
+<h5 id="onCreate-过程"><a href="#onCreate-过程" class="headerlink" title="onCreate() 过程"></a>onCreate() 过程</h5><ul>
+<li>通过MonkeyPatcher 替换当前的 application 为 realApplication<br>包含ActivityThread中相应的Application 都替换成 realApplication</li>
+<li>替换相应的资源resource<br>替换当前app的assetManager，资源相关的变量等等（期间都是用反射的方式）</li>
+<li>Server 创建，建立Socket连接，开启连接</li>
+</ul>
+<h5 id="Server-部署工作"><a href="#Server-部署工作" class="headerlink" title="Server 部署工作"></a>Server 部署工作</h5><p>在Server 建立起连接后，三种部署工作（hot swap、warm swap、cold swap），都是通过Server进行操作。具体在那种情形下进行哪种交换，源码中有具体实现：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">private int handlePatches(List&lt;ApplicationPatch&gt; paramList, boolean paramBoolean, int paramInt) &#123;</div><div class="line">    if (paramBoolean) &#123;</div><div class="line">        FileManager.startUpdate();</div><div class="line">    &#125;</div><div class="line">    Iterator localIterator = paramList.iterator();</div><div class="line">    while (localIterator.hasNext()) &#123;</div><div class="line">        Object localObject = (ApplicationPatch) localIterator.next();</div><div class="line">        String str = ((ApplicationPatch) localObject).getPath();</div><div class="line">        if (str.endsWith(&quot;.dex&quot;)) &#123;// 冷交换</div><div class="line">            handleColdSwapPatch((ApplicationPatch) localObject);</div><div class="line">            int j = 0;</div><div class="line">            localObject = paramList.iterator();</div><div class="line">            do &#123;</div><div class="line">                i = j;</div><div class="line">                if (!((Iterator) localObject).hasNext()) &#123;</div><div class="line">                    break;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            while (!((ApplicationPatch) ((Iterator) localObject).next()).getPath().equals(&quot;classes.dex.3&quot;));</div><div class="line">            int i = 1;</div><div class="line">            if (i == 0) &#123;</div><div class="line">                paramInt = 3;</div><div class="line">            &#125;</div><div class="line">        &#125; else if (str.equals(&quot;classes.dex.3&quot;)) &#123;// 热交换</div><div class="line">            paramInt = handleHotSwapPatch(paramInt, (ApplicationPatch) localObject);</div><div class="line">        &#125; else if (isResourcePath(str)) &#123;// 资源：温交换</div><div class="line">            paramInt = handleResourcePatch(paramInt, (ApplicationPatch) localObject, str);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    if (paramBoolean) &#123;</div><div class="line">        FileManager.finishUpdate(true);</div><div class="line">    &#125;</div><div class="line">    return paramInt;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="代码热更新流程"><a href="#代码热更新流程" class="headerlink" title="代码热更新流程"></a>代码热更新流程</h3><p>在我们增加一行代码后，点击运行，我们来观察生成的类的变化<br>在 build 目录下，transforms 中有生成相关的代码<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xr1vo.com1.z0.glb.clouddn.com/instant-run%E6%9C%89%E4%BB%A3%E7%A0%81%E5%8F%98%E6%9B%B4%E6%97%B6%E6%96%B0%E7%94%9F%E6%88%90.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<h4 id="几个重要类"><a href="#几个重要类" class="headerlink" title="几个重要类"></a>几个重要类</h4><p>我们来具体看看demo 中代码更改：MainActivity$override类内容的确是最新的代码内容<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xr1vo.com1.z0.glb.clouddn.com/instant%20run%20%E5%A2%9E%E5%8A%A0%E7%9A%84%E4%BB%A3%E7%A0%81override%E7%B1%BB.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<p>AppPatchesLoaderImpl类记录了更改的类，存储在一个数组中，供类加载时候，替换成最新的类的代码内容<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xr1vo.com1.z0.glb.clouddn.com/instant%20run%20%E5%8F%98%E5%8C%96%E7%9A%84%E7%B1%BB%E6%95%B0%E7%BB%84%E5%AD%98%E5%82%A8.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xr1vo.com1.z0.glb.clouddn.com/instant-run%20patch%E7%9B%B8%E5%85%B3.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>在此处，我反编译了slice_0-classes.dex：<br> <figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xr1vo.com1.z0.glb.clouddn.com/instant%20run%E7%AC%AC%E4%B8%80%E6%AC%A1%E6%89%93%E5%8C%85%E7%BB%93%E6%9E%9C.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<p>第一次运行打包生成的 “业务代码” 中，生成的类中的方法里都增加了 IncrementalChange 相关的判断，如果 $change 不为空，说明我们有更改的代码，有更改的代码，则执行最新更改的代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">public Object access$dispatch(String paramString, Object... paramVarArgs) &#123;</div><div class="line">        switch (paramString.hashCode()) &#123;</div><div class="line">            case -833446436:</div><div class="line">                initView((MainActivity) paramVarArgs[0]);</div><div class="line">                return null;</div><div class="line">            case -641568046:</div><div class="line">                onCreate((MainActivity) paramVarArgs[0], (Bundle) paramVarArgs[1]);</div><div class="line">                return null;</div><div class="line">            case -399296056:</div><div class="line">                return init$args((MainActivity[]) paramVarArgs[0], (Object[]) paramVarArgs[1]);</div><div class="line">            case 781336394:</div><div class="line">                init$body((MainActivity) paramVarArgs[0], (Object[]) paramVarArgs[1]);</div><div class="line">                return null;</div><div class="line">            case 2118315029:</div><div class="line">                testClick((MainActivity) paramVarArgs[0], (View) paramVarArgs[1]);</div><div class="line">                return null;</div><div class="line">        &#125;</div><div class="line">        throw new InstantReloadException(String.format(&quot;String switch could not find &apos;%s&apos; with hashcode %s in %s&quot;, new Object[]&#123;paramString, Integer.valueOf(paramString.hashCode()), &quot;com/geng/myapplication/MainActivity&quot;&#125;));</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>最后根据不同的类型，进行相关的重启（activity 或者 app），主要由 Restarter负责，同时也提供了相关的重启方法：</p>
+<ul>
+<li>restartActivity()</li>
+<li>restartApp()</li>
+</ul>
+<p><br><br>至此，整个 instant run 的分析告一段落，需要慢慢消化一下。。。</p>
+<p><br><br>源码及工具资源：<br><a href="https://github.com/fenglincanyi/Study/tree/master/instant%20run%E7%9B%B8%E5%85%B3" target="_blank" rel="external">https://github.com/fenglincanyi/Study/tree/master/instant%20run%E7%9B%B8%E5%85%B3</a><br>参考：<br><a href="https://github.com/nuptboyzhb/AndroidInstantRun" target="_blank" rel="external">https://github.com/nuptboyzhb/AndroidInstantRun</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Android Studio 2.0 引入了即时编译功能：instant run，一定程度上进行了增量编译、增量更新代码，节省了开发耗时（喝咖啡的时间）。&lt;br&gt;下面具体分析下instant run相关工作流程和相关的源码&lt;/p&gt;
+&lt;h3 id=&quot;instant-run-使
+    
+    </summary>
+    
+      <category term="Android" scheme="https://fenglincanyi.github.io/categories/Android/"/>
+    
+    
+      <category term="instant run" scheme="https://fenglincanyi.github.io/tags/instant-run/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Android 与 js 交互中url传参中也有url的问题</title>
     <link href="https://fenglincanyi.github.io/2016/12/15/Android%20%E4%B8%8E%20js%20%E4%BA%A4%E4%BA%92%E4%B8%ADurl%E4%BC%A0%E5%8F%82%E4%B8%AD%E4%B9%9F%E6%9C%89url%E7%9A%84%E9%97%AE%E9%A2%98/"/>
     <id>https://fenglincanyi.github.io/2016/12/15/Android 与 js 交互中url传参中也有url的问题/</id>
     <published>2016-12-15T05:29:00.000Z</published>
-    <updated>2016-12-15T05:34:30.915Z</updated>
+    <updated>2016-12-17T14:25:27.229Z</updated>
     
     <content type="html"><![CDATA[<h3 id="问题场景"><a href="#问题场景" class="headerlink" title="问题场景"></a>问题场景</h3><p>get请求链接中： 传参中含有url</p>
 <p>“chinahr://customer/h5page?” + LEOGAO_PAGE+”=”+finishpage+”&amp;”+LEOGAO_ACTION+”=”+finishaction + “&amp;”+INTENT_URL+”=” + <b><font color="red">url</font></b></p>
@@ -43,125 +213,7 @@
       <category term="Hybird" scheme="https://fenglincanyi.github.io/categories/Hybird/"/>
     
     
-  </entry>
-  
-  <entry>
-    <title>Android apk安装过程实例分析</title>
-    <link href="https://fenglincanyi.github.io/2016/11/17/Android%20apk%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B%E5%AE%9E%E4%BE%8B%E5%88%86%E6%9E%90/"/>
-    <id>https://fenglincanyi.github.io/2016/11/17/Android apk安装过程实例分析/</id>
-    <published>2016-11-17T13:08:00.000Z</published>
-    <updated>2016-12-15T11:28:26.475Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote>
-<p>注：本文不对apk安装之前，系统所做的复杂工作做分析，只针对普通的apk安装过程进行简单的过程理解</p>
-</blockquote>
-<p>一般情况下，在apk安装时，系统一般会显示一个安装界面，获取用户同意之后进行安装，并且有一些apk预处理相关的操作，紧接着，会启动app界面，进入app。<br>在这一过程中，不同版本的Android系统在安装时，对包的处理是不太一样的，以下分Dalivk、ART两种虚拟机进行分析。这里主要采用原生模拟器，进行分析。</p>
-<h3 id="一、-Dalvik（JIT：just-in-time-即时编译）"><a href="#一、-Dalvik（JIT：just-in-time-即时编译）" class="headerlink" title="一、 Dalvik（JIT：just in time  即时编译）"></a>一、 Dalvik（JIT：just in time  即时编译）</h3><ul>
-<li>过程分析：<ul>
-<li>点击apk包后或apk下载后，安装之前，系统会启动安装界面PackageInstallerActivity，让用户进行授权选择，用户同意后，会调用ApplicationPackageManager 进行相关操作。</li>
-<li>调用ApplicationPackageManager，通过IPC来调用 PackageManagerService 中的 installPackage 方法，在这个方法中，又去调用 installPackageAsUser 方法，此时，要进行权限相关校验，完毕之后，会通过 handler 发送消息（类型：INIT_COPY，MCS_BOUND）</li>
-<li>然后 startCopy —&gt; handleStartCopy 依次调用，这里，对安装位置、存储空间进行处理，之后会 拷贝apk 相关文件放在相应的目录下。这些文件主要包括：<ul>
-<li>apk文件</li>
-<li>jar、so文件</li>
-<li>db文件（若有的话）</li>
-</ul>
-</li>
-<li>拷贝完成之后，进行预处理，对于Dalvik来说，dexopt要进行dex文件的优化，生成odex文件，在app运行时，能加快其启动速度。</li>
-<li>另外，对于资源处理，是 AssetMananger 来进行资源的解析、加载。</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li>实例考察：<ul>
-<li>安装时logcat日志：拷贝工作，然后进行dex优化，dexopt执行操作</li>
-</ul>
-</li>
-</ul>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://7xr1vo.com1.z0.glb.clouddn.com/apk%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B.png" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure>
-<p>   拷贝后，目录如下：</p>
-<p><img src="http://7xr1vo.com1.z0.glb.clouddn.com/copy%20lib%E7%BB%93%E6%9E%9C.png" alt=""></p>
-<p> dex位置：</p>
-<p><img src="http://7xr1vo.com1.z0.glb.clouddn.com/dex%E4%BD%8D%E7%BD%AE.png" alt=""></p>
-<p>如果把此位置的 dex 删除后，且杀掉已经运行的进程后，再次点击app启动后奔溃，如图：</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://7xr1vo.com1.z0.glb.clouddn.com/%E5%88%A0%E6%8E%89dalvik-cache%E7%9B%AE%E5%BD%95%E4%B8%8B%E7%9A%84dex%E5%90%8E%EF%BC%8C%E4%B8%94%E6%9D%80%E6%8E%89%E5%B7%B2%E7%BB%8F%E8%BF%90%E8%A1%8C%E7%9A%84%E5%BA%94%E7%94%A8%E8%BF%9B%E7%A8%8B%EF%BC%8C%E5%86%8D%E6%AC%A1%E5%90%AF%E5%8A%A8.png" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure>
-<p>由此可知，要启动app时，需要加载 /data/dalik-cache 目录下的dex文件</p>
-<p>相关参考文献：<br><a href="http://www.woaitqs.cc/android/2016/07/28/android-plugin-get-apk-info" target="_blank" rel="external">http://www.woaitqs.cc/android/2016/07/28/android-plugin-get-apk-info</a><br><a href="http://blog.csdn.net/luoshengyang/article/details/8852432" target="_blank" rel="external">http://blog.csdn.net/luoshengyang/article/details/8852432</a></p>
-<h3 id="二、ART（AOT：Ahead-of-time-预编译）"><a href="#二、ART（AOT：Ahead-of-time-预编译）" class="headerlink" title="二、ART（AOT：Ahead of time  预编译）"></a>二、ART（AOT：Ahead of time  预编译）</h3><p>Android 4.4之后，对于Android虚拟机又继续做了优化，art 代替了 Dalvik，对于dex文件，优化工作做了改变。</p>
-<ul>
-<li><p>大致的处理过程：</p>
-</li>
-<li><p>编译时，通过调用 dex2oat 对dex 进行预编译，这个编译器参考了LLVM框架，默认情况下，是采用了quick模式，但在6.0之后，LLVM被彻底去除了。关于LLVM细节，自行Google。</p>
-</li>
-<li>编译后生成的文件 .oat 文件，实际上是Android 私有的ELF文件。在Linux系统中，ELF文件主要分为3类：目标文件（ .o）、共享文件（ .so）、可执行文件。此处Android的 .oat文件属于可执行文件。<br>  oat 文件含有ELF文件正常的结构形态，里面既包含有dex 文件，也包含编译好的本地指令代码。被包含的dex文件也可以是多个。</li>
-</ul>
-<ul>
-<li>实例考察<ul>
-<li>ART 安装apk时，日志记录：</li>
-</ul>
-</li>
-</ul>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://7xr1vo.com1.z0.glb.clouddn.com/art%E5%AE%89%E8%A3%85apk%E7%9A%84log.png" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure>
-<pre><code>可以看到，有apk的拷贝，有dex2oat的dex优化过程。再追一下相关的目录：
-</code></pre><p> <img src="http://7xr1vo.com1.z0.glb.clouddn.com/local%E7%9B%AE%E5%BD%95%E4%B8%8B.png" alt=""></p>
-<p>  <img src="http://7xr1vo.com1.z0.glb.clouddn.com/dalvik-cache%E7%9B%AE%E5%BD%95%E4%B8%8B.png" alt=""></p>
-<p>里面有一部分是系统框架层的相关文件。</p>
-<p>安装后的目录结构也有变化：</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://7xr1vo.com1.z0.glb.clouddn.com/data_app%E7%9B%AE%E5%BD%95%E4%B8%8B.png" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure>
-<p>生成相应的平台下的文件，此处我使用的是x86的模拟器</p>
-<p>Android 在编译时用到的 dexopt、dex2oat、aapt 都在 /system/bin目录下：</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://7xr1vo.com1.z0.glb.clouddn.com/4.4%E4%B8%8Bsystem_bin%E4%B8%8B%E7%9A%84aapt.png.png" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure>
-<p>当时对于 multidex 的包也进行了目录查找，如下，留下后续研究做参考。</p>
-<figure class="image-bubble">
-                <div class="img-lightbox">
-                    <div class="overlay"></div>
-                    <img src="http://7xr1vo.com1.z0.glb.clouddn.com/multidex.png" alt="" title="">
-                </div>
-                <div class="image-caption"></div>
-            </figure>
-<p>相关参考文献：<br><a href="https://mssun.me/blog/android-art-runtime-2-dex2oat.html" target="_blank" rel="external">https://mssun.me/blog/android-art-runtime-2-dex2oat.html</a><br><a href="http://blog.csdn.net/luoshengyang/article/details/39307813" target="_blank" rel="external">http://blog.csdn.net/luoshengyang/article/details/39307813</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;注：本文不对apk安装之前，系统所做的复杂工作做分析，只针对普通的apk安装过程进行简单的过程理解&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;一般情况下，在apk安装时，系统一般会显示一个安装界面，获取用户同意之后进行安装，并且有一些apk预处理相
-    
-    </summary>
-    
-      <category term="Android" scheme="https://fenglincanyi.github.io/categories/Android/"/>
-    
+      <category term="JS" scheme="https://fenglincanyi.github.io/tags/JS/"/>
     
   </entry>
   
@@ -170,7 +222,7 @@
     <link href="https://fenglincanyi.github.io/2016/11/17/Android%20%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%88%9D%E6%8E%A2/"/>
     <id>https://fenglincanyi.github.io/2016/11/17/Android 类加载初探/</id>
     <published>2016-11-17T13:08:00.000Z</published>
-    <updated>2016-12-15T10:59:35.409Z</updated>
+    <updated>2016-12-17T14:23:04.669Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
 <p>源码路径(此版本：Android 5.0)：<br>android-5.0.0_r7\libcore\dalvik\src\main\java\dalvik\system</p>
@@ -284,6 +336,132 @@
       <category term="Android" scheme="https://fenglincanyi.github.io/categories/Android/"/>
     
     
+      <category term="ClassLoader" scheme="https://fenglincanyi.github.io/tags/ClassLoader/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Android apk安装过程实例分析</title>
+    <link href="https://fenglincanyi.github.io/2016/11/17/Android%20apk%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B%E5%AE%9E%E4%BE%8B%E5%88%86%E6%9E%90/"/>
+    <id>https://fenglincanyi.github.io/2016/11/17/Android apk安装过程实例分析/</id>
+    <published>2016-11-17T13:08:00.000Z</published>
+    <updated>2016-12-17T15:10:00.171Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote>
+<p>注：本文不对apk安装之前，系统所做的复杂工作做分析，只针对普通的apk安装过程进行简单的过程理解</p>
+</blockquote>
+<p>一般情况下，在apk安装时，系统一般会显示一个安装界面，获取用户同意之后进行安装，并且有一些apk预处理相关的操作，紧接着，会启动app界面，进入app。<br>在这一过程中，不同版本的Android系统在安装时，对包的处理是不太一样的，以下分Dalivk、ART两种虚拟机进行分析。这里主要采用原生模拟器，进行分析。</p>
+<h3 id="一、-Dalvik（JIT：just-in-time-即时编译）"><a href="#一、-Dalvik（JIT：just-in-time-即时编译）" class="headerlink" title="一、 Dalvik（JIT：just in time  即时编译）"></a>一、 Dalvik（JIT：just in time  即时编译）</h3><ul>
+<li>过程分析：<ul>
+<li>点击apk包后或apk下载后，安装之前，系统会启动安装界面PackageInstallerActivity，让用户进行授权选择，用户同意后，会调用ApplicationPackageManager 进行相关操作。</li>
+<li>调用ApplicationPackageManager，通过IPC来调用 PackageManagerService 中的 installPackage 方法，在这个方法中，又去调用 installPackageAsUser 方法，此时，要进行权限相关校验，完毕之后，会通过 handler 发送消息（类型：INIT_COPY，MCS_BOUND）</li>
+<li>然后 startCopy —&gt; handleStartCopy 依次调用，这里，对安装位置、存储空间进行处理，之后会 拷贝apk 相关文件放在相应的目录下。这些文件主要包括：<ul>
+<li>apk文件</li>
+<li>jar、so文件</li>
+<li>db文件（若有的话）</li>
+</ul>
+</li>
+<li>拷贝完成之后，进行预处理，对于Dalvik来说，dexopt要进行dex文件的优化，生成odex文件，在app运行时，能加快其启动速度。</li>
+<li>另外，对于资源处理，是 AssetMananger 来进行资源的解析、加载。</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>实例考察：<ul>
+<li>安装时logcat日志：拷贝工作，然后进行dex优化，dexopt执行操作</li>
+</ul>
+</li>
+</ul>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xr1vo.com1.z0.glb.clouddn.com/apk%E5%AE%89%E8%A3%85%E8%BF%87%E7%A8%8B.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>   拷贝后，目录如下：</p>
+<p><img src="http://7xr1vo.com1.z0.glb.clouddn.com/copy%20lib%E7%BB%93%E6%9E%9C.png" alt=""></p>
+<p> dex位置：</p>
+<p><img src="http://7xr1vo.com1.z0.glb.clouddn.com/dex%E4%BD%8D%E7%BD%AE.png" alt=""></p>
+<p>如果把此位置的 dex 删除后，且杀掉已经运行的进程后，再次点击app启动后奔溃，如图：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xr1vo.com1.z0.glb.clouddn.com/%E5%88%A0%E6%8E%89dalvik-cache%E7%9B%AE%E5%BD%95%E4%B8%8B%E7%9A%84dex%E5%90%8E%EF%BC%8C%E4%B8%94%E6%9D%80%E6%8E%89%E5%B7%B2%E7%BB%8F%E8%BF%90%E8%A1%8C%E7%9A%84%E5%BA%94%E7%94%A8%E8%BF%9B%E7%A8%8B%EF%BC%8C%E5%86%8D%E6%AC%A1%E5%90%AF%E5%8A%A8.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>由此可知，要启动app时，需要加载 /data/dalik-cache 目录下的dex文件</p>
+<p>相关参考文献：<br><a href="http://www.woaitqs.cc/android/2016/07/28/android-plugin-get-apk-info" target="_blank" rel="external">http://www.woaitqs.cc/android/2016/07/28/android-plugin-get-apk-info</a><br><a href="http://blog.csdn.net/luoshengyang/article/details/8852432" target="_blank" rel="external">http://blog.csdn.net/luoshengyang/article/details/8852432</a></p>
+<h3 id="二、ART（AOT：Ahead-of-time-预编译）"><a href="#二、ART（AOT：Ahead-of-time-预编译）" class="headerlink" title="二、ART（AOT：Ahead of time  预编译）"></a>二、ART（AOT：Ahead of time  预编译）</h3><p>Android 4.4之后，对于Android虚拟机又继续做了优化，art 代替了 Dalvik，对于dex文件，优化工作做了改变。</p>
+<ul>
+<li><p>大致的处理过程：</p>
+</li>
+<li><p>编译时，通过调用 dex2oat 对dex 进行预编译，这个编译器参考了LLVM框架，默认情况下，是采用了quick模式，但在6.0之后，LLVM被彻底去除了。关于LLVM细节，自行Google。</p>
+</li>
+<li>编译后生成的文件 .oat 文件，实际上是Android 私有的ELF文件。在Linux系统中，ELF文件主要分为3类：目标文件（ .o）、共享文件（ .so）、可执行文件。此处Android的 .oat文件属于可执行文件。<br>  oat 文件含有ELF文件正常的结构形态，里面既包含有dex 文件，也包含编译好的本地指令代码。被包含的dex文件也可以是多个。</li>
+</ul>
+<ul>
+<li>实例考察<ul>
+<li>ART 安装apk时，日志记录：</li>
+</ul>
+</li>
+</ul>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xr1vo.com1.z0.glb.clouddn.com/art%E5%AE%89%E8%A3%85apk%E7%9A%84log.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<pre><code>可以看到，有apk的拷贝，有dex2oat的dex优化过程。再追一下相关的目录：
+</code></pre><p> <img src="http://7xr1vo.com1.z0.glb.clouddn.com/local%E7%9B%AE%E5%BD%95%E4%B8%8B.png" alt=""></p>
+<p>  <img src="http://7xr1vo.com1.z0.glb.clouddn.com/dalvik-cache%E7%9B%AE%E5%BD%95%E4%B8%8B.png" alt=""></p>
+<p>里面有一部分是系统框架层的相关文件。</p>
+<p>安装后的目录结构也有变化：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xr1vo.com1.z0.glb.clouddn.com/data_app%E7%9B%AE%E5%BD%95%E4%B8%8B.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>生成相应的平台下的文件，此处我使用的是x86的模拟器</p>
+<p>Android 在编译时用到的 dexopt、dex2oat、aapt 都在 /system/bin目录下：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xr1vo.com1.z0.glb.clouddn.com/4.4%E4%B8%8Bsystem_bin%E4%B8%8B%E7%9A%84aapt.png.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>当时对于 multidex 的包也进行了目录查找，如下，留下后续研究做参考。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="http://7xr1vo.com1.z0.glb.clouddn.com/multidex.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>相关参考文献：<br><a href="https://mssun.me/blog/android-art-runtime-2-dex2oat.html" target="_blank" rel="external">https://mssun.me/blog/android-art-runtime-2-dex2oat.html</a><br><a href="http://blog.csdn.net/luoshengyang/article/details/39307813" target="_blank" rel="external">http://blog.csdn.net/luoshengyang/article/details/39307813</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;注：本文不对apk安装之前，系统所做的复杂工作做分析，只针对普通的apk安装过程进行简单的过程理解&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;一般情况下，在apk安装时，系统一般会显示一个安装界面，获取用户同意之后进行安装，并且有一些apk预处理相
+    
+    </summary>
+    
+      <category term="Android" scheme="https://fenglincanyi.github.io/categories/Android/"/>
+    
+    
+      <category term="Dalvik" scheme="https://fenglincanyi.github.io/tags/Dalvik/"/>
+    
+      <category term="ART" scheme="https://fenglincanyi.github.io/tags/ART/"/>
+    
   </entry>
   
   <entry>
@@ -291,7 +469,7 @@
     <link href="https://fenglincanyi.github.io/2016/10/25/RadioGroup%E3%80%81RadioButton%E5%8A%A8%E6%80%81%E5%88%9B%E5%BB%BA%E5%B9%B6%E5%AE%9A%E5%88%B6icon%E6%98%BE%E7%A4%BA/"/>
     <id>https://fenglincanyi.github.io/2016/10/25/RadioGroup、RadioButton动态创建并定制icon显示/</id>
     <published>2016-10-25T02:24:00.000Z</published>
-    <updated>2016-12-13T04:29:15.203Z</updated>
+    <updated>2016-12-17T14:23:34.871Z</updated>
     
     <content type="html"><![CDATA[<p>由于原生的Radiobutton不能满足业务需求，所以需要自己定制icon图片，和默认选中某一项。需要自己代码动态实现。废话不多说，上代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line">private void setViewData() &#123;</div><div class="line">        radioGroup.removeAllViews();</div><div class="line"></div><div class="line">        int margin = ScreenUtil.dip2px(this, 14.0f);</div><div class="line">        int marginLeft = ScreenUtil.dip2px(this, 20.0f);</div><div class="line">        int paddingLeft = ScreenUtil.dip2px(this, 3.0f);</div><div class="line"></div><div class="line">        RadioGroup.LayoutParams layoutParams = </div><div class="line">            new RadioGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);</div><div class="line">        RadioGroup.LayoutParams layoutParams1 = </div><div class="line">            new RadioGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 1);</div><div class="line">        layoutParams.setMargins(marginLeft, margin, margin, margin);</div><div class="line">        layoutParams1.setMargins(margin, 0, margin, 0);</div><div class="line"></div><div class="line">        int defaultId = -1;</div><div class="line">        for (int i = 0; i &lt; messageList.size(); i++) &#123;</div><div class="line">            RadioButton rb = new RadioButton(this);</div><div class="line">            rb.setMaxLines(2);</div><div class="line">            rb.setPadding(paddingLeft, 0, 0, 0);</div><div class="line">            rb.setText(messageList.get(i).relayMessage);</div><div class="line">            rb.setButtonDrawable(android.R.color.transparent);</div><div class="line">            rb.setTextColor(Color.parseColor(&quot;#555555&quot;));</div><div class="line">            rb.setButtonDrawable(null);// 去掉左边默认图标</div><div class="line">            rb.setCompoundDrawablePadding(margin);</div><div class="line">            rb.setEllipsize(TextUtils.TruncateAt.END);// 结尾处打点显示</div><div class="line">            Drawable drawable = getResources().getDrawable(R.drawable.relay_message_radio_selector);</div><div class="line">            drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());</div><div class="line">            rb.setCompoundDrawables(drawable, null, null, null);</div><div class="line">            // 手动生成id</div><div class="line">            int generateId = generateViewId();</div><div class="line">            messages.put(generateId, messageList.get(i).relayMessage);</div><div class="line">            rb.setId(generateId);</div><div class="line">            if (i == 0) &#123;</div><div class="line">                defaultId = generateId;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            TextView view = new TextView(this);</div><div class="line">            view.setBackgroundColor(Color.parseColor(&quot;#dddddd&quot;));</div><div class="line"></div><div class="line">            radioGroup.addView(rb, layoutParams);</div><div class="line">            radioGroup.addView(view, layoutParams1);</div><div class="line">        &#125;</div><div class="line">        // 此处：默认选中第一个</div><div class="line">        radioGroup.check(defaultId);</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
 <p>R.drawable.relay_message_radio_selector 代码如下：</p>
@@ -314,6 +492,8 @@
       <category term="Android" scheme="https://fenglincanyi.github.io/categories/Android/"/>
     
     
+      <category term="Radiobutton" scheme="https://fenglincanyi.github.io/tags/Radiobutton/"/>
+    
   </entry>
   
   <entry>
@@ -321,7 +501,7 @@
     <link href="https://fenglincanyi.github.io/2016/10/06/RxJava%20%E5%88%9D%E6%8E%A2%EF%BC%88%E4%B8%80%EF%BC%89/"/>
     <id>https://fenglincanyi.github.io/2016/10/06/RxJava 初探（一）/</id>
     <published>2016-10-05T16:45:00.000Z</published>
-    <updated>2016-12-08T15:48:08.904Z</updated>
+    <updated>2016-12-17T14:27:11.748Z</updated>
     
     <content type="html"><![CDATA[<h3 id="一、几个基本概念"><a href="#一、几个基本概念" class="headerlink" title="一、几个基本概念"></a>一、几个基本概念</h3><ul>
 <li>由来<br>  Rx(Reactive Extensions)，最初是LINQ的一个扩展，后由微软团队开发，在2012年11月开源。ReactiveX.io给的定义是，Rx是一个使用可观察数据流进行异步编程的编程接口，ReactiveX结合了观察者模式、迭代器模式和函数式编程的精华。</li>
@@ -378,6 +558,8 @@
       <category term="RxJava" scheme="https://fenglincanyi.github.io/categories/RxJava/"/>
     
     
+      <category term="RxJava" scheme="https://fenglincanyi.github.io/tags/RxJava/"/>
+    
   </entry>
   
   <entry>
@@ -385,7 +567,7 @@
     <link href="https://fenglincanyi.github.io/2016/09/09/Gradle%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE/"/>
     <id>https://fenglincanyi.github.io/2016/09/09/Gradle相关配置/</id>
     <published>2016-09-09T02:36:00.000Z</published>
-    <updated>2016-12-08T15:44:40.909Z</updated>
+    <updated>2016-12-17T14:17:30.720Z</updated>
     
     <content type="html"><![CDATA[<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div></pre></td><td class="code"><pre><div class="line">android &#123;</div><div class="line">    compileSdkVersion 24</div><div class="line">    buildToolsVersion &quot;24.0.0&quot;</div><div class="line"></div><div class="line">    defaultConfig &#123;</div><div class="line">        applicationId &quot;com.geng.hello&quot;</div><div class="line">        minSdkVersion 19</div><div class="line">        targetSdkVersion 24</div><div class="line">        versionCode 1</div><div class="line">        versionName &quot;1.0&quot;</div><div class="line">        // 在buildConfig.java中自动配置常量字段</div><div class="line">        buildConfigField(&apos;String&apos;, &quot;API_DEBUG_URL&quot;, &apos;&quot;http://test.baidu.com&quot;&apos;)</div><div class="line"></div><div class="line">        // 开启multidex,突破64k</div><div class="line">        multiDexEnabled true</div><div class="line"></div><div class="line">        // ndk cpu架构，生成相应的so包</div><div class="line">        ndk&#123;</div><div class="line">            abiFilter &apos;armeabi&apos;, &apos;x86&apos;, &apos;armeabi-v7a&apos;, &apos;x86_64&apos;, &apos;arm64-v8a&apos;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // 渠道</div><div class="line">    productFlavors &#123;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    signingConfigs &#123;</div><div class="line">        relase &#123;</div><div class="line">            storeFile file(&quot;relase.keystore&quot;)</div><div class="line">            keyAlias &quot;relase&quot;</div><div class="line">            keyPassword &quot;123456&quot;</div><div class="line">            storePassword &quot;123456&quot;</div><div class="line">        &#125;</div><div class="line">        debug &#123;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    buildTypes &#123;</div><div class="line">        release &#123;</div><div class="line">            // 混淆开启</div><div class="line">            minifyEnabled true</div><div class="line">            proguardFiles getDefaultProguardFile(&apos;proguard-android.txt&apos;), &apos;proguard-rules.pro&apos;</div><div class="line">        &#125;</div><div class="line">        debug &#123;</div><div class="line">            minifyEnabled false</div><div class="line">            // 4byte对齐，加快解析效率</div><div class="line">            zipAlignEnabled true</div><div class="line">            // 移除无用的资源文件</div><div class="line">            shrinkResources true</div><div class="line">            // 更改包名</div><div class="line">            applicationVariants.all &#123; variant -&gt;</div><div class="line">                variant.outputs.each &#123; output -&gt;</div><div class="line">                    output.outputFile = new File(output.outputFile.parent,</div><div class="line">                            &quot;debug_&quot; + buildTime() + &quot;.apk&quot;)</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">dependencies &#123;</div><div class="line">    compile fileTree(dir: &apos;libs&apos;, include: [&apos;*.jar&apos;])</div><div class="line">    testCompile &apos;junit:junit:4.12&apos;</div><div class="line">    compile &apos;com.android.support:appcompat-v7:24.0.0&apos;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">// --------------------------------gradle.properties配置------------------------------</div><div class="line"></div><div class="line">// 加速构建速度</div><div class="line">org.gradle.daemon=true</div><div class="line">org.gradle.parallel=true</div><div class="line">org.gradle.jvmargs=-Xmx2048m</div><div class="line"></div><div class="line">// 使用ndk配置</div><div class="line">android.useDeprecatedNdk=true</div><div class="line"></div><div class="line"></div><div class="line">// 其他：</div><div class="line">1.查看 keystore 文件的签名信息：</div><div class="line"></div><div class="line">在keystore所在目录下，打开cmd:</div><div class="line">keytool -list -v -keystore keystore文件名</div><div class="line"></div><div class="line">再根据提示，输入storepassword即可查看</div><div class="line"></div><div class="line">2.混淆：</div><div class="line">https://segmentfault.com/a/1190000004461614</div><div class="line">http://www.mayflyask.org/question/247</div></pre></td></tr></table></figure>]]></content>
     
@@ -398,6 +580,8 @@
       <category term="Android" scheme="https://fenglincanyi.github.io/categories/Android/"/>
     
     
+      <category term="Gradle" scheme="https://fenglincanyi.github.io/tags/Gradle/"/>
+    
   </entry>
   
   <entry>
@@ -405,7 +589,7 @@
     <link href="https://fenglincanyi.github.io/2016/08/16/%E6%BB%91%E5%8A%A8%E5%86%B2%E7%AA%81%E4%B9%8BEditText-ScrollView/"/>
     <id>https://fenglincanyi.github.io/2016/08/16/滑动冲突之EditText-ScrollView/</id>
     <published>2016-08-16T09:14:00.000Z</published>
-    <updated>2016-12-13T04:25:45.933Z</updated>
+    <updated>2016-12-17T15:12:47.535Z</updated>
     
     <content type="html"><![CDATA[<h3 id="问题一"><a href="#问题一" class="headerlink" title="问题一"></a>问题一</h3><pre><code>EditText的内容过多时，EditText的内容并不能滚动，而是ScrollView的滚动
 </code></pre><h3 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h3><pre><code>重写EditText的onTouch事件，将触摸事件交给EditText来处理
@@ -424,6 +608,8 @@
       <category term="Android" scheme="https://fenglincanyi.github.io/categories/Android/"/>
     
     
+      <category term="滑动冲突" scheme="https://fenglincanyi.github.io/tags/%E6%BB%91%E5%8A%A8%E5%86%B2%E7%AA%81/"/>
+    
   </entry>
   
   <entry>
@@ -431,7 +617,7 @@
     <link href="https://fenglincanyi.github.io/2016/06/04/%E7%AE%80%E5%8D%95%E7%9A%84%E9%A1%B5%E9%9D%A2%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90/"/>
     <id>https://fenglincanyi.github.io/2016/06/04/简单的页面置换算法分析/</id>
     <published>2016-06-04T11:39:00.000Z</published>
-    <updated>2016-12-13T04:26:21.192Z</updated>
+    <updated>2016-12-17T14:19:18.847Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
 <p>本文主要分析操作系统中涉及到的一些常见的置换算法，并不对涉及的操作系统内容过多介绍。这些算法在其他的计算机应用中也有体现，基本原理都是一致的，可参考理解。</p>
@@ -480,6 +666,8 @@
       <category term="算法" scheme="https://fenglincanyi.github.io/categories/%E7%AE%97%E6%B3%95/"/>
     
     
+      <category term="LRU" scheme="https://fenglincanyi.github.io/tags/LRU/"/>
+    
   </entry>
   
   <entry>
@@ -487,7 +675,7 @@
     <link href="https://fenglincanyi.github.io/2016/05/16/Android%20SingleTask%20%E6%8E%A2%E7%A9%B6/"/>
     <id>https://fenglincanyi.github.io/2016/05/16/Android SingleTask 探究/</id>
     <published>2016-05-16T03:12:00.000Z</published>
-    <updated>2016-12-13T03:43:43.809Z</updated>
+    <updated>2016-12-17T14:25:03.531Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
 <p>Android 4种启动模式来说，用法说明此处不再提及主要介绍SingleTop，SingleTask相关的问题</p>
@@ -567,6 +755,8 @@ adb shell dumpsys activity | grep mFocusedActivity  获取处于栈顶的Activit
       <category term="Android" scheme="https://fenglincanyi.github.io/categories/Android/"/>
     
     
+      <category term="SingleTask" scheme="https://fenglincanyi.github.io/tags/SingleTask/"/>
+    
   </entry>
   
   <entry>
@@ -574,7 +764,7 @@ adb shell dumpsys activity | grep mFocusedActivity  获取处于栈顶的Activit
     <link href="https://fenglincanyi.github.io/2016/02/28/%E5%AF%B9%E7%A7%B0%E3%80%81%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E6%8A%80%E6%9C%AF%E5%88%9D%E6%8E%A2/"/>
     <id>https://fenglincanyi.github.io/2016/02/28/对称、非对称加密技术初探/</id>
     <published>2016-02-28T09:52:00.000Z</published>
-    <updated>2016-12-13T04:25:57.079Z</updated>
+    <updated>2016-12-17T15:12:40.989Z</updated>
     
     <content type="html"><![CDATA[<h3 id="一、对称加密"><a href="#一、对称加密" class="headerlink" title="一、对称加密"></a>一、对称加密</h3><ol>
 <li><p><strong>对称加密简介</strong></p>
@@ -708,6 +898,10 @@ M: 变长的消息，H(M)是定长的 Hash值
       <category term="网络" scheme="https://fenglincanyi.github.io/categories/%E7%BD%91%E7%BB%9C/"/>
     
     
+      <category term="加密" scheme="https://fenglincanyi.github.io/tags/%E5%8A%A0%E5%AF%86/"/>
+    
+      <category term="签名" scheme="https://fenglincanyi.github.io/tags/%E7%AD%BE%E5%90%8D/"/>
+    
   </entry>
   
   <entry>
@@ -715,7 +909,7 @@ M: 变长的消息，H(M)是定长的 Hash值
     <link href="https://fenglincanyi.github.io/2016/02/19/Git%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/"/>
     <id>https://fenglincanyi.github.io/2016/02/19/Git学习笔记（二）/</id>
     <published>2016-02-19T08:06:00.000Z</published>
-    <updated>2016-12-13T05:11:57.321Z</updated>
+    <updated>2016-12-17T14:17:11.736Z</updated>
     
     <content type="html"><![CDATA[<h3 id="常用命令："><a href="#常用命令：" class="headerlink" title="常用命令："></a>常用命令：</h3><blockquote>
 <p>1、初始</p>
@@ -811,6 +1005,8 @@ git branch -v, -vv            查看所有分支的最后一次提交
       <category term="工具" scheme="https://fenglincanyi.github.io/categories/%E5%B7%A5%E5%85%B7/"/>
     
     
+      <category term="Git" scheme="https://fenglincanyi.github.io/tags/Git/"/>
+    
   </entry>
   
   <entry>
@@ -818,7 +1014,7 @@ git branch -v, -vv            查看所有分支的最后一次提交
     <link href="https://fenglincanyi.github.io/2016/02/19/Git%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/"/>
     <id>https://fenglincanyi.github.io/2016/02/19/Git学习笔记（一）/</id>
     <published>2016-02-19T07:28:00.000Z</published>
-    <updated>2016-12-13T04:23:55.294Z</updated>
+    <updated>2016-12-17T14:17:45.689Z</updated>
     
     <content type="html"><![CDATA[<h3 id="一、Git特点"><a href="#一、Git特点" class="headerlink" title="一、Git特点"></a>一、Git特点</h3><h4 id="1-直接记录快照，而非差异比较"><a href="#1-直接记录快照，而非差异比较" class="headerlink" title="1. 直接记录快照，而非差异比较"></a>1. 直接记录快照，而非差异比较</h4><ul>
 <li>在 Git 中保存项目状态时，它主要对当时的全部文件制作一个快照并保存这个快照的索引。</li>
@@ -875,6 +1071,8 @@ git branch -v, -vv            查看所有分支的最后一次提交
       <category term="工具" scheme="https://fenglincanyi.github.io/categories/%E5%B7%A5%E5%85%B7/"/>
     
     
+      <category term="Git" scheme="https://fenglincanyi.github.io/tags/Git/"/>
+    
   </entry>
   
   <entry>
@@ -882,7 +1080,7 @@ git branch -v, -vv            查看所有分支的最后一次提交
     <link href="https://fenglincanyi.github.io/2016/01/16/Android%20Studio%20NDK%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E5%8F%8ADemo%E7%A4%BA%E4%BE%8B/"/>
     <id>https://fenglincanyi.github.io/2016/01/16/Android Studio NDK开发环境搭建及Demo示例/</id>
     <published>2016-01-16T11:34:00.000Z</published>
-    <updated>2016-12-13T04:01:49.524Z</updated>
+    <updated>2016-12-17T15:11:57.475Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
 <p> 说明：Android Studio 1.4后支持C/C++开发，1.3之前的版本坑点较多，所以使用1.4后的版本较为容易</p>
@@ -1017,6 +1215,10 @@ public native String javaCallC();
     
       <category term="Android" scheme="https://fenglincanyi.github.io/categories/Android/"/>
     
+    
+      <category term="JNI" scheme="https://fenglincanyi.github.io/tags/JNI/"/>
+    
+      <category term="NDK" scheme="https://fenglincanyi.github.io/tags/NDK/"/>
     
   </entry>
   

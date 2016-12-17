@@ -2,6 +2,7 @@
 title: RxJava 初探（一）
 date: 2016-10-06 00:45
 categories: RxJava
+tags: RxJava
 ---
 ### 一、几个基本概念
 * 由来

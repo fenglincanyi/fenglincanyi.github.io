@@ -2,6 +2,7 @@
 title: Android apk安装过程实例分析
 date: 2016-11-17 21:08
 categories: Android
+tags: [Dalvik, ART]
 ---
 > 注：本文不对apk安装之前，系统所做的复杂工作做分析，只针对普通的apk安装过程进行简单的过程理解
 
